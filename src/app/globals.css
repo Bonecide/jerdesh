@@ -2,32 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  background-color: #f7f7fb;
+}
+.container {
+  width: 90%;
+  max-width: 1980px;
+  overflow-x: hidden;
+  margin: 0 auto;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+.header .ant-select-selector {
+  background-color: #0c7ce2 !important;
+  color: white !important;
+}
+.header .ant-select-selection-item {
+  color: white !important;
+}
+.header .ant-select-arrow {
+  color: white !important;
+}
+.header .ant-select-selection-placeholder {
+  color: white !important;
+}
+
+.shadowPoster {
+  box-shadow: 0px 3.75px 10.5px 0px #080f340a;
+}
+
+.contactShadow {
+  box-shadow: 0px 5.84px 16.36px 0px #080f340a;
+}
+
+.descriptionShadow {
+  box-shadow: 0px 3.84px 10.74px 0px #080f340a;
+}
+
+.slick-active .dots {
+  transition: all 0.3s;
+  background: #4daae8;
+}
+.slick-dots li {
+  margin: 0px !important;
+}
+
+.dots:hover {
+  background: #4daae8 !important;
+}
+
+.shadowRec {
+  box-shadow: 0px 5.11px 14.32px 0px #080f340a;
+}
+
+.shadowTabs {
+  box-shadow: 0px 2.01px 5.64px 0px #080f340a;
+}
+
+.myAddShadow {
+  box-shadow: 0px 4.19px 11.73px 0px #080f340a;
+}
+
+.ant-upload-drag {
+  background: white !important;
+  border: 1.26px dashed #9e9e9e;
 }
