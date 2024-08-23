@@ -5,14 +5,14 @@ import Image from "next/image";
 
 export const Contacts = ({ item }: { item: ADD }) => {
   return (
-    <div className="flex w-full rounded-[30px] py-[10px] flex-wrap gap-y-[20px] px-[20px] contactShadow justify-between">
+    <div className="flex w-full rounded-[30px] py-[10px] gap-[10px] flex-wrap gap-y-[20px] lg:px-[20px] md:px-[10px] contactShadow justify-between">
       <div className="flex gap-[10px] items-center">
-        <PhoneIcon className="text-primary size-[28px]" />
-        <p className="text-[#696969]">{item.user.phone}</p>
+        <PhoneIcon className="text-primary lg:size-[28px] md:size-[17px]" />
+        <p className="text-[#696969] md:text-[12px] lg:text-[14px]">{item.user.phone}</p>
       </div>
       <div className="flex gap-[10px] items-center">
-        <MapPinIcon className="text-primary size-[28px]" />
-        <p className="text-[#696969]">{item.address}</p>
+        <MapPinIcon className="text-primary lg:size-[28px] md:size-[17px]" />
+        <p className="text-[#696969] md:text-[12px] lg:text-[14px]">{item.address}</p>
       </div>
       <div className="flex gap-[10px] items-center">
         <Image
@@ -20,8 +20,9 @@ export const Contacts = ({ item }: { item: ADD }) => {
           width={28}
           height={28}
           alt="train"
+          className="md:size-[17px] lg:size-[28px]"
         />
-        <p className="text-[#696969]">{item.station}</p>
+        <p className="text-[#696969] md:text-[12px] lg:text-[14px]">{item.station}</p>
       </div>
     </div>
   );

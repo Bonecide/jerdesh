@@ -22,7 +22,7 @@ export async function generateMetadata({ params, searchParams }: any) {
 const ItemDetails = ({ params }: ItemDetailsProps) => {
   const item = ADDS[params.id];
   return (
-    <div className="container">
+    <div className="containerBlock">
       <Item item={item} />
     </div>
   );

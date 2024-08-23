@@ -10,19 +10,26 @@ import toast from "react-hot-toast";
 interface ExitModalProps {
   isOpen: boolean;
   setIsOpen: Dispatch<boolean>;
+  setIsTabOpen?: Dispatch<boolean>;
 }
-export const ExitModal = ({ isOpen, setIsOpen }: ExitModalProps) => {
+export const ExitModal = ({
+  isOpen,
+  setIsOpen,
+  setIsTabOpen,
+}: ExitModalProps) => {
   const setIsAuth = useSetAtom(isAuthAtom);
 
   const onCancel = useCallback(() => {
     setIsOpen(false);
-  }, [setIsOpen]);
+    setIsTabOpen && setIsTabOpen(false);
+  }, [setIsOpen, setIsTabOpen]);
 
   const onExit = useCallback(() => {
+    setIsTabOpen && setIsTabOpen(false);
     setIsAuth(false);
     setIsOpen(false);
     toast.success("Вы успешно вышли из аккаунта!");
-  }, [setIsAuth, setIsOpen]);
+  }, [setIsAuth, setIsOpen, setIsTabOpen]);
 
   return (
     <Modal

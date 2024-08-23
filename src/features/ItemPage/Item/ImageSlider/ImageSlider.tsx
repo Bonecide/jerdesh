@@ -3,6 +3,7 @@ import Image from "next/image";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider, { Settings } from "react-slick";
+
 export const ImageSlider = ({ images }: { images: string[] }) => {
   const settings: Settings = {
     dots: true,
@@ -15,12 +16,13 @@ export const ImageSlider = ({ images }: { images: string[] }) => {
     slidesToScroll: 1,
     autoplay: true,
   };
+
   return (
-    <div className="min-w-[550px] w-[550px]">
+    <div className="lg:min-w-[550px] lg:w-[550px] md:pr-0 md:w-[400px] w-full">
       <Slider {...settings}>
         {images.map((item) => (
           <Image
-            className="w-[550px] h-auto rounded-[12px]"
+            className="lg:w-[550px] md:w-[400px] h-auto rounded-[12px] w-full"
             src={item}
             width={550}
             height={275}

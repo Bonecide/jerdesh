@@ -14,13 +14,14 @@
 
 body {
   background-color: #f7f7fb;
-}
-.container {
-  width: 90%;
-  max-width: 1980px;
   overflow-x: hidden;
+}
+.containerBlock {
+  width: 95vw;
+  max-width: 1980px;
   margin: 0 auto;
 }
+
 
 .header .ant-select-selector {
   background-color: #0c7ce2 !important;
@@ -75,4 +76,12 @@ body {
 .ant-upload-drag {
   background: white !important;
   border: 1.26px dashed #9e9e9e;
+}
+
+header .ant-select-selector {
+  border: 0px !important;
+}
+
+.banners .slick-slide > div {
+  margin: 0 10px;
 }

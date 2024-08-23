@@ -1,17 +1,22 @@
 "use client";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue } from "jotai";
 import { Tab, TabSlug } from "../Profile";
 import { userAtom } from "@/atoms/user";
-import { Dispatch, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import Image from "next/image";
 import { ExitModal } from "./ExitModal";
+import { useRouter } from "next/navigation";
+import { tabAtom } from "@/atoms/profile";
+import { IoMdClose } from "react-icons/io";
 
-interface ProfileTabs {
-  currentTab: TabSlug;
-  setCurrentTab: Dispatch<TabSlug>;
+interface ProfileTabsProps {
+  setIsOpen?: Dispatch<boolean>;
 }
 
-export const ProfileTabs = ({ currentTab, setCurrentTab }: ProfileTabs) => {
+export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
+  const [currentTab, setCurrentTab] = useAtom(tabAtom);
+  const router = useRouter();
+
   const [isExit, setIsExit] = useState(false);
   const user = useAtomValue(userAtom);
 
@@ -42,8 +47,21 @@ export const ProfileTabs = ({ currentTab, setCurrentTab }: ProfileTabs) => {
     },
   ];
 
+  const onClickTab = useCallback(
+    (tab: TabSlug) => () => {
+      setIsOpen && setIsOpen(false);
+      setCurrentTab(tab);
+      router.push(`/profile?tab=${tab}`);
+    },
+    [router, setCurrentTab, setIsOpen]
+  );
+
+  const handleExitClick = useCallback(() => {
+    setIsExit(true);
+  }, []);
+
   return (
-    <div className="bg-white p-[25px] flex flex-col gap-[27px] shadowTabs rounded-[15px]">
+    <div className="bg-white lg:p-[25px] p-[20px] md:p-[12px] flex flex-col lg:gap-[27px] md:gap-[10px] relative shadowTabs lg:rounded-[15px] md:rounded-[8px] md:w-[203px] h-screen md:h-auto w-screen lg:w-auto">
       <div className="flex gap-[10px]">
         {user.image && (
           <Image
@@ -51,20 +69,24 @@ export const ProfileTabs = ({ currentTab, setCurrentTab }: ProfileTabs) => {
             height={30}
             src={user.image}
             alt={user.name}
-            className="rounded-full w-[50px] h-[50px] object-cover"
+            className="rounded-full lg:size-[50px] md:size-[30px] size-[50px] object-cover"
           />
         )}
         <div className="flex flex-col justify-between">
-          <h4 className="font-[500] text-[20px]">{user.name}</h4>
-          <p>Баланс: {user.balance?.toLocaleString("ru-RU") || "0"} Р</p>
+          <h4 className="font-[500] lg:text-[20px] md:text-[11px]">
+            {user.name}
+          </h4>
+          <p className="md:text-[8px] lg:text-[14px]">
+            Баланс: {user.balance?.toLocaleString("ru-RU") || "0"} Р
+          </p>
         </div>
       </div>
-      <div className="space-y-[15px]">
+      <div className="space-y-[15px] mt-[20px] md:mt-0">
         {TABS.map((item) => (
           <p
-            onClick={() => setCurrentTab(item.slug)}
+            onClick={onClickTab(item.slug)}
             key={item.slug}
-            className={`cursor-pointer pl-[10px] text-[16px] transition-all duration-300 hover:text-primary ${
+            className={`cursor-pointer pl-[10px] lg:text-[16px] md:text-[10px] transition-all duration-300 hover:text-primary ${
               currentTab === item.slug ? "text-primary" : ""
             }`}
           >
@@ -72,13 +94,25 @@ export const ProfileTabs = ({ currentTab, setCurrentTab }: ProfileTabs) => {
           </p>
         ))}
         <p
-          onClick={() => setIsExit(true)}
-          className="cursor-pointer text-rose-500 pl-[10px]"
+          onClick={handleExitClick}
+          className="cursor-pointe lg:text-[16px] cursor-pointer md:text-[10px] text-rose-500 pl-[10px]"
         >
           Выход
         </p>
       </div>
-      <ExitModal isOpen={isExit} setIsOpen={setIsExit} />
+      <div
+        className="absolute top-[20px] right-[20px] cursor-pointer"
+        onClick={() => {
+          setIsOpen && setIsOpen(false);
+        }}
+      >
+        <IoMdClose className="size-[25px]" />
+      </div>
+      <ExitModal
+        setIsTabOpen={setIsOpen}
+        isOpen={isExit}
+        setIsOpen={setIsExit}
+      />
     </div>
   );
 };

@@ -26,7 +26,7 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
       toast.success("Вы успешно вошли в аккаунт!");
       setAuth(true);
       setIsOpen(false);
-      router.push("/profile");
+      router.push("/profile?tab=profile");
     },
     [setAuth, setIsOpen, router]
   );

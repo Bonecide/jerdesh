@@ -78,7 +78,7 @@ export const CreateAddForm = () => {
             <Select
               rootClassName="w-full"
               options={options}
-              className="!w-full !h-[50px]"
+              className="!w-full !h-[50px] !border-none"
             />
           </Form.Item>
           <Form.Item

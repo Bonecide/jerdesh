@@ -2,7 +2,7 @@ import { categories } from "@/utils/mock";
 
 export const Categories = () => {
   return (
-    <div className="flex flex-col mt-[32px] gap-[5px] w-[20%] ">
+    <div className=" flex-col mt-[10px] gap-[5px] w-[20%] hidden lg:flex ">
       {categories.map((item) => (
         <div
           key={item.id}

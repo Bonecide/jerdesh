@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation";
 export const Posters = () => {
   const router = useRouter();
   return (
-    <div className=" space-y-[15px] w-[60%] mt-[30px]">
+    <div className=" space-y-[15px] w-[100%] md:w-[75%] lg:w-[65%] mt-[10px]">
       {ADDS.map((item) => (
         <motion.div
           onClick={() => router.push(`/items/${item.id}`)}
@@ -37,11 +37,11 @@ export const Posters = () => {
             duration: 0.5,
           }}
           key={item.id}
-          className={`px-[27px] py-[20px] flex justify-between items-end cursor-pointer ${
+          className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row justify-between items-end cursor-pointer ${
             item.type === "vip" && " border-[2px] border-[#D11010]"
           } ${
             item.type === "premium" ? "bg-[#FFD0DB]" : "bg-white"
-          } shadowPoster w-full rounded-[21px]`}
+          } shadowPoster w-full md:rounded-[21px] rounded-[13px]`}
         >
           <div className="flex flex-col gap-[15px]">
             <div className="flex gap-[20px] items-center">
@@ -58,7 +58,7 @@ export const Posters = () => {
             <p className="font-[300]">{item.description}</p>
           </div>
           <Image
-            className="w-[225px] h-[160px]"
+            className="md:w-[225px] md:h-[160px] w-full "
             src={item.images[0]}
             width={225}
             height={160}

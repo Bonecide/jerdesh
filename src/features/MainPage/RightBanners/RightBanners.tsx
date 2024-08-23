@@ -4,10 +4,10 @@ import React from "react";
 
 export const RightBanners = () => {
   return (
-    <div className="flex-2 space-y-[15px] w-[20%] mt-[30px]">
+    <div className="flex-2 hidden space-y-[15px] md:block md:w-[25%] lg:w-[15%] mt-[10px]">
       {RIGHT_BANNERS.map((item) => (
         <Image
-          className="rounded-[15px] aspect-square "
+          className="rounded-[15px] aspect-square w-full h-auto "
           key={item.id}
           src={item.image}
           width={250}

@@ -27,7 +27,7 @@ export const Register = ({ setType, setIsOpen }: RegisterProps) => {
       toast.success("Вы успешно зарегестрировались!");
       setAuth(true);
       setIsOpen(false);
-      router.push("/profile");
+      router.push("/profile?tab=profile");
     },
     [setAuth, setIsOpen, router]
   );

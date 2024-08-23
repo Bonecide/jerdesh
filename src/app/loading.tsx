@@ -3,9 +3,9 @@ import Skeleton from "react-loading-skeleton";
 
 const Loading = () => {
   return (
-    <div className="container mt-[39px]">
+    <div className="containerBlock mt-[39px]">
       <Skeleton count={1} height={102} width={"100%"} borderRadius={9} />
-      <div className="flex gap-[30px] items-start mt-[40px]">
+      <div className="flex gap-[30px] items-start mt-[10px]">
         <Skeleton containerClassName="w-[20%]" height={32} count={17} />
         <Skeleton
           count={5}

@@ -13,6 +13,7 @@ export type ADD = {
   station: string;
   address: string;
   view: number;
+  category: string;
 };
 
 export type MyAdd = {
@@ -155,6 +156,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 1,
@@ -172,6 +174,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 2,
@@ -189,6 +192,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 3,
@@ -206,6 +210,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 4,
@@ -223,6 +228,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 5,
@@ -240,6 +246,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 6,
@@ -257,6 +264,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 7,
@@ -274,6 +282,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
   {
     id: 8,
@@ -291,6 +300,7 @@ export const ADDS: ADD[] = [
     station: "Пушкинская",
     address: "г.Бишкек улица Абдрахманова дом 22",
     view: 8,
+    category: "Запчасти",
   },
 ];
 
