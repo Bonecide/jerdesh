@@ -28,9 +28,18 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
     [setIsChange]
   );
   return (
-    <Form onFinish={onFinish} layout="vertical" className="flex flex-col ">
-      <div className="grid grid-cols-2 gap-[40px]">
-        <Form.Item initialValue={user.first_name} name="first_name" label="Имя">
+    <Form
+      onFinish={onFinish}
+      layout="vertical"
+      className="flex flex-col max-[767px]:!mt-4"
+    >
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[40px]">
+        <Form.Item
+          initialValue={user.first_name}
+          name="first_name"
+          label="Имя"
+          className="max-[767px]:!m-0"
+        >
           <Input
             disabled={!isChange}
             name="first_name"
@@ -41,6 +50,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
           initialValue={user.last_name}
           name="last_name"
           label="Фамилия"
+          className="max-[767px]:!m-0"
         >
           <Input
             disabled={!isChange}
@@ -52,6 +62,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
           initialValue={user.email}
           name="email"
           label="Электронная почта"
+          className="max-[767px]:!m-0"
         >
           <Input
             disabled={!isChange}
@@ -59,7 +70,12 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
             className="w-full h-[50px]"
           />
         </Form.Item>
-        <Form.Item initialValue={user.phone} name="phone" label="Телефон">
+        <Form.Item
+          initialValue={user.phone}
+          name="phone"
+          label="Телефонv"
+          className="max-[767px]:!m-0"
+        >
           <Input
             disabled={!isChange}
             name="phone"
@@ -68,7 +84,11 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         </Form.Item>
       </div>
       {isChange && (
-        <Button type="primary" htmlType="submit" className="!h-[40px]">
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="!h-[40px] max-[767px]:mt-5"
+        >
           Сохранить
         </Button>
       )}

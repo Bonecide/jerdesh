@@ -30,7 +30,7 @@ export const ProfileData = () => {
         },
       }}
     >
-      <div className="flex gap-[15px]">
+      <div className="flex flex-col md:flex-row items-center gap-[12px]">
         {user.image && (
           <Image
             src={user.image}
@@ -40,9 +40,9 @@ export const ProfileData = () => {
             className="rounded-full w-[100px] h-[100px] object-cover"
           />
         )}
-        <div className="flex flex-col items-start justify-between gap-[30px]">
+        <div className="flex flex-col items-start justify-between gap-4 md:gap-[30px]">
           <h3 className="font-[600] text-[20px]">{user.name}</h3>
-          <div className="flex ">
+          <div className="flex max-[767px]:mx-auto">
             {!isChange && (
               <Button
                 onClick={() => setIsChange(true)}
