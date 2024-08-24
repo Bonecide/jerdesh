@@ -12,10 +12,10 @@ export const Payment = () => {
       <h2 className="text-center text-[20px] font-[500]">
         Фиксированный платеж
       </h2>
-      <div className="mt-[30px] flex gap-[22px] flex-wrap">
+      <div className="mt-[30px] flex max-[330px]:flex-col gap-[22px] flex-wrap max-[767px]:justify-center">
         {PAYMENT_VALUE.map((item) => (
           <div
-            className={`cursor-pointer rounded-[15px] py-[27px] transition-all duration-300 px-[45px] ${
+            className={`cursor-pointer rounded-[15px] max-[330px]:px-2 max-[330px]:py-3 py-[27px] transition-all duration-300 w-[183px] max-[330px]:max-w-[98px]  max-[767px]:max-w-[118px] text-center ${
               currentPayment === item
                 ? "text-white bg-primary"
                 : "border border-primary text-primary"
@@ -29,7 +29,7 @@ export const Payment = () => {
       </div>
       <Button
         type="primary"
-        className="!h-[46px] mt-[30px] !px-[40px]"
+        className="!h-[46px] mt-[30px] !px-[40px] max-[767px]:!px-[80px]"
         disabled={!currentPayment}
       >
         Пополнить счёт

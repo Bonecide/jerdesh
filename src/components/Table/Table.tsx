@@ -64,6 +64,7 @@ export const Table = <RecordType extends AnyObject = AnyObject>(
     <AntTable<RecordType>
       {...props}
       columns={columns.filter((item) => !item.hidden)}
+      className="ant-tb"
     />
   );
 };

@@ -48,6 +48,7 @@ export const TransactionHistory = () => {
   );
   return (
     <div ref={containerRef} className="max-w-[100%] w-full">
+      <h4 className="font-bold mt-2 mb-2">История транзакций</h4>
       <Table<Transaction>
         locale={{ emptyText: "Нет данных за этот промежуток времени" }}
         columns={columns}
@@ -56,7 +57,11 @@ export const TransactionHistory = () => {
         bordered
         size="small"
         pagination={baseTablePaginationConfig}
-        scroll={{ x: containerRef.current?.clientWidth ? containerRef.current?.clientWidth - 400  : window.innerWidth-600}}
+        scroll={{
+          x: containerRef.current?.clientWidth
+            ? containerRef.current?.clientWidth - 400
+            : window.innerWidth - 600,
+        }}
       />
     </div>
   );
