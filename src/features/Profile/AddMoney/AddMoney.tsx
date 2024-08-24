@@ -21,9 +21,11 @@ export const AddMoney = () => {
           duration: 0.3,
         },
       }}
-      className="w-full flex flex-col gap-[20px] "
+      className="w-full flex flex-col gap-[16px] md:gap-6 "
     >
-      <p className="text-[20px] font-[500]">Пополнить счет:</p>
+      <p className="text-[20px] max-[767px]:text-[22px] max-[767px]:text-center font-[500]">
+        Пополнить счет:
+      </p>
       <Payment />
       <TransactionHistory />
     </motion.div>

@@ -22,7 +22,6 @@ body {
   margin: 0 auto;
 }
 
-
 .header .ant-select-selector {
   background-color: #0c7ce2 !important;
   color: white !important;
@@ -84,4 +83,13 @@ header .ant-select-selector {
 
 .banners .slick-slide > div {
   margin: 0 10px;
+}
+
+@media screen and (max-width: 330px) {
+  .ant-tb .ant-table-tbody {
+    font-size: 10px;
+  }
+  .ant-tb .ant-table-thead {
+    font-size: 12px;
+  }
 }
