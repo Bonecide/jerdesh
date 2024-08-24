@@ -8,7 +8,7 @@ import { Recomendation } from "../Recomendation";
 
 export const Item = ({ item }: { item: ADD }) => {
   return (
-    <div className="flex flex-col md:flex-row gap-[30px] items-start">
+    <div className="flex flex-col lg:flex-row gap-[30px]">
       <div className="w-full">
         <h1 className="lg:text-[25px] md:text-[16px] font-[500]">
           {item.title}
@@ -28,13 +28,15 @@ export const Item = ({ item }: { item: ADD }) => {
 
         <Recomendation id={item.id} />
       </div>
-      <Image
-        src={"/images/longBanner.png"}
-        className="w-[300px] h-auto object-contain hidden lg:block"
-        width={300}
-        height={900}
-        alt="banner"
-      />
+      <div className="min-w-[300px] w-ful flex-1l">
+        <Image
+          src={"/images/longBanner.png"}
+          className="w-[300px] h-auto object-contain hidden lg:block"
+          width={300}
+          height={900}
+          alt="banner"
+        />
+      </div>
     </div>
   );
 };

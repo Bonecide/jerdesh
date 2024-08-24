@@ -6,7 +6,12 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#0C7CE2",
-        accent : '#FF7E36'
+        accent: "#FF7E36",
+      },
+      screens: {
+        md: "768px",
+        lg: "1440px",
+        exLg: "1920px",
       },
     },
   },
