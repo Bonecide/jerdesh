@@ -26,7 +26,7 @@ export const Anouncment = () => {
           className="w-full rounded-[24px] myAddShadow p-[20px] bg-white space-y-[12px]"
           key={item.id}
         >
-          <div className="flex items-center gap-[15px]">
+          <div className="flex items-center gap-[15px] max-[767px]:gap-2 max-[767px]:flex-col">
             <p className="font-[500]">
               Дата публикации :{" "}
               <span className="font-[300]">
