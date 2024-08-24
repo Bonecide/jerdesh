@@ -9,7 +9,7 @@ export const Recomendation = ({ id }: { id: number }) => {
     <div className="mt-[20px] md:mt-[30px] gap-[20px] md:flex lg:block">
       <div className="columns-1">
         <div className="w-[100%] md:w-[74vw]">
-          <Banner options={{ autoplay: false }}>
+          <Banner>
             <div className="h-[75px] md:h-[81px] lg:h-[127px] exLg:h-[173px] relative rounded-md overflow-hidden">
               <Image
                 src={"/images/widthBanner.png"}
@@ -37,7 +37,7 @@ export const Recomendation = ({ id }: { id: number }) => {
           ))}
         </div>
       </div>
-      <div className="columns-1 w-full h-[100vh] md:h-auto bg-red-400 relative rounded-md mt-[24px] md:mt-0 overflow-hidden lg:hidden">
+      <div className="columns-1 w-full h-[100vh] md:h-auto relative rounded-md mt-[24px] md:mt-0 overflow-hidden lg:hidden">
         <Image
           src={"/images/longBanner.png"}
           className="w-full h-full object-cover"
