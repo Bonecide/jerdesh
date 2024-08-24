@@ -62,8 +62,8 @@ export const CreateAddForm = () => {
       layout="vertical"
       className="flex flex-col items-end gap-[30px] w-full "
     >
-      <div className="grid grid-cols-2 gap-[200px] w-full mt-[22px]">
-        <div className="w-full space-y-[30px]">
+      <div className="grid grid-cols-1 md:grid-cols-2 md:gap-[200px] w-full mt-[22px]">
+        <div className="w-full space-y-[16px] md:space-y-[30px]">
           <Form.Item
             className="w-full"
             name="category"
@@ -152,7 +152,7 @@ export const CreateAddForm = () => {
             />
           </Form.Item>
         </div>
-        <div className="w-full space-y-[30px]">
+        <div className="w-full space-y-[16px] md:space-y-[30px] max-[767px]:mt-[16px]">
           <Form.Item
             className="w-full"
             name="sub_category"
@@ -240,17 +240,17 @@ export const CreateAddForm = () => {
                   transition={{
                     duration: 0.3,
                   }}
-                  className="px-[23px] py-[15px] bg-[#F2F4F7] rounded-[10px] flex   gap-[40px] items-center flex-wrap"
+                  className="px-[23px] py-[15px] bg-[#F2F4F7] rounded-[10px] flex   gap-[40px] items-center md:flex-wrap"
                   key={item.uid}
                 >
-                  <div className="flex gap-[20px] flex-wrap items-center">
+                  <div className="flex gap-[20px] md:flex-wrap items-center">
                     <ImFilePicture className="text-primary text-[20px]" />
                     <p className="whitespace-nowrap w-[100px] overflow-hidden text-ellipsis">
                       {" "}
                       {item.originFileObj?.name}
                     </p>
                     <Image
-                    className="max-h-[100px]"
+                      className="max-h-[100px]"
                       src={URL.createObjectURL(item.originFileObj as Blob)}
                       alt="image"
                     />
