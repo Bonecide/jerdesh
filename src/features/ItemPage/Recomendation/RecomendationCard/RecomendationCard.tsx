@@ -10,9 +10,9 @@ export const RecomendationCard = ({ item }: { item: ADD }) => {
   return (
     <div
       onClick={() => router.push(`/items/${item.id}`)}
-      className="w-full flex flex-col gap-[16px]  lg:p-[37px] md:p-[15px] bg-white shadowRec rounded-[25px] cursor-pointer hover:scale-[1.05] transition-all duration-[0.3s]"
+      className="w-full flex flex-col gap-[16px] py-[20px] px-[38px] lg:p-[37px] md:p-[15px] bg-white shadowRec rounded-[25px] cursor-pointer hover:scale-[1.05] transition-all duration-[0.3s]"
     >
-      <div className="flex gap-[20px]">
+      <div className="flex max-[767px]:justify-between gap-[20px]">
         <div className="flex items-center gap-[5px]">
           <Squares2X2Icon className="size-[20px] text-[#BFBFBF]" />
           <p className="text-[12px]">Категория</p>
