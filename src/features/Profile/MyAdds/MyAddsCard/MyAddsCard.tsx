@@ -38,11 +38,11 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
         (item.isBorder || currentType === "border") &&
         "border-[2px] border-[#D11010]"
       } ${
-        item.isColor || currentType === "fill" ? "bg-[#FFD0DB]" : "bg-white"
+        item.isColor || currentType === "fill" ? "bg-[#fdd2dc]" : "bg-white"
       }`}
     >
-      <div className="flex items-center justify-between">
-        <div className="flex gap-[15px]">
+      <div className="flex max-[767px]:flex-col max-[767px]:px-[14px] items-center justify-between max-[767px]:text-center">
+        <div className="flex max-[767px]:flex-col gap-2 md:gap-[15px]">
           <p className="font-[500]">
             Дата публикации :{" "}
             <span className="font-[300]">
@@ -56,25 +56,28 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
             </span>
           </p>
         </div>
-        <div className="flex gap-[5px]">
-          <Checkbox defaultChecked={item.isActive} />
-          <p>Активное</p>
-        </div>
 
-        <div className="flex gap-[10px]">
-          <div className="size-[30px] rounded-full bg-primary flex items-center justify-center cursor-pointer">
-            <PencilIcon className="text-white size-[18px]" />
+        <div className="flex w-[225px] max-[767px]:w-full mt-2">
+          <div className="flex gap-[5px] flex-1 items-center">
+            <Checkbox defaultChecked={item.isActive} />
+            <p>Активное</p>
           </div>
-          <div className="size-[30px] rounded-full bg-[#F6001E] flex items-center justify-center cursor-pointer">
-            <TrashIcon className="text-white size-[18px]" />
+
+          <div className="flex gap-[10px]">
+            <div className="size-[30px] rounded-full bg-primary flex items-center justify-center cursor-pointer">
+              <PencilIcon className="text-white size-[18px]" />
+            </div>
+            <div className="size-[30px] rounded-full bg-[#F6001E] flex items-center justify-center cursor-pointer">
+              <TrashIcon className="text-white size-[18px]" />
+            </div>
           </div>
         </div>
       </div>
       <div
-        className={`mt-[20px] flex justify-between items-end cursor-pointer w-full rounded-[21px]`}
+        className={`mt-4 md:mt-[20px] flex max-[767px]:flex-col justify-between items-end cursor-pointer w-full rounded-[21px]`}
       >
-        <div className="flex flex-col gap-[15px]">
-          <div className="flex gap-[20px] items-center">
+        <div className="flex flex-col gap-[15px] max-[767px]:mb-4">
+          <div className="flex gap-[20px]  items-center max-[767px]:px-[14px] max-[767px]:justify-between">
             <div className="flex items-center gap-[5px]">
               <Squares2X2Icon className="size-[20px] text-[#BFBFBF]" />
               <p className="text-[12px]">Категория</p>
@@ -84,11 +87,13 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
               <p className="text-[12px]">Место</p>
             </div>
           </div>
-          <h2 className="text-[16px] font-[500]">{item.title}</h2>
+          <h2 className="text-[16px] font-[500] max-[767px]:mt-3 max-[767px]:text-center">
+            {item.title}
+          </h2>
           <p className="font-[300]">{item.description}</p>
         </div>
         <Image
-          className="w-[225px] h-[160px]"
+          className="w-[225px] h-[160px] max-[767px]:w-[237px] mx-auto max-[767px]:max-h-[154px]"
           src={item.images[0]}
           width={225}
           height={160}
@@ -98,7 +103,7 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
       <div className="flex justify-between flex-wrap gap-y-[20px] mt-[20px]">
         <Button
           icon={<ChevronDoubleUpIcon className="text-white size-[18px]" />}
-          className="!bg-accent !h-[40px] !px-[30px] !text-white !border-none"
+          className="!bg-accent !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
         >
           Поднять объявление
         </Button>
@@ -109,7 +114,7 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
             icon={
               <div className="w-[15px] h-[12px]  border-[2px] border-white" />
             }
-            className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none"
+            className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
           >
             Выделить рамкой
           </Button>
@@ -126,7 +131,7 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
                 alt="paint"
               />
             }
-            className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none"
+            className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
           >
             Выделить цветом
           </Button>
@@ -134,7 +139,7 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
         {!item.isPinned && (
           <Button
             icon={<PushpinOutlined className="text-white text-[20px]" />}
-            className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none"
+            className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
           >
             Закрепить
           </Button>
