@@ -3,9 +3,9 @@ import { categories } from "@/utils/mock";
 export const Categories = () => {
   return (
     <div className=" flex-col mt-[10px] gap-[5px] w-[20%] hidden lg:flex ">
-      {categories.map((item) => (
+      {categories.map((item, idx) => (
         <div
-          key={item.id}
+          key={item.id + idx}
           className="flex  items-center gap-[10px] cursor-pointer w-[210px]"
         >
           <div className="size-[10px] min-w-[10px] bg-primary rounded-full" />
