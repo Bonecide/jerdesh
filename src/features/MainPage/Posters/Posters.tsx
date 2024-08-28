@@ -8,8 +8,9 @@ import { useRouter } from "next/navigation";
 
 export const Posters = () => {
   const router = useRouter();
+
   return (
-    <div className=" space-y-[15px] w-[100%] md:w-[75%] lg:w-[65%] mt-[10px]">
+    <div className="space-y-[15px]">
       {ADDS.map((item) => (
         <motion.div
           onClick={() => router.push(`/items/${item.id}`)}
