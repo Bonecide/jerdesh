@@ -101,7 +101,7 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
         </p>
       </div>
       <div
-        className="absolute top-[20px] right-[20px] cursor-pointer"
+        className="absolute top-[20px] right-[20px] cursor-pointer md:hidden"
         onClick={() => {
           setIsOpen && setIsOpen(false);
         }}

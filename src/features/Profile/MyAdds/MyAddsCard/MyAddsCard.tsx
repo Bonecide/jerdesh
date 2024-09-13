@@ -34,9 +34,9 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
           duration: 0.3,
         },
       }}
-      className={` p-[20px] duration-300 transition-all shadowPoster w-full rounded-[21px] ${
+      className={` p-[20px] duration-300 transition-all outline-none shadowPoster w-full rounded-[21px] ${
         (item.isBorder || currentType === "border") &&
-        "border-[2px] border-[#D11010]"
+        "outline-[2px] outline outline-[#D11010]"
       } ${
         item.isColor || currentType === "fill" ? "bg-[#fdd2dc]" : "bg-white"
       }`}
@@ -93,7 +93,7 @@ export const MyAddsCard = ({ item }: { item: MyAdd }) => {
           <p className="font-[300]">{item.description}</p>
         </div>
         <Image
-          className="w-[225px] h-[160px] max-[767px]:w-[237px] mx-auto max-[767px]:max-h-[154px]"
+          className="md:w-[225px] md:h-[160px]  mx-auto w-full"
           src={item.images[0]}
           width={225}
           height={160}

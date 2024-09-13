@@ -250,7 +250,7 @@ export const CreateAddForm = () => {
                       {item.originFileObj?.name}
                     </p>
                     <Image
-                      className="max-h-[100px]"
+                      className="max-h-[100px] w-auto object-contain"
                       src={URL.createObjectURL(item.originFileObj as Blob)}
                       alt="image"
                     />

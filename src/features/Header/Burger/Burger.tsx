@@ -36,7 +36,7 @@ export const Burger = () => {
             }}
             className="bg-white h-[100dvh] p-[20px] overflow-auto md:w-[300px] w-full fixed left-0 top-0 z-[99999]"
           >
-            <div className="containerBlock">
+            <div className="">
               <IoCloseSharp
                 className="w-[20px] h-[20px]  text-primary cursor-pointer"
                 onClick={() => setIsOpen(false)}

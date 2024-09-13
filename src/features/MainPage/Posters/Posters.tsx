@@ -39,7 +39,7 @@ export const Posters = () => {
           }}
           key={item.id}
           className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row justify-between items-end cursor-pointer ${
-            item.type === "vip" && " border-[2px] border-[#D11010]"
+            item.type === "vip" && " outline outline-[2px] outline-[#D11010]"
           } ${
             item.type === "premium" ? "bg-[#FFD0DB]" : "bg-white"
           } shadowPoster w-full md:rounded-[21px] rounded-[13px]`}

@@ -1,7 +1,5 @@
 import { Item } from "@/features/ItemPage/Item";
-import { Recomendation } from "@/features/ItemPage/Recomendation";
 import { ADDS } from "@/utils/mock";
-import { Metadata } from "next";
 import React from "react";
 
 interface ItemDetailsProps {
