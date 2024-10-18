@@ -1,11 +1,12 @@
 "use client";
 
-import { isAuthAtom } from "@/atoms/authAtoms";
+import { accesTokenAtom, isAuthAtom } from "@/atoms/authAtoms";
 import { Modal } from "@/components/Modal";
+import { logout } from "@/services/logout";
 import { Button } from "antd";
 import { useSetAtom } from "jotai";
-import { Dispatch, useCallback } from "react";
-import toast from "react-hot-toast";
+import { Dispatch, useCallback, useState } from "react";
+import cookies from "js-cookie";
 
 interface ExitModalProps {
   isOpen: boolean;
@@ -17,19 +18,26 @@ export const ExitModal = ({
   setIsOpen,
   setIsTabOpen,
 }: ExitModalProps) => {
+  const [isLoading, setIsLoading] = useState(false);
   const setIsAuth = useSetAtom(isAuthAtom);
-
+  const setToken = useSetAtom(accesTokenAtom);
   const onCancel = useCallback(() => {
     setIsOpen(false);
     setIsTabOpen && setIsTabOpen(false);
   }, [setIsOpen, setIsTabOpen]);
 
-  const onExit = useCallback(() => {
-    setIsTabOpen && setIsTabOpen(false);
-    setIsAuth(false);
-    setIsOpen(false);
-    toast.success("Вы успешно вышли из аккаунта!");
-  }, [setIsAuth, setIsOpen, setIsTabOpen]);
+  const onExit = useCallback(async () => {
+    setIsLoading(true);
+    const success = await logout();
+    setIsLoading(false);
+    if (success) {
+      setToken("");
+      cookies.remove("token");
+      setIsTabOpen && setIsTabOpen(false);
+      setIsAuth(false);
+      setIsOpen(false);
+    }
+  }, [setIsAuth, setIsOpen, setIsTabOpen, setToken]);
 
   return (
     <Modal
@@ -43,6 +51,7 @@ export const ExitModal = ({
       <p>Все несохраненные данные могут быть утеряны</p>
       <div className="flex gap-[20px]">
         <Button
+          loading={isLoading}
           onClick={onExit}
           className="!h-[43px] !px-[50px] !bg-[#FF5E5E] !border-none"
           type="primary"
@@ -50,6 +59,7 @@ export const ExitModal = ({
           Выйти
         </Button>
         <Button
+          loading={isLoading}
           onClick={onCancel}
           className="!h-[43px] !px-[50px] "
           type="primary"

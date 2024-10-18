@@ -17,7 +17,7 @@ export const AuthModal = ({ isAuth, setIsAuth }: AuthModalProps) => {
   const TYPES: Record<CurrentType, ReactNode> = {
     auth: <Auth setIsOpen={setIsAuth} setType={setCurrentType} />,
     forget: "",
-    register: <Register setIsOpen={setIsAuth} setType={setCurrentType} />,
+    register: <Register setType={setCurrentType} />,
   };
   return (
     <Modal className="w-[500px]" isOpen={isAuth} setIsOpen={setIsAuth}>

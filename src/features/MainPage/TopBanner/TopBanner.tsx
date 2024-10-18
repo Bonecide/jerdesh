@@ -5,6 +5,7 @@ import Slider, { Settings } from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import React from "react";
+import { BASE_API_URL } from "@/utils/const/env";
 
 const BANNERS = [
   "/images/banner-full.png",
@@ -18,11 +19,11 @@ export const TopBanner = () => {
     infinite: true,
     speed: 500,
     slidesToShow: 1,
-
     slidesToScroll: 1,
     autoplay: true,
     autoplaySpeed: 3000,
   };
+
   return (
     <div className="w-full overflow-x-hidden overflow-y-visibl banners">
       <Slider {...options}>

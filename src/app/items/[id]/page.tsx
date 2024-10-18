@@ -1,6 +1,7 @@
 import { Item } from "@/features/ItemPage/Item";
 import { ADDS } from "@/utils/mock";
 import React from "react";
+import Skeleton from "react-loading-skeleton";
 
 interface ItemDetailsProps {
   params: {

@@ -1,11 +1,12 @@
 import { Button, Checkbox, Form, Input } from "antd";
-import { ChangeEvent, Dispatch, useCallback, useState } from "react";
+import { Dispatch, useCallback, useState } from "react";
 import { CurrentType } from "../AuthModal";
 import { useSetAtom } from "jotai";
-import { isAuthAtom } from "@/atoms/authAtoms";
-import toast from "react-hot-toast";
+import { accesTokenAtom, isAuthAtom } from "@/atoms/authAtoms";
 import { useRouter } from "next/navigation";
-
+import { auth } from "@/services/auth";
+import cookies from "js-cookie";
+import toast from "react-hot-toast";
 interface AuthProps {
   setType: Dispatch<CurrentType>;
   setIsOpen: Dispatch<boolean>;
@@ -17,18 +18,27 @@ interface FormValues {
 }
 export const Auth = ({ setType, setIsOpen }: AuthProps) => {
   const [isAgree, setIsAgree] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   const setAuth = useSetAtom(isAuthAtom);
+  const setToken = useSetAtom(accesTokenAtom);
 
   const onSubmit = useCallback(
-    (values: FormValues) => {
-      toast.success("Вы успешно вошли в аккаунт!");
-      setAuth(true);
-      setIsOpen(false);
-      router.push("/profile?tab=profile");
+    async (values: FormValues) => {
+      setIsLoading(true);
+      const token = await auth(values);
+      setIsLoading(false);
+      if (token) {
+        setToken(token);
+        cookies.set("token", token);
+        toast.success("Вы успешно вошли в аккаунт!");
+        setAuth(true);
+        setIsOpen(false);
+        router.push("/profile?tab=profile");
+      }
     },
-    [setAuth, setIsOpen, router]
+    [setAuth, setIsOpen, router, setToken]
   );
 
   return (
@@ -67,6 +77,7 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         </div>
         <Form.Item>
           <Button
+            loading={isLoading}
             disabled={!isAgree}
             htmlType="submit"
             type="primary"

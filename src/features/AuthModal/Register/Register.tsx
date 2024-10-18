@@ -5,31 +5,34 @@ import toast from "react-hot-toast";
 import { useSetAtom } from "jotai";
 import { isAuthAtom } from "@/atoms/authAtoms";
 import { useRouter } from "next/navigation";
+import { register } from "@/services/register";
 
 interface RegisterProps {
   setType: Dispatch<CurrentType>;
-  setIsOpen: Dispatch<boolean>;
 }
 interface FormValues {
   email: string;
   password: string;
-  confirm_password: string;
+  password_confirmation: string;
 }
-export const Register = ({ setType, setIsOpen }: RegisterProps) => {
-  const router = useRouter();
-
+export const Register = ({ setType }: RegisterProps) => {
   const [isAgree, setIsAgree] = useState(false);
 
-  const setAuth = useSetAtom(isAuthAtom);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = useCallback(
-    (values: FormValues) => {
-      toast.success("Вы успешно зарегестрировались!");
-      setAuth(true);
-      setIsOpen(false);
-      router.push("/profile?tab=profile");
+    async (values: FormValues) => {
+      setIsLoading(true);
+      const success = await register(values);
+      setIsLoading(false);
+      if (success) {
+        toast.success(
+          "Вы успешно зарегестрировались, пожалуйста войдите в аккаунт!"
+        );
+        setType("auth");
+      }
     },
-    [setAuth, setIsOpen, router]
+    [setType]
   );
   return (
     <Form layout="vertical" onFinish={onSubmit}>
@@ -61,7 +64,7 @@ export const Register = ({ setType, setIsOpen }: RegisterProps) => {
         </Form.Item>
         <Form.Item
           dependencies={["password"]}
-          name="confirm_password"
+          name="password_confirmation"
           label="Пароль"
           rules={[
             { required: true, message: "Повторите пароль" },
@@ -85,6 +88,7 @@ export const Register = ({ setType, setIsOpen }: RegisterProps) => {
         </div>
         <Form.Item>
           <Button
+            loading={isLoading}
             disabled={!isAgree}
             type="primary"
             htmlType="submit"

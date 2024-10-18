@@ -13,7 +13,7 @@ const Loading = () => {
             <Skeleton containerClassName="flex-1" width={"100%"} count={12} />
           </div>
           <div className="w-full py-[30px] px-[18px] rounded-[20px] mt-[20px] descriptionShadow">
-            <p className="font-[500] text-[16px]">Описание</p>
+            <Skeleton />
             <Skeleton className="mt-[10px]" count={2} width={"100%"} />
           </div>
 
@@ -25,7 +25,7 @@ const Loading = () => {
           />
           <div className="mt-[30px] gap-[20px] md:flex lg:block">
             <div>
-              <h2 className="font-[500] text-[20px] mt-[30px]">Рекомендации</h2>
+              <Skeleton />
               <div className="flex gap-[30px]">
                 <Skeleton
                   width="100%"
