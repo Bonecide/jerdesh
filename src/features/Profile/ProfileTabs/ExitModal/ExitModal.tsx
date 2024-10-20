@@ -28,15 +28,13 @@ export const ExitModal = ({
 
   const onExit = useCallback(async () => {
     setIsLoading(true);
-    const success = await logout();
+    await logout();
     setIsLoading(false);
-    if (success) {
-      setToken("");
-      cookies.remove("token");
-      setIsTabOpen && setIsTabOpen(false);
-      setIsAuth(false);
-      setIsOpen(false);
-    }
+    setToken("");
+    cookies.remove("token");
+    setIsTabOpen && setIsTabOpen(false);
+    setIsAuth(false);
+    setIsOpen(false);
   }, [setIsAuth, setIsOpen, setIsTabOpen, setToken]);
 
   return (

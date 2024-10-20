@@ -88,7 +88,9 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         </Form.Item>
       </div>
       <div className="flex justify-end mt-[20px] font-[500]">
-        <p>Забыли пароль?</p>
+        <p onClick={() => setType("forget")} className="cursor-pointer">
+          Забыли пароль?
+        </p>
       </div>
       <p className="text-center mt-[20px] text-[16px] text-[#B0B0B0]">
         Нет аккаунта?{" "}

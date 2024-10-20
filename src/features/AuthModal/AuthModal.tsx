@@ -4,6 +4,7 @@ import { Button, Checkbox, Input } from "antd";
 import { Dispatch, ReactElement, ReactNode, useState } from "react";
 import { Auth } from "./Auth/Auth";
 import { Register } from "./Register";
+import { ForgotPassword } from "./ForgotPassword";
 
 interface AuthModalProps {
   isAuth: boolean;
@@ -16,7 +17,7 @@ export const AuthModal = ({ isAuth, setIsAuth }: AuthModalProps) => {
 
   const TYPES: Record<CurrentType, ReactNode> = {
     auth: <Auth setIsOpen={setIsAuth} setType={setCurrentType} />,
-    forget: "",
+    forget: <ForgotPassword setType={setCurrentType} />,
     register: <Register setType={setCurrentType} />,
   };
   return (
