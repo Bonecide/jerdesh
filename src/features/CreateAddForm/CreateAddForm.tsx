@@ -5,22 +5,22 @@ import { Button, Form, Image, Input, Select, UploadFile } from "antd";
 import { UploadChangeParam } from "antd/es/upload";
 import Dragger from "antd/es/upload/Dragger";
 import { AnimatePresence } from "framer-motion";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { ImFilePicture } from "react-icons/im";
-
 import { motion } from "framer-motion";
+import useCategory from "@/hooks/useCategory";
 
-const options = [
-  {
-    value: "1",
-    label: 1,
-  },
-  {
-    value: "2",
-    lavel: 2,
-  },
-];
+export interface CategoryOptionProps {
+  label: string;
+  value: number;
+}
 export const CreateAddForm = () => {
+  const [categoryOptions, setCategoryOptions] = useState<CategoryOptionProps[]>(
+    []
+  );
+  const [subCategoriesOption, setSubCategoriesOption] = useState<
+    CategoryOptionProps[]
+  >([]);
   const [images, setImages] = useState<UploadChangeParam<UploadFile<[]>>>({
     fileList: [],
     file: {
@@ -28,9 +28,9 @@ export const CreateAddForm = () => {
       uid: "",
     },
   });
+  const { categories, isLoad } = useCategory();
 
   const [form] = Form.useForm();
-
   const handleRemoveImage = useCallback(
     (file: UploadFile) => {
       const newImages = {
@@ -50,9 +50,25 @@ export const CreateAddForm = () => {
     [form, images]
   );
 
+  useEffect(() => {
+    setCategoryOptions(
+      categories.map((cat) => ({ label: cat.title, value: cat.id }))
+    );
+  }, [isLoad]);
+
   const handleChange = (info: UploadChangeParam<UploadFile<[]>>) => {
     // Обновляем состояние с новыми файлами
     setImages(info);
+  };
+
+  const mainCategoryChange = (id: number) => {
+    const parentCategory = categories.find((cat) => cat.id === id);
+    const options = parentCategory?.sub_categories.map((subCat) => ({
+      label: subCat.title,
+      value: subCat.id,
+    }));
+
+    setSubCategoriesOption(options || []);
   };
 
   return (
@@ -76,9 +92,12 @@ export const CreateAddForm = () => {
             ]}
           >
             <Select
+              notFoundContent={"Пусто"}
               rootClassName="w-full"
-              options={options}
+              options={categoryOptions}
+              loading={isLoad}
               className="!w-full !h-[50px] !border-none"
+              onChange={mainCategoryChange}
             />
           </Form.Item>
           <Form.Item
@@ -111,7 +130,7 @@ export const CreateAddForm = () => {
           >
             <Select
               rootClassName="w-full"
-              options={options}
+              options={[]}
               className="!w-full !h-[50px]"
             />
           </Form.Item>
@@ -165,8 +184,9 @@ export const CreateAddForm = () => {
             ]}
           >
             <Select
+              notFoundContent="Подкатегории не найден"
               rootClassName="w-full"
-              options={options}
+              options={subCategoriesOption}
               className="!w-full !h-[50px]"
             />
           </Form.Item>
