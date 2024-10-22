@@ -5,12 +5,13 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseSharp } from "react-icons/io5";
-import { categories } from "@/utils/mock";
 import { Button } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
+import useCategory from "@/hooks/useCategory";
 
 export const Burger = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { categories } = useCategory();
   return (
     <div className="lg:hidden block">
       <div onClick={() => setIsOpen(true)}>
@@ -55,7 +56,7 @@ export const Burger = () => {
                   >
                     <div className="size-[10px] min-w-[10px] bg-primary rounded-full" />
                     <p className="text-[#02203B] text-[10px]">
-                      {item.name} ({item.count})
+                      {item.title} ({item.count})
                     </p>
                   </div>
                 ))}
