@@ -9,6 +9,7 @@ import { AddMoney } from "./AddMoney";
 import { useSearchParams } from "next/navigation";
 import { useAtom } from "jotai";
 import { tabAtom } from "@/atoms/profile";
+import { VipServices } from "./VipServices";
 
 export type TabSlug =
   | "profile"
@@ -34,7 +35,7 @@ export const ProfilePage = () => {
     announcement: <Anouncment />,
     addMoney: <AddMoney />,
     settings: null,
-    vips: null,
+    vips: <VipServices />,
   };
 
   useEffect(() => {

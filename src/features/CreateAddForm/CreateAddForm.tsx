@@ -9,12 +9,30 @@ import { useCallback, useEffect, useState } from "react";
 import { ImFilePicture } from "react-icons/im";
 import { motion } from "framer-motion";
 import useCategory from "@/hooks/useCategory";
+import { createAdd } from "@/services/createAdd";
+import { useAtomValue } from "jotai";
+import { subwaysAtom } from "@/atoms/subways";
+import { DefaultOptionType } from "antd/es/select";
+import { File } from "buffer";
+import toast from "react-hot-toast";
 
 export interface CategoryOptionProps {
   label: string;
   value: number;
 }
+export type CreateFieldsType = {
+  address: string;
+  category: number;
+  description: string;
+  phone: string;
+  slug: string;
+  station: number;
+  sub_category: number;
+  title: string;
+  images: UploadChangeParam<UploadFile<[]>>;
+};
 export const CreateAddForm = () => {
+  const subways = useAtomValue(subwaysAtom);
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptionProps[]>(
     []
   );
@@ -54,10 +72,9 @@ export const CreateAddForm = () => {
     setCategoryOptions(
       categories.map((cat) => ({ label: cat.title, value: cat.id }))
     );
-  }, [isLoad]);
+  }, [isLoad, categories]);
 
   const handleChange = (info: UploadChangeParam<UploadFile<[]>>) => {
-    // Обновляем состояние с новыми файлами
     setImages(info);
   };
 
@@ -70,11 +87,16 @@ export const CreateAddForm = () => {
 
     setSubCategoriesOption(options || []);
   };
+  const onSubmit = useCallback(async (values: CreateFieldsType) => {
+    const toastId = toast.loading("Загрузка...");
+    await createAdd(values);
+    toast.dismiss(toastId);
+  }, []);
 
   return (
     <Form
       form={form}
-      onFinish={(values) => console.log(values)}
+      onFinish={onSubmit}
       layout="vertical"
       className="flex flex-col items-end gap-[30px] w-full "
     >
@@ -82,7 +104,7 @@ export const CreateAddForm = () => {
         <div className="w-full space-y-[16px] md:space-y-[30px]">
           <Form.Item
             className="w-full"
-            name="category"
+            name="category_id"
             label="Категория"
             rules={[
               {
@@ -92,6 +114,12 @@ export const CreateAddForm = () => {
             ]}
           >
             <Select
+              showSearch
+              filterOption={(input: string, option?: DefaultOptionType) =>
+                ((option?.label as string) ?? "")
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
               notFoundContent={"Пусто"}
               rootClassName="w-full"
               options={categoryOptions}
@@ -119,7 +147,7 @@ export const CreateAddForm = () => {
           </Form.Item>
           <Form.Item
             className="w-full"
-            name="station"
+            name="subway_id"
             label="Метро"
             rules={[
               {
@@ -129,8 +157,18 @@ export const CreateAddForm = () => {
             ]}
           >
             <Select
+              showSearch
+              filterOption={(input: string, option?: DefaultOptionType) =>
+                ((option?.label as string) ?? "")
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+              notFoundContent={"Пусто"}
               rootClassName="w-full"
-              options={[]}
+              options={subways.map((item) => ({
+                value: item.id,
+                label: item.title,
+              }))}
               className="!w-full !h-[50px]"
             />
           </Form.Item>
@@ -164,7 +202,6 @@ export const CreateAddForm = () => {
           >
             <Input
               type="tel"
-              pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}"
               rootClassName="w-full"
               name="phone"
               className="!w-full !h-[50px]"
@@ -174,17 +211,17 @@ export const CreateAddForm = () => {
         <div className="w-full space-y-[16px] md:space-y-[30px] max-[767px]:mt-[16px]">
           <Form.Item
             className="w-full"
-            name="sub_category"
+            name="sub_category_id"
             label="Подкатегория"
-            rules={[
-              {
-                required: true,
-                message: "Выберите подкатегорию",
-              },
-            ]}
           >
             <Select
-              notFoundContent="Подкатегории не найден"
+              showSearch
+              filterOption={(input: string, option?: DefaultOptionType) =>
+                ((option?.label as string) ?? "")
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+              notFoundContent="Подкатегории не найдены"
               rootClassName="w-full"
               options={subCategoriesOption}
               className="!w-full !h-[50px]"
@@ -290,12 +327,7 @@ export const CreateAddForm = () => {
           </div>
         )}
       </div>
-      <Button
-        onClick={() => console.log(form.getFieldValue("images"))}
-        className="!h-[40px]"
-        type="primary"
-        htmlType="submit"
-      >
+      <Button className="!h-[40px]" type="primary" htmlType="submit">
         Создать
       </Button>
     </Form>

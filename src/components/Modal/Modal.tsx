@@ -1,3 +1,4 @@
+import { AnimatePresence, motion } from "framer-motion";
 import { Dispatch, ReactNode, useCallback, useEffect } from "react";
 
 type ModalProps = {
@@ -41,18 +42,32 @@ export const Modal = ({
     };
   }, [handleKeyDown, isOpen]);
   return (
-    <div
-      onClick={onClose}
-      className={`fixed top-0 !mt-0 flex w-screen left-0 h-full justify-center items-center cursor-pointer bg-black/30 duration-300 z-10 ${
-        isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-      }`}
-    >
-      <div
-        onClick={(e) => e.stopPropagation()}
-        className={`bg-white rounded-[20px] max-h-[95vh] overflow-auto cursor-auto p-[30px] max-w-[90%] ${className}`}
-      >
-        {children}
-      </div>
-    </div>
+    <AnimatePresence>
+      {isOpen && (
+        <motion.div
+          initial={{
+            opacity: 0,
+          }}
+          animate={{
+            opacity: 1,
+          }}
+          exit={{
+            opacity: 0,
+          }}
+          transition={{
+            duration: 0.3,
+          }}
+          onClick={onClose}
+          className={`fixed top-0 !mt-0 flex w-screen left-0 h-full justify-center items-center cursor-pointer bg-black/30  z-10 `}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className={`bg-white rounded-[20px] max-h-[95vh] overflow-auto cursor-auto p-[30px] max-w-[90%] ${className}`}
+          >
+            {children}
+          </div>
+        </motion.div>
+      )}
+    </AnimatePresence>
   );
 };

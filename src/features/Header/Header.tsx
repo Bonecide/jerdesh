@@ -4,29 +4,27 @@ import { GlobeAltIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { Button, Select } from "antd";
 import Image from "next/image";
 import Link from "next/link";
-import { useCallback, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { AuthModal } from "@/features/AuthModal";
-import { useAtomValue } from "jotai";
+import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { isAuthAtom } from "@/atoms/authAtoms";
-import { useRouter } from "next/navigation";
 import { AnimatePresence } from "framer-motion";
 import { Filters } from "./Filters";
 import { Burger } from "./Burger";
 import { userAtom } from "@/atoms/user";
 import { Tabs } from "./Tabs";
-
-const METRO = [
-  {
-    value: 1,
-    label: "Люблино",
-  },
-  {
-    value: 2,
-    label: "Люблино",
-  },
-];
-
+import { DefaultOptionType } from "antd/es/select";
+import { subwaysAtom } from "@/atoms/subways";
+import { headerCategories } from "@/atoms/category";
+import {
+  announcementsFiltersAtom,
+  setAnnouncementsAtom,
+} from "@/atoms/announcements";
+import { useRouter } from 'nextjs-toploader/app';
 export const Header = () => {
+  const subways = useAtomValue(subwaysAtom);
+  const categories = useAtomValue(headerCategories);
+
   const router = useRouter();
   const user = useAtomValue(userAtom);
   const isAuth = useAtomValue(isAuthAtom);
@@ -34,6 +32,12 @@ export const Header = () => {
 
   const [isFilters, setIsFilters] = useState(false);
   const [isTabs, setIsTabs] = useState(false);
+
+  const [announcementsFilters, setAnnouncementsFilters] = useAtom(
+    announcementsFiltersAtom
+  );
+
+  const refetchAnnounce = useSetAtom(setAnnouncementsAtom);
 
   const handleProfileClick = useCallback(() => {
     if (isAuth) {
@@ -51,6 +55,22 @@ export const Header = () => {
     }
   }, [isAuth]);
 
+  const onChangeSubway = useCallback(
+    (value: number) => {
+      setAnnouncementsFilters((prev) => ({ ...prev, subway_id: value }));
+      refetchAnnounce();
+    },
+    [setAnnouncementsFilters, refetchAnnounce]
+  );
+
+  const onChangeCategory = useCallback(
+    (value: number) => {
+      setAnnouncementsFilters((prev) => ({ ...prev, category_id: value }));
+      refetchAnnounce();
+    },
+    [setAnnouncementsFilters, refetchAnnounce]
+  );
+
   return (
     <header className="containerBlock py-[20px] flex flex-col md:flex-row gap-[10px] md:justify-between items-center header ">
       <div className="flex justify-between gap-[10px] w-full ">
@@ -66,7 +86,7 @@ export const Header = () => {
         </Link>
         <div className="relative hidden md:block">
           <input
-            className="lg:w-[300px] md:w-[333px]  bg-white outline-none pl-[50px] md:h-[45px] lg:h-[56px] shadow lg:!rounded-[12px] md:!rounded-[8px] border-none"
+            className="lg:w-[300px] md:w-[303px]  bg-white outline-none pl-[50px] md:h-[45px] lg:h-[56px] shadow lg:!rounded-[12px] md:!rounded-[8px] border-none"
             placeholder="Объявление"
           />
           <SearchOutlined className="absolute !text-primary lg:top-[28%] md:top-[25%]  text-[25px] left-[10px]" />
@@ -79,14 +99,38 @@ export const Header = () => {
           </div>
         </div>
         <Select
+          notFoundContent={"Пусто"}
+          onChange={onChangeSubway}
+          defaultValue={announcementsFilters.subway_id}
+          showSearch
+          filterOption={(input: string, option?: DefaultOptionType) =>
+            ((option?.label as string) ?? "")
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
           className="!h-[57px] w-[18%] !hidden lg:!block  "
           placeholder="Выбрать метро"
-          options={METRO}
+          options={subways.map((item) => ({
+            value: item.id,
+            label: item.title,
+          }))}
         />
         <Select
+          notFoundContent={"Пусто"}
+          onChange={onChangeCategory}
+          defaultValue={announcementsFilters.category_id}
+          showSearch
+          filterOption={(input: string, option?: DefaultOptionType) =>
+            ((option?.label as string) ?? "")
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
           className="!h-[57px] w-[18%] !hidden lg:!block  "
-          placeholder="Выбрать метро"
-          options={METRO}
+          placeholder="Выбрать категорию"
+          options={categories.map((item) => ({
+            value: item.id,
+            label: item.title,
+          }))}
         />
         <Button
           onClick={() => router.push("/create")}
@@ -103,8 +147,8 @@ export const Header = () => {
           />
         </div>
         <div className="lg:hidden block">
-          {!user.image ? (
-            <div className="lg:h-[57px] lg:w-[57px] md:h-[45px] md:w-[45px] border border-primary  bg-white lg:rounded-[12px] md:rounded-[8px] flex items-center justify-center">
+          {!user.image || !isAuth ? (
+            <div className="lg:h-[57px] lg:w-[57px] h-[45px] w-[45px] border border-primary  bg-white lg:rounded-[12px] rounded-[8px] flex items-center justify-center">
               <UserCircleIcon
                 onClick={handleProfileClick}
                 className="text-primary size-[30px] cursor-pointer"

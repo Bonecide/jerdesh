@@ -21,6 +21,7 @@ export const rentalFetch = async (
         headers: await buildHeaders(data),
         body: buildBody(data),
         signal: data.signal,
+        cache: "no-store",
         next: {
           revalidate: REVALIDATE,
         },
