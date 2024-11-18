@@ -1,17 +1,26 @@
 "use client";
-import { ADDS } from "@/utils/mock";
 import { MapPinIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
+import { Announce, announcementsAtom } from "@/atoms/announcements";
+import { useAtomValue } from "jotai";
+import { useHydrateAtoms } from "jotai/utils";
 
-export const Posters = () => {
+interface PostersProps {
+  data: Announce[];
+}
+
+export const Posters = ({ data }: PostersProps) => {
+  useHydrateAtoms([[announcementsAtom, data]]);
   const router = useRouter();
+  const announcements = useAtomValue(announcementsAtom);
 
+  if (!announcements) return null;
   return (
     <div className="space-y-[15px]">
-      {ADDS.map((item) => (
+      {announcements.map((item) => (
         <motion.div
           onClick={() => router.push(`/items/${item.id}`)}
           whileTap={{
@@ -36,12 +45,13 @@ export const Posters = () => {
           }}
           transition={{
             duration: 0.5,
+            type: "spring",
           }}
           key={item.id}
           className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row justify-between items-end cursor-pointer ${
-            item.type === "vip" && " outline outline-[2px] outline-[#D11010]"
+            item.status === "vip" && " outline outline-[2px] outline-[#D11010]"
           } ${
-            item.type === "premium" ? "bg-[#FFD0DB]" : "bg-white"
+            item.status === "premium" ? "bg-[#FFD0DB]" : "bg-white"
           } shadowPoster w-full md:rounded-[21px] rounded-[13px]`}
         >
           <div className="flex flex-col gap-[15px]">

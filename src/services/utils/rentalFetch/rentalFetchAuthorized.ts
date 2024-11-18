@@ -9,7 +9,7 @@ export const rentalFetchAuthorized = async (
   data: Omit<Data, "accessToken">,
   config?: RentalFetchConfig
 ) => {
-  const token = isServer
+  const token = config?.isServer   
     ? cookies.get("token")
     : JSON.parse(localStorage.getItem("token") || "null");
 
