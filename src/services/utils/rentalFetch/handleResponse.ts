@@ -7,6 +7,7 @@ export type Errors = {
 export type HandleError = {
   errors: Errors;
   error?: string;
+  message?: string;
 };
 
 export const getFirstError = (errors: Errors) => {

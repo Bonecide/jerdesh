@@ -20,7 +20,7 @@ import {
   announcementsFiltersAtom,
   setAnnouncementsAtom,
 } from "@/atoms/announcements";
-import { useRouter } from 'nextjs-toploader/app';
+import { useRouter } from "nextjs-toploader/app";
 export const Header = () => {
   const subways = useAtomValue(subwaysAtom);
   const categories = useAtomValue(headerCategories);
@@ -75,10 +75,10 @@ export const Header = () => {
     <header className="containerBlock py-[20px] flex flex-col md:flex-row gap-[10px] md:justify-between items-center header ">
       <div className="flex justify-between gap-[10px] w-full ">
         <Burger />
-        <Link href={"/"}>
+        <Link href={"/"} className="cursor-pointer">
           <Image
             src="/logo.svg"
-            className="lg:h-[50px] h-[40px]"
+            className="lg:h-[50px] h-[40px] "
             width={212}
             height={50}
             alt="Jerdesh"
@@ -99,6 +99,7 @@ export const Header = () => {
           </div>
         </div>
         <Select
+          allowClear
           notFoundContent={"Пусто"}
           onChange={onChangeSubway}
           defaultValue={announcementsFilters.subway_id}
@@ -116,6 +117,7 @@ export const Header = () => {
           }))}
         />
         <Select
+          allowClear
           notFoundContent={"Пусто"}
           onChange={onChangeCategory}
           defaultValue={announcementsFilters.category_id}
@@ -140,18 +142,18 @@ export const Header = () => {
           <PlusOutlined />
           Опубликовать
         </Button>
-        <div className="lg:h-[57px] lg:w-[57px] md:h-[45px] md:w-[45px] border border-primary  bg-white lg:rounded-[12px] md:rounded-[8px] hidden lg:flex items-center justify-center">
+        <div className="lg:h-[57px] lg:w-[57px] md:h-[45px] cursor-pointer md:w-[45px] border border-primary  bg-white lg:rounded-[12px] md:rounded-[8px] hidden lg:flex items-center justify-center">
           <UserCircleIcon
             onClick={handleProfileClick}
-            className="text-primary size-[30px] cursor-pointer"
+            className="text-primary size-[30px] "
           />
         </div>
         <div className="lg:hidden block">
           {!user.image || !isAuth ? (
-            <div className="lg:h-[57px] lg:w-[57px] h-[45px] w-[45px] border border-primary  bg-white lg:rounded-[12px] rounded-[8px] flex items-center justify-center">
+            <div className="lg:h-[57px] lg:w-[57px] h-[45px] cursor-pointer w-[45px] border border-primary  bg-white lg:rounded-[12px] rounded-[8px] flex items-center justify-center">
               <UserCircleIcon
                 onClick={handleProfileClick}
-                className="text-primary size-[30px] cursor-pointer"
+                className="text-primary size-[30px] "
               />
             </div>
           ) : (
