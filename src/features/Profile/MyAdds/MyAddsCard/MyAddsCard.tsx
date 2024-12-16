@@ -19,18 +19,20 @@ import {
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useRouter } from "nextjs-toploader/app";
 import { ActionModal } from "./ActionModal";
+import { useLocale } from "next-intl";
 
 type CardType = "common" | "border" | "fill";
 export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
   const router = useRouter();
+  const locale = useLocale()
 
   const [currentType, setCurrentType] = useState<CardType>("common");
   const [actionType, setActionType] = useState<Announcement_Service>();
   const [isOpenAction, setIsOpenAction] = useState(false);
 
   const onClickEdit = useCallback(() => {
-    router.push(`/edit/${item.id}`);
-  }, [router, item]);
+    router.push(`/${locale}/edit/${item.id}`);
+  }, [router, item,locale]);
 
   const onClickAction = useCallback(
     (type: Announcement_Service) => () => {

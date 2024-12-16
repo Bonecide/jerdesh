@@ -9,6 +9,7 @@ import { useHydrateAtoms } from "jotai/utils";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { PushpinOutlined } from "@ant-design/icons";
 import { useRouter } from "nextjs-toploader/app";
+import { useLocale } from "next-intl";
 
 interface PostersProps {
   data: Announce[];
@@ -17,6 +18,7 @@ interface PostersProps {
 export const Posters = ({ data }: PostersProps) => {
   useHydrateAtoms([[announcementsAtom, data]]);
   const router = useRouter();
+  const locale = useLocale()
   const announcements = useAtomValue(announcementsAtom);
 
   if (!announcements) return null;
@@ -25,7 +27,7 @@ export const Posters = ({ data }: PostersProps) => {
       <AnimatePresence>
         {announcements.map((item) => (
           <motion.div
-            onClick={() => router.push(`/items/${item.id}`)}
+            onClick={() => router.push(`/${locale}/items/${item.id}`)}
             whileTap={{
               scale: 0.95,
               transition: {

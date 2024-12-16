@@ -3,7 +3,6 @@ import { PlusOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { GlobeAltIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { Button, Select } from "antd";
 import Image from "next/image";
-import Link from "next/link";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { AuthModal } from "@/features/AuthModal";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
@@ -25,18 +24,21 @@ import { fetchProfileAtom, profileAtom } from "@/atoms/profile";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import useDebounce from "@/hooks/useDebounce";
 import { handlePreventScroll } from "@/services/utils/helpers/preventMove";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
+
 export const Header = () => {
   const router = useRouter();
   const subways = useAtomValue(subwaysAtom);
   const categories = useAtomValue(headerCategories);
-
+  const t = useTranslations("root");
   const user = useAtomValue(profileAtom);
 
   const isAuth = useAtomValue(isAuthAtom);
 
   const refetchAnnounce = useSetAtom(setAnnouncementsAtom);
   const refetchProfile = useSetAtom(fetchProfileAtom);
-
+  const locale = useLocale();
   const [announcementsFilters, setAnnouncementsFilters] = useAtom(
     announcementsFiltersAtom
   );
@@ -49,11 +51,11 @@ export const Header = () => {
   const debouncedSearchTerm = useDebounce(searchTerm, 500);
   const handleProfileClick = useCallback(() => {
     if (isAuth) {
-      router.push("/profile?tab=profile");
+      router.push(`/${locale}/profile?tab=profile`);
     } else {
       setIsAuthModal(true);
     }
-  }, [isAuth, router]);
+  }, [isAuth, router, locale]);
 
   const handleTabsClick = useCallback(() => {
     if (isAuth) {
@@ -81,11 +83,11 @@ export const Header = () => {
 
   const onClickAdd = useCallback(() => {
     if (isAuth) {
-      router.push("/create");
+      router.push(`/${locale}/create`);
     } else {
       setIsAuthModal(true);
     }
-  }, [isAuth, router]);
+  }, [isAuth, router, locale]);
 
   useEffect(() => {
     setAnnouncementsFilters((prev) => ({
@@ -102,7 +104,7 @@ export const Header = () => {
     <header className="containerBlock py-[20px] flex flex-col md:flex-row gap-[10px] md:justify-between items-center header ">
       <div className="flex justify-between gap-[10px] w-full ">
         <Burger />
-        <Link href={"/"} className="cursor-pointer">
+        <Link locale={locale} href={"/"} className="cursor-pointer">
           <Image
             src="/logo.svg"
             className="lg:h-[50px] h-[40px] aspect-square "
@@ -123,7 +125,9 @@ export const Header = () => {
             className="flex lg:hidden items-center gap-[6px] absolute right-[20px] top-[34%] cursor-pointer"
             onClick={() => setIsFilters((prev) => !prev)}
           >
-            <p className="text-primary text-[10px]">Фильтры</p>
+            <p className="text-primary text-[10px]">
+              {t("navigation.filters")}
+            </p>
             <Image src="/filters.svg" width={15} height={15} alt="filters" />
           </div>
         </div>
@@ -147,7 +151,7 @@ export const Header = () => {
               .includes(input.toLowerCase())
           }
           className="!h-[57px] w-[18%] !hidden lg:!block  "
-          placeholder="Выбрать метро"
+          placeholder={t("navigation.chooseStation")}
           options={subways.map((item) => ({
             value: item.id,
             label: item.title,
@@ -173,7 +177,7 @@ export const Header = () => {
               .includes(input.toLowerCase())
           }
           className="!h-[57px] w-[18%] !hidden lg:!block  "
-          placeholder="Выбрать категорию"
+          placeholder={t("navigation.chooseCategory")}
           options={categories.map((item) => ({
             value: item.id,
             label: item.title,
@@ -185,7 +189,7 @@ export const Header = () => {
           className="lg:!h-[57px] md:!h-[45px] w-[15%] lg:!text-[16px] !text-white md:!flex items-center justify-center lg:!rounded-[12px] md:!rounded-[5px] border-none !bg-accent hover:!bg-accent hover:!text-white !shadow-none !hidden"
         >
           <PlusOutlined />
-          Опубликовать
+          {t("navigation.create")}
         </Button>
         <div className="lg:h-[57px] lg:w-[57px] md:h-[45px] cursor-pointer md:w-[45px] border border-primary  bg-white lg:rounded-[12px] md:rounded-[8px] hidden lg:flex items-center justify-center">
           <UserCircleIcon

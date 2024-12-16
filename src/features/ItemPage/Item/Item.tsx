@@ -1,5 +1,5 @@
 "use client";
-import { ADD } from "@/utils/mock";
+
 import { ImageSlider } from "./ImageSlider";
 import { User } from "./User";
 import { Status } from "./Status";
@@ -50,7 +50,8 @@ export const Item = ({ item }: { item: AnnounceDetails }) => {
         <Image
           src={
             BASE_IMAGE_URL! +
-            banners.detail_right[getRandomInt(0, banners.detail_right.length)].image
+            banners.detail_right[getRandomInt(0, banners.detail_right.length)]
+              .image
           }
           className="w-[300px] h-auto object-contain hidden lg:block"
           width={300}

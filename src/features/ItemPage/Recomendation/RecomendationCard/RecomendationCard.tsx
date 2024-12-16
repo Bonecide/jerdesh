@@ -2,15 +2,17 @@
 import { AnnounceDetails } from "@/atoms/announcements";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { MapPinIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
+import { useLocale } from "next-intl";
 import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
 import React from "react";
 
 export const RecomendationCard = ({ item }: { item: AnnounceDetails }) => {
   const router = useRouter();
+  const locale = useLocale()
   return (
     <div
-      onClick={() => router.push(`/items/${item.id}`)}
+      onClick={() => router.push(`/${locale}/items/${item.id}`)}
       className="w-full flex flex-col gap-[16px] py-[20px] px-[38px] lg:p-[37px] md:p-[15px] bg-white shadowRec rounded-[25px] cursor-pointer hover:scale-[1.05] transition-all duration-[0.3s]"
     >
       <div className="flex max-[767px]:justify-between gap-[20px]">

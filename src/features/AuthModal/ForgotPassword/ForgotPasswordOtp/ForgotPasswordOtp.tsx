@@ -2,6 +2,7 @@ import { forgotPasswordConfirm } from "@/services/forgotPassword";
 import { Button, Form, Input } from "antd";
 import { Dispatch, useCallback, useState } from "react";
 import { CurrentType } from "../../AuthModal";
+import { useTranslations } from "next-intl";
 
 interface ForgotPasswordOtp {
   setIsOtp: Dispatch<boolean>;
@@ -19,6 +20,7 @@ export const ForgotPasswordOtp = ({
   email,
   setType,
 }: ForgotPasswordOtp) => {
+  const t = useTranslations("root");
   const [isLoading, setIsLoading] = useState(false);
   const onSubmit = useCallback(
     async (data: FormValues) => {
@@ -32,26 +34,27 @@ export const ForgotPasswordOtp = ({
       if (success) {
         setType("auth");
       }
+      setIsLoading(false);
     },
     [email, setType]
   );
   return (
     <Form layout="vertical" onFinish={onSubmit}>
-      <h3 className="text-[25px] font-[500]">Регистрация</h3>
+      <h3 className="text-[25px] font-[500]">{t("forgot.confirm")}</h3>
 
       <div className="mt-[32px] space-y-[20px]">
         <Form.Item
           name="code"
-          label="Код подтверждения, отправленный на вашу почту"
+          label={t("forgot.confirmCode")}
           rules={[
             {
               required: true,
-              message: "Введите код подтверждения, отправленный на вашу почту",
+              message: t("errors.confirmCode.req"),
             },
-            { min: 10, message: "Минимальная длина кода 10 символа" },
+            { min: 10, message: t("errors.confirmCode.min") },
             {
               max: 10,
-              message: "Максимальная длина кода 10 символа",
+              message: t("errors.confirmCode.max"),
             },
           ]}
         >
@@ -59,10 +62,10 @@ export const ForgotPasswordOtp = ({
         </Form.Item>
         <Form.Item
           name="password"
-          label="Пароль"
+          label={t("main.password")}
           rules={[
-            { required: true, message: "Введите пароль" },
-            { min: 8, message: "Минимальная длина пароля 8 символов" },
+            { required: true, message: t("errors.password.req") },
+            { min: 8, message: t("errors.password.min") },
           ]}
         >
           <Input.Password type="password" className="w-full h-[50px]" />
@@ -70,15 +73,15 @@ export const ForgotPasswordOtp = ({
         <Form.Item
           dependencies={["password"]}
           name="password_confirmation"
-          label="Повторите пароль"
+          label={t("main.passwordConfirm")}
           rules={[
-            { required: true, message: "Повторите пароль" },
+            { required: true, message: t("main.passwordConfirm") },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("Пароли должны совпадать!"));
+                return Promise.reject(new Error(t("errors.passwordConfirm")));
               },
             }),
           ]}
@@ -93,7 +96,7 @@ export const ForgotPasswordOtp = ({
             htmlType="submit"
             className="w-full !h-[50px] text-[16px] disabled:bg-gray-400"
           >
-            Изменить пароль
+            {t("forgot.changePassword")}
           </Button>
         </Form.Item>
         <Button
@@ -102,7 +105,7 @@ export const ForgotPasswordOtp = ({
           type="primary"
           className="w-full !h-[50px] !bg-[#F0F0F0] !text-black text-[16px] disabled:bg-gray-400"
         >
-          Назад
+          {t("forgot.back")}
         </Button>
       </div>
     </Form>

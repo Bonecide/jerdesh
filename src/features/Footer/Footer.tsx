@@ -1,15 +1,24 @@
+import { Link } from "@/i18n/routing";
 import { navigation, PAYMENTS } from "@/utils/navigation";
+import { useLocale } from "next-intl";
 import Image from "next/image";
-import Link from "next/link";
 
 export const Footer = () => {
+  const locale = useLocale();
   return (
     <footer className="containerBlock border-t  border-[#C7C7C7] !mt-[80px] py-[20px]">
       <nav className="justify-between flex-col md:flex-row flex items-center gap-[10px] md:gap-0 md:items-center">
-        <Image width={140} height={47} src={"/miniLogo.svg"} alt="jerdesh" className="md:mr-[70px]" />
+        <Image
+          width={140}
+          height={47}
+          src={"/miniLogo.svg"}
+          alt="jerdesh"
+          className="md:mr-[70px]"
+        />
         <div className="flex flex-col md:flex-row justify-between w-full">
           {navigation.map((item) => (
             <Link
+              locale={locale}
               key={item.id}
               href={item.link}
               className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] "

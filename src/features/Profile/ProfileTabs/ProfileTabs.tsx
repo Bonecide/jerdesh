@@ -8,6 +8,7 @@ import { profileAtom, tabAtom } from "@/atoms/profile";
 import { IoMdClose } from "react-icons/io";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useRouter } from "nextjs-toploader/app";
+import { useLocale } from "next-intl";
 
 interface ProfileTabsProps {
   setIsOpen?: Dispatch<boolean>;
@@ -16,7 +17,7 @@ interface ProfileTabsProps {
 export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
   const [currentTab, setCurrentTab] = useAtom(tabAtom);
   const router = useRouter();
-
+  const locale = useLocale();
   const [isExit, setIsExit] = useState(false);
   const user = useAtomValue(profileAtom);
 
@@ -51,9 +52,9 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
     (tab: TabSlug) => () => {
       setIsOpen && setIsOpen(false);
       setCurrentTab(tab);
-      router.push(`/profile?tab=${tab}`);
+      router.push(`/${locale}/profile?tab=${tab}`);
     },
-    [router, setCurrentTab, setIsOpen]
+    [router, setCurrentTab, setIsOpen, locale]
   );
 
   const handleExitClick = useCallback(() => {

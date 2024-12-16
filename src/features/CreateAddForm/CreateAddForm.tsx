@@ -23,6 +23,7 @@ import { removeServerImage } from "@/services/removeServerImage";
 import { addNewImage } from "@/services/addNewImage";
 import { editAnnoune } from "@/services/editAnnoune";
 import { useRouter } from "nextjs-toploader/app";
+import { useLocale } from "next-intl";
 
 export interface CategoryOptionProps {
   label: string;
@@ -47,7 +48,7 @@ export const CreateAddForm = ({
   subways: Subway[];
 }) => {
   const router = useRouter();
-
+  const locale = useLocale()
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptionProps[]>(
     []
   );
@@ -142,7 +143,7 @@ export const CreateAddForm = ({
         );
         toast.dismiss(toastId);
         if (status) {
-          router.push(`/items/${announce.id}`);
+          router.push(`/${locale}/items/${announce.id}`);
         }
       } else {
         const toastId = toast.loading("Загрузка...");
@@ -163,7 +164,7 @@ export const CreateAddForm = ({
         }
       }
     },
-    [form, announce, router]
+    [form, announce, router,locale]
   );
 
   return (

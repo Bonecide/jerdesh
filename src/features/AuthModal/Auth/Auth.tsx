@@ -7,6 +7,7 @@ import { auth } from "@/services/auth";
 import cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "nextjs-toploader/app";
+import { useLocale, useTranslations } from "next-intl";
 interface AuthProps {
   setType: Dispatch<CurrentType>;
   setIsOpen: Dispatch<boolean>;
@@ -20,6 +21,8 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
   const [isAgree, setIsAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const t = useTranslations("root");
+  const locale = useLocale();
 
   const setAuth = useSetAtom(isAuthAtom);
   const setToken = useSetAtom(accesTokenAtom);
@@ -35,25 +38,25 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         toast.success("Вы успешно вошли в аккаунт!");
         setAuth(true);
         setIsOpen(false);
-        router.push("/profile?tab=profile");
+        router.push(`/${locale}/profile?tab=profile`);
       }
     },
-    [setAuth, setIsOpen, router, setToken]
+    [setAuth, setIsOpen, router, setToken, locale]
   );
 
   return (
     <Form layout="vertical" onFinish={onSubmit}>
-      <h3 className="text-[25px] font-[500]">Авторизация</h3>
+      <h3 className="text-[25px] font-[500]">{t("auth.auth")}</h3>
 
       <div className="mt-[32px] space-y-[20px]">
         <Form.Item
           name="email"
-          label="Электронная почта"
+          label={t("main.email")}
           rules={[
             {
               required: true,
               type: "email",
-              message: "Введите корректную почту",
+              message: t("errors.email"),
             },
           ]}
         >
@@ -61,19 +64,17 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         </Form.Item>
         <Form.Item
           name="password"
-          label="Пароль"
+          label={t('main.password')}
           rules={[
-            { required: true, message: "Введите пароль" },
-            { min: 8, message: "Минимальная длина пароля 8 символов" },
+            { required: true, message: t("errors.password.req") },
+            { min: 8, message: t("errors.password.min") },
           ]}
         >
           <Input.Password type="password" className="w-full h-[50px]" />
         </Form.Item>
         <div className="flex items-center gap-[5px]">
           <Checkbox onChange={(e) => setIsAgree(e.target.checked)} />
-          <p className="text-[12px]">
-            Я согласен с политикой конфиденциальности и условиями
-          </p>
+          <p className="text-[12px]">{t("auth.agree")}</p>
         </div>
         <Form.Item>
           <Button
@@ -83,22 +84,22 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
             type="primary"
             className="w-full !h-[50px] text-[16px] disabled:bg-gray-400"
           >
-            Войти
+            {t("main.signIn")}
           </Button>
         </Form.Item>
       </div>
       <div className="flex justify-end mt-[20px] font-[500]">
         <p onClick={() => setType("forget")} className="cursor-pointer">
-          Забыли пароль?
+          {t("auth.forget")}
         </p>
       </div>
       <p className="text-center mt-[20px] text-[16px] text-[#B0B0B0]">
-        Нет аккаунта?{" "}
+        {t("auth.dontHaveAccount")}{" "}
         <span
           className="text-primary cursor-pointer"
           onClick={() => setType("register")}
         >
-          Зарегистрироваться
+          {t("auth.register")}
         </span>
       </p>
     </Form>

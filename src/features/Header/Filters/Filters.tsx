@@ -11,6 +11,7 @@ import { Button, Select } from "antd";
 import { DefaultOptionType } from "antd/es/select";
 import { motion } from "framer-motion";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useTranslations } from "next-intl";
 import { Dispatch, useCallback, useState } from "react";
 
 interface FiltersProps {
@@ -22,6 +23,8 @@ interface Filters {
   subway: number | null;
 }
 export const Filters = ({ setIsOpen }: FiltersProps) => {
+
+  const t = useTranslations('root')
   const [announcementsFilters, setAnnouncementsFilters] = useAtom(
     announcementsFiltersAtom
   );
@@ -104,7 +107,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
             value: item.id,
             label: item.title,
           }))}
-          placeholder="Выбрать метро"
+          placeholder={t('navigation.chooseStation')}
           className="!h-[33px] w-full !rounded-[5px] "
         />
         <Select
@@ -130,7 +133,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
             value: item.id,
             label: item.title,
           }))}
-          placeholder="Выбрать категорию"
+          placeholder={t('navigation.chooseCategory')}
           className="!h-[33px] w-full !rounded-[5px] "
         />
       </div>
