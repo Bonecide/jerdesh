@@ -1,7 +1,7 @@
 import { baseGetRequest } from "@/services/utils/rentalFetch/baseGetRequest";
 import { atom } from "jotai";
 
-type Subway = {
+export type Subway = {
   id: number;
   title: string;
   slug: string;

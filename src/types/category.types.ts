@@ -6,7 +6,7 @@ interface CategoryProps {
     slug:string;
     isActive:boolean;
     sub_categories: SubCategoriesProps[]
-    count:number;
+    announcements_count:number;
 }
 
 interface UseCategoryProps {

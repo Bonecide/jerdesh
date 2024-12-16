@@ -20,4 +20,5 @@ export type RequestFunc = (
 
 export type RentalFetchConfig = {
   isServer?: boolean;
+  noCache? :boolean
 };

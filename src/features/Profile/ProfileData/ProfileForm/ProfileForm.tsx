@@ -1,8 +1,9 @@
 "use client";
 
-import { userAtom } from "@/atoms/user";
+import { fetchProfileAtom, profileAtom } from "@/atoms/profile";
+import { updateProfileData } from "@/services/profile/updateProfileData";
 import { Button, Form, Input } from "antd";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { Dispatch, useCallback } from "react";
 import toast from "react-hot-toast";
 
@@ -11,21 +12,27 @@ interface ProfileForm {
   setIsChange: Dispatch<boolean>;
 }
 
-interface Data {
-  first_name?: string;
+export interface ProfileData {
+  name?: string;
   last_name?: string;
   email?: string;
   phone?: string;
 }
 export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
-  const user = useAtomValue(userAtom);
-
+  const user = useAtomValue(profileAtom);
+  const refetchUser = useSetAtom(fetchProfileAtom);
   const onFinish = useCallback(
-    (data: Data) => {
-      toast.success("Данные успешно обновлены!");
-      setIsChange(false);
+    async (data: ProfileData) => {
+      const toastId = toast.loading("Загрузка...");
+      const status = await updateProfileData(data, user!.id);
+      toast.dismiss(toastId);
+
+      if (status) {
+        setIsChange(false);
+        await refetchUser();
+      }
     },
-    [setIsChange]
+    [refetchUser, setIsChange, user]
   );
   return (
     <Form
@@ -35,19 +42,15 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-[40px]">
         <Form.Item
-          initialValue={user.first_name}
-          name="first_name"
+          initialValue={user?.name}
+          name="name"
           label="Имя"
           className="max-[767px]:!m-0"
         >
-          <Input
-            disabled={!isChange}
-            name="first_name"
-            className="w-full h-[50px]"
-          />
+          <Input disabled={!isChange} name="name" className="w-full h-[50px]" />
         </Form.Item>
         <Form.Item
-          initialValue={user.last_name}
+          initialValue={user?.last_name}
           name="last_name"
           label="Фамилия"
           className="max-[767px]:!m-0"
@@ -59,10 +62,16 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
           />
         </Form.Item>
         <Form.Item
-          initialValue={user.email}
+          initialValue={user?.email}
           name="email"
           label="Электронная почта"
           className="max-[767px]:!m-0"
+          rules={[
+            {
+              required: true,
+              message: "Введите email",
+            },
+          ]}
         >
           <Input
             disabled={!isChange}
@@ -71,9 +80,9 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
           />
         </Form.Item>
         <Form.Item
-          initialValue={user.phone}
+          initialValue={user?.phone}
           name="phone"
-          label="Телефонv"
+          label="Телефон"
           className="max-[767px]:!m-0"
         >
           <Input

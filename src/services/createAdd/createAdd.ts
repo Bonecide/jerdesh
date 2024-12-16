@@ -12,6 +12,7 @@ export const createAdd = async (values: CreateFieldsType) => {
     const formData = createFormData({
       ...values,
     });
+
     images.fileList.forEach((file: UploadFile<[]>) => {
       if (file.originFileObj instanceof File) {
         formData.append("images[]", file.originFileObj);

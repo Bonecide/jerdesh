@@ -1,17 +1,22 @@
 "use client";
 
 import { AnimatePresence } from "framer-motion";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { motion } from "framer-motion";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import useCategory from "@/hooks/useCategory";
+import { CategoryItem } from "./CategoryItem";
 
 export const Burger = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { categories } = useCategory();
+
+  const onClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
   return (
     <div className="lg:hidden block">
       <div onClick={() => setIsOpen(true)}>
@@ -50,15 +55,7 @@ export const Burger = () => {
               </Button>
               <div className=" flex-col  mt-[16px] gap-[5px] w-full flex ">
                 {categories.map((item) => (
-                  <div
-                    key={item.id}
-                    className="flex  items-center gap-[10px] cursor-pointer w-[210px]"
-                  >
-                    <div className="size-[10px] min-w-[10px] bg-primary rounded-full" />
-                    <p className="text-[#02203B] text-[10px]">
-                      {item.title} ({item.count})
-                    </p>
-                  </div>
+                  <CategoryItem onClose={onClose} key={item.id} item={item} />
                 ))}
               </div>
             </div>

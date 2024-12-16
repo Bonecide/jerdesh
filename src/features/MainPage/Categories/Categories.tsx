@@ -1,5 +1,6 @@
 import { getAllCategories } from "@/services/category";
 import Link from "next/link";
+import { Category } from "./Category";
 
 export const Categories = async () => {
   const categories = await getAllCategories();
@@ -12,12 +13,7 @@ export const Categories = async () => {
           className="flex  items-center gap-[10px] cursor-pointer w-[210px]"
         >
           <div className="size-[10px] min-w-[10px] bg-primary rounded-full" />
-          <Link
-            href={`/categories/${item.slug}`}
-            className="text-[#02203B] text-[14px]"
-          >
-            {item.title} ({item.count})
-          </Link>
+          <Category item={item} />
         </div>
       ))}
     </div>

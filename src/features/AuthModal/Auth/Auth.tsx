@@ -3,10 +3,10 @@ import { Dispatch, useCallback, useState } from "react";
 import { CurrentType } from "../AuthModal";
 import { useSetAtom } from "jotai";
 import { accesTokenAtom, isAuthAtom } from "@/atoms/authAtoms";
-import { useRouter } from "next/navigation";
 import { auth } from "@/services/auth";
 import cookies from "js-cookie";
 import toast from "react-hot-toast";
+import { useRouter } from "nextjs-toploader/app";
 interface AuthProps {
   setType: Dispatch<CurrentType>;
   setIsOpen: Dispatch<boolean>;

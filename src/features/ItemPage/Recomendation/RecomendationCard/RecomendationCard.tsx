@@ -1,11 +1,12 @@
 "use client";
-import { ADD } from "@/utils/mock";
+import { AnnounceDetails } from "@/atoms/announcements";
+import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { MapPinIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "nextjs-toploader/app";
 import React from "react";
 
-export const RecomendationCard = ({ item }: { item: ADD }) => {
+export const RecomendationCard = ({ item }: { item: AnnounceDetails }) => {
   const router = useRouter();
   return (
     <div
@@ -15,21 +16,23 @@ export const RecomendationCard = ({ item }: { item: ADD }) => {
       <div className="flex max-[767px]:justify-between gap-[20px]">
         <div className="flex items-center gap-[5px]">
           <Squares2X2Icon className="size-[20px] text-[#BFBFBF]" />
-          <p className="text-[12px]">Категория</p>
+          <p className="text-[12px]">{item.category.title}</p>
         </div>
         <div className="flex items-center gap-[5px]">
           <MapPinIcon className="size-[20px] text-[#BFBFBF]" />
-          <p className="text-[12px]">Место</p>
+          <p className="text-[12px]">{item.address}</p>
         </div>
       </div>
       <h4 className="text-[16px] font-[500]">{item.title}</h4>
-      <Image
-        src={item.images[0]}
-        alt={item.title}
-        width={239}
-        height={169}
-        className="w-full h-auto rounded-[15px]"
-      />
+      <div className="w-full bg-gray-200 h-[200px] rounded-[15px]">
+        <Image
+          src={BASE_IMAGE_URL + item.images[0].path}
+          alt={item.title}
+          width={239}
+          height={169}
+          className="w-full h-full object-cover rounded-[15px]"
+        />
+      </div>
     </div>
   );
 };

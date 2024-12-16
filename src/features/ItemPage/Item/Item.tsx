@@ -1,3 +1,4 @@
+"use client";
 import { ADD } from "@/utils/mock";
 import { ImageSlider } from "./ImageSlider";
 import { User } from "./User";
@@ -5,8 +6,24 @@ import { Status } from "./Status";
 import { Contacts } from "./Contacts";
 import Image from "next/image";
 import { Recomendation } from "../Recomendation";
+import {
+  activeAnnounceAtom,
+  Announce,
+  AnnounceDetails,
+  AnnounceWithImages,
+} from "@/atoms/announcements";
+import { useAtomValue, useSetAtom } from "jotai";
+import { useEffect } from "react";
+import { bannersAtom } from "@/atoms/banners/banners.atoms";
+import { BASE_IMAGE_URL } from "@/utils/const/env";
+import { getRandomInt } from "@/utils/helpers";
 
-export const Item = ({ item }: { item: ADD }) => {
+export const Item = ({ item }: { item: AnnounceDetails }) => {
+  const setActiveAnnounce = useSetAtom(activeAnnounceAtom);
+  const banners = useAtomValue(bannersAtom);
+  useEffect(() => {
+    setActiveAnnounce(item.id);
+  }, [item.id, setActiveAnnounce]);
   return (
     <div className="flex flex-col md:flex-row gap-[30px] items-start">
       <div className="w-full">
@@ -15,7 +32,7 @@ export const Item = ({ item }: { item: ADD }) => {
         </h1>
         <div className="flex flex-col md:flex-row gap-[30px] items-start">
           <ImageSlider images={item.images} />
-          <div className="space-y-[20px]">
+          <div className="space-y-[20px] w-full">
             <User item={item} />
             <Status item={item} />
             <Contacts item={item} />
@@ -26,15 +43,28 @@ export const Item = ({ item }: { item: ADD }) => {
           <p className="text-[16px] mt-[10px] font-[300]">{item.description}</p>
         </div>
 
-        <Recomendation id={item.id} />
+        <Recomendation />
       </div>
-      <Image
+
+      {banners && banners.detail_right.length ? (
+        <Image
+          src={
+            BASE_IMAGE_URL! +
+            banners.detail_right[getRandomInt(0, banners.detail_right.length)].image
+          }
+          className="w-[300px] h-auto object-contain hidden lg:block"
+          width={300}
+          height={900}
+          alt="banner"
+        />
+      ) : null}
+      {/* <Image
         src={"/images/longBanner.png"}
         className="w-[300px] h-auto object-contain hidden lg:block"
         width={300}
         height={900}
         alt="banner"
-      />
+      /> */}
     </div>
   );
 };

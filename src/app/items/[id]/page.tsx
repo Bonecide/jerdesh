@@ -1,7 +1,7 @@
+import { Announce } from "@/atoms/announcements";
 import { Item } from "@/features/ItemPage/Item";
-import { ADDS } from "@/utils/mock";
+import { baseGetRequest } from "@/services/utils/rentalFetch/baseGetRequest";
 import React from "react";
-import Skeleton from "react-loading-skeleton";
 
 interface ItemDetailsProps {
   params: {
@@ -9,20 +9,29 @@ interface ItemDetailsProps {
   };
 }
 
-export async function generateMetadata({ params, searchParams }: any) {
-  let data = ADDS[params.id];
+export async function generateMetadata({ params }: ItemDetailsProps) {
+  let { data } = await baseGetRequest<Announce>(`announcement/${params.id}`, {
+    config: {
+      isServer: true,
+    },
+  });
 
   return {
     title: `${data.title} | Jerdesh`,
-    description: "Jerdesh",
+    description: data.description,
   };
 }
 
-const ItemDetails = ({ params }: ItemDetailsProps) => {
-  const item = ADDS[params.id];
+const ItemDetails = async ({ params }: ItemDetailsProps) => {
+  let { data } = await baseGetRequest<Announce>(`announcement/${params.id}`, {
+    config: {
+      isServer: true,
+    },
+  });
+
   return (
     <div className="containerBlock">
-      <Item item={item} />
+      <Item item={data} />
     </div>
   );
 };

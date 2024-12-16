@@ -1,10 +1,15 @@
 "use client";
-import { MY_ADDS } from "@/utils/mock";
+
 import { MyAddsCard } from "./MyAddsCard";
 
 import { AnimatePresence, motion } from "framer-motion";
+import { useAtomValue } from "jotai";
+import { profileAnnouncementsAtom } from "@/atoms/profile";
+import { announcementsServicesAtom } from "@/atoms/announcements/announcementsServices.atoms";
 
 export const MyAdds = () => {
+  const myAnons = useAtomValue(profileAnnouncementsAtom);
+
   return (
     <motion.div
       exit={{
@@ -24,7 +29,7 @@ export const MyAdds = () => {
       }}
       className="w-full grid grid-cols-1 gap-[30px]"
     >
-      {MY_ADDS.map((item) => (
+      {myAnons.map((item) => (
         <MyAddsCard item={item} key={item.id} />
       ))}
     </motion.div>

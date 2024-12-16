@@ -1,13 +1,13 @@
 "use client";
 import { useAtom, useAtomValue } from "jotai";
 import { Tab, TabSlug } from "../Profile";
-import { userAtom } from "@/atoms/user";
-import { Dispatch, useCallback, useState } from "react";
+import { Dispatch, useCallback, useMemo, useState } from "react";
 import Image from "next/image";
 import { ExitModal } from "./ExitModal";
-import { useRouter } from "next/navigation";
-import { tabAtom } from "@/atoms/profile";
+import { profileAtom, tabAtom } from "@/atoms/profile";
 import { IoMdClose } from "react-icons/io";
+import { BASE_IMAGE_URL } from "@/utils/const/env";
+import { useRouter } from "nextjs-toploader/app";
 
 interface ProfileTabsProps {
   setIsOpen?: Dispatch<boolean>;
@@ -18,7 +18,7 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
   const router = useRouter();
 
   const [isExit, setIsExit] = useState(false);
-  const user = useAtomValue(userAtom);
+  const user = useAtomValue(profileAtom);
 
   const TABS: Tab[] = [
     {
@@ -60,24 +60,29 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
     setIsExit(true);
   }, []);
 
+  const userName = useMemo(() => {
+    if (!user?.name) return "";
+    return user?.last_name + " " + user?.name;
+  }, [user]);
   return (
     <div className="bg-white lg:p-[25px] p-[20px] md:p-[12px] flex flex-col lg:gap-[27px] md:gap-[10px] relative shadowTabs lg:rounded-[15px] md:rounded-[8px] md:w-[203px] h-screen md:h-auto w-screen lg:w-auto">
       <div className="flex gap-[10px]">
-        {user.image && (
-          <Image
-            width={30}
-            height={30}
-            src={user.image}
-            alt={user.name}
-            className="rounded-full lg:size-[50px] md:size-[30px] size-[50px] object-cover"
-          />
-        )}
+        <Image
+          width={30}
+          height={30}
+          src={
+            user?.logo ? BASE_IMAGE_URL + user.logo : "/images/emptyUser.jpg"
+          }
+          alt={user?.name || "user"}
+          className="rounded-full lg:size-[50px] md:size-[30px] size-[50px] object-cover"
+        />
+
         <div className="flex flex-col justify-between">
           <h4 className="font-[500] lg:text-[20px] md:text-[11px]">
-            {user.name}
+            {userName}
           </h4>
           <p className="md:text-[8px] lg:text-[14px]">
-            Баланс: {user.balance?.toLocaleString("ru-RU") || "0"} Р
+            Баланс: {user?.balance?.toLocaleString("ru-RU") || "0"} Р
           </p>
         </div>
       </div>

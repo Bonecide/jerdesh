@@ -6,6 +6,7 @@ import {
 } from "@/atoms/announcements";
 import { headerCategories } from "@/atoms/category";
 import { subwaysAtom } from "@/atoms/subways";
+import { handlePreventScroll } from "@/services/utils/helpers/preventMove";
 import { Button, Select } from "antd";
 import { DefaultOptionType } from "antd/es/select";
 import { motion } from "framer-motion";
@@ -54,6 +55,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
       category_id: null,
       sub_category_id: null,
       subway_id: null,
+      search: "",
     }));
     setIsOpen(false);
     refetchAnnounce();
@@ -80,10 +82,18 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
       <p className="text-[11px]">Фильтры</p>
       <div className="mt-[10px] space-y-[7px]">
         <Select
+          dropdownRender={(menu) => (
+            <div
+              className="max-h-[300px] overflow-auto"
+              onTouchMove={handlePreventScroll}
+            >
+              {menu}
+            </div>
+          )}
           onChange={(value) =>
             setFilters((prev) => ({ ...prev, subway: value }))
           }
-          defaultValue={announcementsFilters.subway_id}
+          value={announcementsFilters.subway_id}
           showSearch
           filterOption={(input: string, option?: DefaultOptionType) =>
             ((option?.label as string) ?? "")
@@ -98,11 +108,19 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
           className="!h-[33px] w-full !rounded-[5px] "
         />
         <Select
+          dropdownRender={(menu) => (
+            <div
+              className="max-h-[300px] overflow-auto"
+              onTouchMove={handlePreventScroll}
+            >
+              {menu}
+            </div>
+          )}
           onChange={(value) =>
             setFilters((prev) => ({ ...prev, category: value }))
           }
           showSearch
-          defaultValue={announcementsFilters.category_id}
+          value={announcementsFilters.category_id}
           filterOption={(input: string, option?: DefaultOptionType) =>
             ((option?.label as string) ?? "")
               .toLowerCase()

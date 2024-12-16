@@ -1,426 +1,107 @@
-export type ADD = {
-  id: number;
-  title: string;
-  description: string;
-  images: string[];
-  type: string;
-  user: {
-    image: string;
-    name: string;
-    phone: string;
-  };
-  createdAt: Date;
-  station: string;
-  address: string;
-  view: number;
-  category: string;
-};
-
-export type MyAdd = {
-  id: number;
-  title: string;
-  description: string;
-  images: string[];
-  type: string;
-  user: {
-    image: string;
-    name: string;
-    phone: string;
-  };
-  createdAt: Date;
-  station: string;
-  address: string;
-  view: number;
-  updatedAt: Date;
-  isActive: boolean;
-  isBorder: boolean;
-  isColor: boolean;
-  isPinned: boolean;
-};
-
-export type Transaction = {
-  id: number;
-  created_at: Date;
-  name: string;
-  total: string;
-  order_number: string;
-};
-
-export const categories = [
+export const VIPS = [
   {
     id: 1,
-    name: "Авто",
-    count: 876,
+    title: "MEGA VIP",
+    discount: 10,
+    ads_count: 20,
+    is_active: true,
+    created_at: null,
+    updated_at: null,
+    pricing_vip_services: [
+      {
+        id: 1,
+        day_count: 30,
+        price: 200,
+        vip_service_id: 1,
+        created_at: null,
+        updated_at: null,
+      },
+      {
+        id: 2,
+        day_count: 60,
+        price: 350,
+        vip_service_id: 1,
+        created_at: null,
+        updated_at: null,
+      },
+      {
+        id: 3,
+        day_count: 90,
+        price: 500,
+        vip_service_id: 1,
+        created_at: null,
+        updated_at: null,
+      },
+    ],
   },
   {
     id: 2,
-    name: "Автомобильные запчасти и прочее",
-    count: 200,
+    title: "SUPER VIP",
+    discount: 20,
+    ads_count: 30,
+    is_active: true,
+    created_at: null,
+    updated_at: null,
+    pricing_vip_services: [
+      {
+        id: 4,
+        day_count: 30,
+        price: 300,
+        vip_service_id: 2,
+        created_at: null,
+        updated_at: null,
+      },
+      {
+        id: 5,
+        day_count: 60,
+        price: 500,
+        vip_service_id: 2,
+        created_at: null,
+        updated_at: null,
+      },
+      {
+        id: 6,
+        day_count: 90,
+        price: 700,
+        vip_service_id: 2,
+        created_at: null,
+        updated_at: null,
+      },
+    ],
   },
   {
     id: 3,
-    name: "Авто",
-    count: 200,
-  },
-  {
-    id: 1,
-    name: "Авто",
-    count: 876,
-  },
-  {
-    id: 2,
-    name: "Автомобильные запчасти и прочее",
-    count: 200,
-  },
-  {
-    id: 3,
-    name: "Авто",
-    count: 200,
-  },
-  {
-    id: 1,
-    name: "Авто",
-    count: 876,
-  },
-  {
-    id: 2,
-    name: "Автомобильные запчасти и прочее",
-    count: 200,
-  },
-  {
-    id: 3,
-    name: "Авто",
-    count: 200,
-  },
-  {
-    id: 1,
-    name: "Авто",
-    count: 876,
-  },
-  {
-    id: 2,
-    name: "Автомобильные запчасти и прочее",
-    count: 200,
-  },
-  {
-    id: 3,
-    name: "Авто",
-    count: 200,
-  },
-  {
-    id: 1,
-    name: "Авто",
-    count: 876,
-  },
-  {
-    id: 2,
-    name: "Автомобильные запчасти и прочее",
-    count: 200,
-  },
-  {
-    id: 3,
-    name: "Авто",
-    count: 200,
-  },
-  {
-    id: 1,
-    name: "Авто",
-    count: 876,
-  },
-  {
-    id: 2,
-    name: "Автомобильные запчасти и прочее",
-    count: 200,
-  },
-  {
-    id: 3,
-    name: "Авто",
-    count: 200,
-  },
-];
-
-export const ADDS: ADD[] = [
-  {
-    id: 0,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "common",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 1,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "vip",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 2,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "premium",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 3,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "common",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 4,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "vip",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 5,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "premium",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 6,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "common",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 7,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "vip",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-  {
-    id: 8,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "premium",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    category: "Запчасти",
-  },
-];
-
-export const RIGHT_BANNERS = [
-  {
-    id: 1,
-    image: "/images/mockRightBanner.png",
-  },
-  {
-    id: 2,
-    image: "/images/mockRightBanner.png",
-  },
-  {
-    id: 3,
-    image: "/images/mockRightBanner.png",
-  },
-  {
-    id: 4,
-    image: "/images/mockRightBanner.png",
-  },
-  {
-    id: 5,
-    image: "/images/mockRightBanner.png",
-  },
-];
-export const MY_ADDS: MyAdd[] = [
-  {
-    id: 0,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "common",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    isActive: true,
-    isBorder: false,
-    isColor: false,
-    isPinned: false,
-  },
-  {
-    id: 1,
-    title: "Здесь заголовок объявления",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-    images: ["/images/mockPoster.png", "/images/mockPoster.png"],
-    type: "common",
-    user: {
-      image: "/images/userImage.png",
-      name: "Сергей  Ваневский",
-      phone: "+8 (985) 660-76-96",
-    },
-    createdAt: new Date(),
-    updatedAt: new Date(),
-    station: "Пушкинская",
-    address: "г.Бишкек улица Абдрахманова дом 22",
-    view: 8,
-    isActive: true,
-    isBorder: true,
-    isColor: true,
-    isPinned: true,
-  },
-];
-
-export const ANOUNCMENT = [
-  {
-    id: 1,
-    created_at: new Date(),
-    updated_at: new Date(),
-    title:
-      "Совсем скоро jerdesh перейдет на новый движок. Следите за нами, и за нашими обновлениями!",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-  },
-  {
-    id: 2,
-    created_at: new Date(),
-    updated_at: new Date(),
-    title:
-      "Совсем скоро jerdesh перейдет на новый движок. Следите за нами, и за нашими обновлениями!",
-    description:
-      "Безусловно, базовый вектор развития способствует подготовке и реализации инновационных методов управления процессами! Являясь всего лишь частью общей картины, действия представителей оппозиции формируют глобальную экономическую сеть и при этом —  обнародованы.",
-  },
-];
-
-export const TRANSACTION_HISTORY: Transaction[] = [
-  {
-    id: 1,
-    created_at: new Date("15.06.2024"),
-    name: "SUPER VIP ",
-    total: "5000",
-    order_number: "123134124",
-  },
-  {
-    id: 2,
-    created_at: new Date("10.06.2024"),
-    name: "SUPER VIP ",
-    total: "5000",
-    order_number: "123134124",
-  },
-  {
-    id: 3,
-    created_at: new Date("15.01.2024"),
-    name: "SUPER VIP ",
-    total: "5000",
-    order_number: "123134124",
-  },
-  {
-    id: 4,
-    created_at: new Date("01.01.2024"),
-    name: "SUPER VIP ",
-    total: "5000",
-    order_number: "123134124",
+    title: "VIP",
+    discount: 10,
+    ads_count: 10,
+    is_active: true,
+    created_at: null,
+    updated_at: null,
+    pricing_vip_services: [
+      {
+        id: 7,
+        day_count: 30,
+        price: 400,
+        vip_service_id: 3,
+        created_at: null,
+        updated_at: null,
+      },
+      {
+        id: 8,
+        day_count: 60,
+        price: 600,
+        vip_service_id: 3,
+        created_at: null,
+        updated_at: null,
+      },
+      {
+        id: 9,
+        day_count: 90,
+        price: 800,
+        vip_service_id: 3,
+        created_at: null,
+        updated_at: null,
+      },
+    ],
   },
 ];

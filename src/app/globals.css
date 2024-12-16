@@ -106,3 +106,7 @@ header .ant-select-selector {
     font-size: 12px;
   }
 }
+
+.dots::after {
+  display: none;
+}

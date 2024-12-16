@@ -12,7 +12,7 @@ export const rentalFetchAuthorized = async (
   const token = config?.isServer   
     ? cookies.get("token")
     : JSON.parse(localStorage.getItem("token") || "null");
-
+  
   const accessToken = token;
 
   return await withLogger(rentalFetch, path, { ...data, accessToken }, config);

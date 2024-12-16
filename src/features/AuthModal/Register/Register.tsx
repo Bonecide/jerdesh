@@ -2,9 +2,7 @@ import { Button, Checkbox, Form, Input } from "antd";
 import { Dispatch, useCallback, useState } from "react";
 import { CurrentType } from "../AuthModal";
 import toast from "react-hot-toast";
-import { useSetAtom } from "jotai";
-import { isAuthAtom } from "@/atoms/authAtoms";
-import { useRouter } from "next/navigation";
+
 import { register } from "@/services/register";
 
 interface RegisterProps {

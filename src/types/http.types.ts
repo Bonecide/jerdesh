@@ -4,6 +4,7 @@ export type HttpHeader = {
   accept?: string;
   "Accept-Language"?: string;
   Origin?: string;
+  viewer_token?: string;
 };
 
 export type TError = {

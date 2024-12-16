@@ -23,10 +23,6 @@ export const handleResponse = async (response: Response) => {
     return response;
   }
 
-  console.error(
-    `${response.url} responded with status ${response.status} typooo`
-  );
-
   const error: HandleError = await response.json();
   throw error;
 };
