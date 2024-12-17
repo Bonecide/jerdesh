@@ -4,6 +4,7 @@ import { CurrentType } from "../AuthModal";
 import toast from "react-hot-toast";
 
 import { register } from "@/services/register";
+import { useTranslations } from "next-intl";
 
 interface RegisterProps {
   setType: Dispatch<CurrentType>;
@@ -17,7 +18,7 @@ export const Register = ({ setType }: RegisterProps) => {
   const [isAgree, setIsAgree] = useState(false);
 
   const [isLoading, setIsLoading] = useState(false);
-
+  const t = useTranslations("root");
   const onSubmit = useCallback(
     async (values: FormValues) => {
       setIsLoading(true);
@@ -34,17 +35,17 @@ export const Register = ({ setType }: RegisterProps) => {
   );
   return (
     <Form layout="vertical" onFinish={onSubmit}>
-      <h3 className="text-[25px] font-[500]">Регистрация</h3>
+      <h3 className="text-[25px] font-[500]">{t("register.title")}</h3>
 
       <div className="mt-[32px] space-y-[20px]">
         <Form.Item
           name="email"
-          label="Электронная почта"
+          label={t("main.email")}
           rules={[
             {
               required: true,
               type: "email",
-              message: "Введите корректную почту",
+              message: t("errors.email"),
             },
           ]}
         >
@@ -52,10 +53,10 @@ export const Register = ({ setType }: RegisterProps) => {
         </Form.Item>
         <Form.Item
           name="password"
-          label="Пароль"
+          label={t("main.password")}
           rules={[
-            { required: true, message: "Введите пароль" },
-            { min: 8, message: "Минимальная длина пароля 8 символов" },
+            { required: true, message: t("errors.password.req") },
+            { min: 8, message: t("errors.password.min") },
           ]}
         >
           <Input.Password type="password" className="w-full h-[50px]" />
@@ -63,15 +64,15 @@ export const Register = ({ setType }: RegisterProps) => {
         <Form.Item
           dependencies={["password"]}
           name="password_confirmation"
-          label="Пароль"
+          label={t("main.passwordConfirm")}
           rules={[
-            { required: true, message: "Повторите пароль" },
+            { required: true, message: t("main.passwordConfirm") },
             ({ getFieldValue }) => ({
               validator(_, value) {
                 if (!value || getFieldValue("password") === value) {
                   return Promise.resolve();
                 }
-                return Promise.reject(new Error("Пароли должны совпадать!"));
+                return Promise.reject(new Error(t("errors.passwordConfirm")));
               },
             }),
           ]}
@@ -80,9 +81,7 @@ export const Register = ({ setType }: RegisterProps) => {
         </Form.Item>
         <div className="flex items-center gap-[5px]">
           <Checkbox onChange={(e) => setIsAgree(e.target.checked)} />
-          <p className="text-[12px]">
-            Я согласен с политикой конфиденциальности и условиями
-          </p>
+          <p className="text-[12px]">{t("auth.agree")}</p>
         </div>
         <Form.Item>
           <Button
@@ -92,17 +91,17 @@ export const Register = ({ setType }: RegisterProps) => {
             htmlType="submit"
             className="w-full !h-[50px] text-[16px] disabled:bg-gray-400"
           >
-            Зарегистрироваться
+            {t("register.register")}
           </Button>
         </Form.Item>
       </div>
       <p className="text-center mt-[20px] text-[16px] text-[#B0B0B0]">
-        Есть аккаунт?{" "}
+        {t("register.haveAccount")}{" "}
         <span
           className="text-primary cursor-pointer"
           onClick={() => setType("auth")}
         >
-          Войти
+          {t("register.signIn")}
         </span>
       </p>
     </Form>

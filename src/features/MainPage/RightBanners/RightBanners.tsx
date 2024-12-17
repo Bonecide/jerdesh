@@ -1,7 +1,6 @@
 "use client";
 import { bannersAtom } from "@/atoms/banners/banners.atoms";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
-import { RIGHT_BANNERS } from "@/utils/mock";
 import { useAtomValue } from "jotai";
 import Image from "next/image";
 import React from "react";

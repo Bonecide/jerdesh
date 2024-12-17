@@ -1,10 +1,11 @@
 import { Link } from "@/i18n/routing";
 import { navigation, PAYMENTS } from "@/utils/navigation";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 import Image from "next/image";
 
 export const Footer = () => {
   const locale = useLocale();
+  const t = useTranslations('root')
   return (
     <footer className="containerBlock border-t  border-[#C7C7C7] !mt-[80px] py-[20px]">
       <nav className="justify-between flex-col md:flex-row flex items-center gap-[10px] md:gap-0 md:items-center">
@@ -23,11 +24,11 @@ export const Footer = () => {
               href={item.link}
               className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] "
             >
-              {item.name}
+              {t(`footer.${item.name}`)}
             </Link>
           ))}
           <p className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] ">
-            © Jerdesh.ru.kg - Все права защищены
+            © Jerdesh.ru.kg - {t('footer.secure')}
           </p>
         </div>
       </nav>

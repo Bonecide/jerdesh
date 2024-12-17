@@ -23,7 +23,7 @@ import { removeServerImage } from "@/services/removeServerImage";
 import { addNewImage } from "@/services/addNewImage";
 import { editAnnoune } from "@/services/editAnnoune";
 import { useRouter } from "nextjs-toploader/app";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 export interface CategoryOptionProps {
   label: string;
@@ -47,8 +47,9 @@ export const CreateAddForm = ({
   announce?: Announce;
   subways: Subway[];
 }) => {
+  const t = useTranslations("root");
   const router = useRouter();
-  const locale = useLocale()
+  const locale = useLocale();
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptionProps[]>(
     []
   );
@@ -134,7 +135,7 @@ export const CreateAddForm = ({
   const onSubmit = useCallback(
     async (values: CreateFieldsType) => {
       if (announce) {
-        const toastId = toast.loading("Загрузка...");
+        const toastId = toast.loading(t("main.loading"));
         const status = await editAnnoune(
           {
             ...values,
@@ -146,7 +147,7 @@ export const CreateAddForm = ({
           router.push(`/${locale}/items/${announce.id}`);
         }
       } else {
-        const toastId = toast.loading("Загрузка...");
+        const toastId = toast.loading(t("main.loading"));
         const status = await createAdd({
           ...values,
           phone: `+${values.phone}`,
@@ -164,7 +165,7 @@ export const CreateAddForm = ({
         }
       }
     },
-    [form, announce, router,locale]
+    [announce, t, router, locale, form]
   );
 
   return (
@@ -180,11 +181,11 @@ export const CreateAddForm = ({
             initialValue={announce?.category.id}
             className="w-full"
             name="category_id"
-            label="Категория"
+            label={t("main.category")}
             rules={[
               {
                 required: true,
-                message: "Выберите категорию",
+                message: t("errors.category"),
               },
             ]}
           >
@@ -215,11 +216,11 @@ export const CreateAddForm = ({
             initialValue={announce?.title}
             className="w-full"
             name="title"
-            label="Заголовок"
+            label={t("main.title")}
             rules={[
               {
                 required: true,
-                message: "Введите заголовк",
+                message: t("errors.title"),
               },
             ]}
           >
@@ -233,7 +234,7 @@ export const CreateAddForm = ({
             initialValue={announce?.subway?.id}
             className="w-full"
             name="subway_id"
-            label="Метро"
+            label={t("main.station")}
           >
             <Select
               dropdownRender={(menu) => (
@@ -263,11 +264,11 @@ export const CreateAddForm = ({
             initialValue={announce?.address}
             className="w-full"
             name="address"
-            label="Адрес"
+            label={t("main.address")}
             rules={[
               {
                 required: true,
-                message: "Введите адрес",
+                message: t("errors.address"),
               },
             ]}
           >
@@ -281,16 +282,15 @@ export const CreateAddForm = ({
             initialValue={announce?.phone}
             className="w-full"
             name="phone"
-            label="Телефон"
+            label={t("main.phone")}
             rules={[
               {
                 required: true,
-                message: "Введите телефон",
+                message: t("errors.phone"),
               },
             ]}
           >
             <PhoneInput
-              placeholder="Введите номер телефона"
               onlyCountries={["kg", "ru"]}
               inputClass="!w-full !h-[50px] rounded-[8px]"
               inputProps={{
@@ -305,7 +305,7 @@ export const CreateAddForm = ({
             initialValue={announce?.subcategory?.id}
             className="w-full"
             name="sub_category_id"
-            label="Подкатегория"
+            label={t("main.subcategory")}
           >
             <Select
               dropdownRender={(menu) => (
@@ -332,11 +332,11 @@ export const CreateAddForm = ({
             initialValue={announce?.description}
             className="w-full"
             name="description"
-            label="Описание"
+            label={t("main.description")}
             rules={[
               {
                 required: true,
-                message: "Введите описание",
+                message: t("errors.description"),
               },
             ]}
           >
@@ -354,7 +354,7 @@ export const CreateAddForm = ({
             rules={[
               {
                 required: announce ? false : true,
-                message: "Загрузите фотографии",
+                message: t("errors.images"),
               },
             ]}
           >
@@ -373,9 +373,12 @@ export const CreateAddForm = ({
                   <ImFilePicture />
                 </p>
                 <p className="text-[20px] font-[500]">
-                  <span className="text-primary">Нажмите</span>, чтобы загрузить{" "}
-                  <br />
-                  фотографии, или перетащите их сюда
+                  <span className="text-primary">{t("main.press")}</span>,{" "}
+                  <span
+                    dangerouslySetInnerHTML={{
+                      __html: t("announceForm.uploadImage"),
+                    }}
+                  />
                 </p>
               </div>
             </Dragger>
@@ -472,7 +475,7 @@ export const CreateAddForm = ({
         </div>
       </div>
       <Button className="!h-[40px]" type="primary" htmlType="submit">
-        {announce ? "Изменить" : "Созать"}
+        {announce ? t("main.edit") : t("main.create")}
       </Button>
     </Form>
   );

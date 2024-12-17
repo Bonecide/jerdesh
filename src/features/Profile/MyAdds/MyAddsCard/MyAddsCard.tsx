@@ -19,20 +19,20 @@ import {
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useRouter } from "nextjs-toploader/app";
 import { ActionModal } from "./ActionModal";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 type CardType = "common" | "border" | "fill";
 export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
   const router = useRouter();
-  const locale = useLocale()
-
+  const locale = useLocale();
+  const t = useTranslations("root.profile.announce");
   const [currentType, setCurrentType] = useState<CardType>("common");
   const [actionType, setActionType] = useState<Announcement_Service>();
   const [isOpenAction, setIsOpenAction] = useState(false);
 
   const onClickEdit = useCallback(() => {
     router.push(`/${locale}/edit/${item.id}`);
-  }, [router, item,locale]);
+  }, [router, item, locale]);
 
   const onClickAction = useCallback(
     (type: Announcement_Service) => () => {
@@ -79,13 +79,13 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
         <div className="flex max-[767px]:flex-col max-[767px]:px-[14px] items-center justify-between max-[767px]:text-center">
           <div className="flex max-[767px]:flex-col gap-2 md:gap-[15px]">
             <p className="font-[500]">
-              Дата публикации :{" "}
+              {t("publishDate")}{" "}
               <span className="font-[300]">
                 {new Date(item.created_at).toLocaleDateString("ru-RU")}
               </span>
             </p>
             <p className="font-[500]">
-              Последнее обновление :{" "}
+              {t("lastUpdate")}{" "}
               <span className="font-[300]">
                 {new Date(item.updated_at).toLocaleDateString("ru-RU")}
               </span>
@@ -95,7 +95,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
           <div className="flex w-[225px] max-[767px]:w-full mt-2">
             <div className="flex gap-[5px] flex-1 items-center">
               <Checkbox defaultChecked={true} />
-              <p>Активное</p>
+              <p>{t("active")}</p>
             </div>
 
             <div className="flex gap-[10px]">
@@ -144,7 +144,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
             icon={<ChevronDoubleUpIcon className="text-white size-[18px]" />}
             className="!bg-accent !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
           >
-            Поднять объявление
+            {t("actions.raise")}
           </Button>
           {!item.announcement_services.includes("border") && (
             <Button
@@ -156,7 +156,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
               }
               className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
             >
-              Выделить рамкой
+              {t("actions.border")}
             </Button>
           )}
           {!item.announcement_services.includes("color") && (
@@ -174,7 +174,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
               }
               className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
             >
-              Выделить цветом
+              {t("actions.color")}
             </Button>
           )}
           {!item.announcement_services.includes("fix") && (
@@ -183,7 +183,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
               icon={<PushpinOutlined className="text-white text-[20px]" />}
               className="!bg-[#5CB85C] !h-[40px] !px-[30px] !text-white !border-none max-[767px]:w-full max-[767px]:!h-[49px]"
             >
-              Закрепить
+              {t("actions.fix")}
             </Button>
           )}
         </div>

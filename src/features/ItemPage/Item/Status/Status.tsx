@@ -1,5 +1,4 @@
 import { AnnounceDetails } from "@/atoms/announcements";
-import { ADD } from "@/utils/mock";
 
 export const Status = ({ item }: { item: AnnounceDetails }) => {
   return (

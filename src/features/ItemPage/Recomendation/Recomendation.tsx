@@ -8,13 +8,13 @@ import { recomendationAtom } from "@/atoms/announcements";
 import { bannersAtom } from "@/atoms/banners/banners.atoms";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { getRandomInt } from "@/utils/helpers";
+import { useTranslations } from "next-intl";
 
 export const Recomendation = () => {
   const banners = useAtomValue(bannersAtom);
   const rec = useAtomValue(recomendationAtom).slice(0, 3);
-  const isMobile = useMediaQuery("(max-width:767px)");
 
-  const imageUrl = isMobile ? "topBannerMobile" : "someBanner";
+  const t = useTranslations("root");
 
   return (
     <div className="mt-[30px] gap-[20px] md:flex lg:block">
@@ -33,7 +33,7 @@ export const Recomendation = () => {
             alt="banner"
           />
         ) : null}
-        <h2 className="font-[500] text-[20px] mt-[30px]">Рекомендации</h2>
+        <h2 className="font-[500] text-[20px] mt-[30px]">{t('item.recomendations')}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-[27px] mt-[30px]">
           {rec.map((item) => (
             <RecomendationCard key={item.id} item={item} />

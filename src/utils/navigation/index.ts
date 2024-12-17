@@ -1,24 +1,29 @@
 export const navigation = [
   {
     id: 1,
-    name: "Главная",
+    name: "main",
     link: "/",
   },
   {
     id: 2,
-    name: "Реклама",
+    name: "advertisement",
     link: "/advertisement",
   },
   {
     id: 3,
-    name: "О сервисе",
+    name: "aboutUs",
     link: "/about-us",
   },
   {
     id: 4,
-    name: "Политика конфиденциальности",
+    name: "confidential",
     link: "/confidential",
   },
 ];
 
-export const PAYMENTS = ['/images/payments/qiwi.svg','/images/payments/mir.svg','/images/payments/tbank.svg','/images/payments/youmoney.svg']
+export const PAYMENTS = [
+  "/images/payments/qiwi.svg",
+  "/images/payments/mir.svg",
+  "/images/payments/tbank.svg",
+  "/images/payments/youmoney.svg",
+];

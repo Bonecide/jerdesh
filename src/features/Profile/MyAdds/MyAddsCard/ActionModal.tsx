@@ -5,6 +5,7 @@ import { Modal } from "@/components/Modal";
 import { activeService } from "@/services/activeService";
 import { Button } from "antd";
 import { useAtomValue } from "jotai";
+import { useTranslations } from "next-intl";
 import { Dispatch, useCallback, useMemo, useState } from "react";
 
 interface ActionModal {
@@ -14,16 +15,17 @@ interface ActionModal {
   setIsOpen: Dispatch<boolean>;
 }
 export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
+  const t = useTranslations("root.profile.announce");
   const [isLoading, setIsLoading] = useState(false);
   const services = useAtomValue(announcementsServicesAtom);
   const texts: Record<Announcement_Service, string> = useMemo(() => {
     return {
-      border: "Подтверждение выделения объявления рамкой",
-      color: "Подтверждение выделения объявления цветом",
-      fix: "Подтверждение закрепления объявления",
-      raise: "Подтверждение поднятия объявления",
+      border: t("confirmTexts.border"),
+      color: t("confirmTexts.color"),
+      fix: t("confirmTexts.fix"),
+      raise: t("confirmTexts.raise"),
     };
-  }, []);
+  }, [t]);
 
   const currentService = useMemo(() => {
     return services.find((item) => item.status.title === type);
@@ -50,8 +52,7 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
     >
       <h3 className="font-[500] text-[16px] text-center">{texts[type]}</h3>
       <p className="text-center mt-[30px]">
-        Вы уверены, что хотите продолжить ? С вашего баланса будет списано{" "}
-        {currentService?.price} рублей.
+        {t("confirmTexts.sure", { amount: String(currentService?.price || 0) })}
       </p>
       <div className="flex gap-[20px] flex-wrap items-center justify-center mt-[50px]">
         <Button
@@ -60,7 +61,7 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
           className="!h-[43px] w-full md:w-auto  !px-[50px] !bg-[#FF7E36] !border-none"
           type="primary"
         >
-          Подтвердить
+          {t("confirm")}
         </Button>
         <Button
           onClick={() => setIsOpen(false)}
@@ -68,7 +69,7 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
           className="!h-[43px] w-full md:w-auto !px-[50px] !bg-[#BBBBBB] "
           type="primary"
         >
-          Отмена
+          {t("cancel")}
         </Button>
       </div>
     </Modal>

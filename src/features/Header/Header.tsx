@@ -118,7 +118,7 @@ export const Header = () => {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="lg:w-[300px] md:w-[303px]  bg-white outline-none pl-[50px] md:h-[45px] lg:h-[56px] shadow lg:!rounded-[12px] md:!rounded-[8px] border-none"
-            placeholder="Объявление"
+            placeholder={t("navigation.search")}
           />
           <SearchOutlined className="absolute !text-primary lg:top-[28%] md:top-[25%]  text-[25px] left-[10px]" />
           <div
@@ -241,14 +241,16 @@ export const Header = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
             value={searchTerm}
             className="w-full  bg-white outline-none pl-[30px] h-[40px] text-[12px] shadow lg:!rounded-[12px] md:!rounded-[8px] border-none"
-            placeholder="Объявление"
+            placeholder={t("navigation.search")}
           />
           <SearchOutlined className="absolute !text-primary  text-[18px] top-[30%] left-[10px]" />
           <div
             className="flex lg:hidden items-center gap-[6px] absolute right-[20px] top-[34%] cursor-pointer"
             onClick={() => setIsFilters((prev) => !prev)}
           >
-            <p className="text-primary text-[10px]">Фильтры</p>
+            <p className="text-primary text-[10px]">
+              {t("navigation.filters")}
+            </p>
             <Image src="/filters.svg" width={15} height={15} alt="filters" />
           </div>
         </div>

@@ -9,8 +9,10 @@ import { Button } from "antd";
 import { PlusIcon } from "@heroicons/react/24/outline";
 import useCategory from "@/hooks/useCategory";
 import { CategoryItem } from "./CategoryItem";
+import { useTranslations } from "next-intl";
 
 export const Burger = () => {
+  const t = useTranslations('root');
   const [isOpen, setIsOpen] = useState(false);
   const { categories } = useCategory();
 
@@ -51,7 +53,7 @@ export const Burger = () => {
                 icon={<PlusIcon className="text-white size-[11px] " />}
                 className="w-full !bg-accent !text-white hover:!bg-accent !border-none  mt-[12px]"
               >
-                Опубликовать
+                {t("navigation.create")}
               </Button>
               <div className=" flex-col  mt-[16px] gap-[5px] w-full flex ">
                 {categories.map((item) => (

@@ -2,8 +2,11 @@
 import { motion } from "framer-motion";
 import { Payment } from "./Payment";
 import { TransactionHistory } from "./TransactionHistory";
+import { useTranslations } from "next-intl";
 
 export const AddMoney = () => {
+
+  const t = useTranslations('root')
   return (
     <motion.div
       exit={{
@@ -24,7 +27,7 @@ export const AddMoney = () => {
       className="w-full flex flex-col gap-[16px] md:gap-6 "
     >
       <p className="text-[20px] max-[767px]:text-[22px] max-[767px]:text-center font-[500]">
-        Пополнить счет:
+        {t('profile.addMoney')}
       </p>
       <Payment />
       <TransactionHistory />

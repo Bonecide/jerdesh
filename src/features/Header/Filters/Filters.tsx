@@ -23,8 +23,7 @@ interface Filters {
   subway: number | null;
 }
 export const Filters = ({ setIsOpen }: FiltersProps) => {
-
-  const t = useTranslations('root')
+  const t = useTranslations("root");
   const [announcementsFilters, setAnnouncementsFilters] = useAtom(
     announcementsFiltersAtom
   );
@@ -82,7 +81,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
       }}
       className="p-[16px] absolute bg-white rounded-[10px] z-[9] md:top-[70px] md:left-[35%] md:w-[300px] sm:left-0 max-w-full top-[128px]"
     >
-      <p className="text-[11px]">Фильтры</p>
+      <p className="text-[11px]">{t("navigation.filters")}</p>
       <div className="mt-[10px] space-y-[7px]">
         <Select
           dropdownRender={(menu) => (
@@ -107,7 +106,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
             value: item.id,
             label: item.title,
           }))}
-          placeholder={t('navigation.chooseStation')}
+          placeholder={t("navigation.chooseStation")}
           className="!h-[33px] w-full !rounded-[5px] "
         />
         <Select
@@ -133,20 +132,20 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
             value: item.id,
             label: item.title,
           }))}
-          placeholder={t('navigation.chooseCategory')}
+          placeholder={t("navigation.chooseCategory")}
           className="!h-[33px] w-full !rounded-[5px] "
         />
       </div>
       <div className="flex justify-center gap-[10px] mt-[14px]">
         <Button onClick={onClear} className="w-[200px] h-[30px] text-[10px]">
-          Очистить все
+          {t("navigation.clear")}
         </Button>
         <Button
           onClick={onConfirm}
           className="w-[200px] h-[30px] text-[10px]"
           type="primary"
         >
-          Применить
+          {t("navigation.apply")}
         </Button>
       </div>
     </motion.div>
