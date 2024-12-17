@@ -1,5 +1,5 @@
 "use client";
-import { ANOUNCMENT } from "@/utils/mock";
+
 import { motion } from "framer-motion";
 import { useTranslations } from "next-intl";
 export const Anouncment = () => {
@@ -23,7 +23,7 @@ export const Anouncment = () => {
       }}
       className="w-full grid grid-cols-1 gap-[30px]"
     >
-      {ANOUNCMENT.map((item) => (
+      {/* {[].map((item) => (
         <div
           className="w-full rounded-[24px] myAddShadow p-[20px] bg-white space-y-[12px]"
           key={item.id}
@@ -45,7 +45,7 @@ export const Anouncment = () => {
           <h3 className="font-[500] text-[20px]">{item.title}</h3>
           <p>{item.description}</p>
         </div>
-      ))}
+      ))} */}
     </motion.div>
   );
 };

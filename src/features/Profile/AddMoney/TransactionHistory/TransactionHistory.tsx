@@ -1,17 +1,17 @@
 "use client";
 
+import { Transactions } from "@/atoms/profile";
 import { Table } from "@/components/Table";
 import {
   baseTablePaginationConfig,
   fixedTableHeight,
 } from "@/utils/const/table";
-import { Transaction, TRANSACTION_HISTORY } from "@/utils/mock";
 import { ColumnsType } from "antd/es/table";
 import { useMemo, useRef } from "react";
 
 export const TransactionHistory = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const columns: ColumnsType<Transaction> = useMemo(
+  const columns: ColumnsType<Transactions> = useMemo(
     () => [
       {
         title: "Дата",
@@ -49,10 +49,10 @@ export const TransactionHistory = () => {
   return (
     <div ref={containerRef} className="max-w-[100%] w-full">
       <h4 className="font-bold mt-2 mb-2">История транзакций</h4>
-      <Table<Transaction>
+      <Table<Transactions>
         locale={{ emptyText: "Нет данных за этот промежуток времени" }}
         columns={columns}
-        dataSource={TRANSACTION_HISTORY}
+        dataSource={[]}
         rowKey={(record) => record.title}
         bordered
         size="small"
