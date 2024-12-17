@@ -22,11 +22,11 @@ export const Posters = ({ data }: PostersProps) => {
   const router = useRouter();
   const locale = useLocale();
   const announcements = useAtomValue(announcementsAtom);
-  const setAnnouncements = useSetAtom(announcementsAtom)
+  const setAnnouncements = useSetAtom(announcementsAtom);
 
   useEffect(() => {
-    setAnnouncements(data)
-  },[data, setAnnouncements])
+    setAnnouncements(data);
+  }, [data, setAnnouncements]);
   if (!announcements) return null;
   return (
     <div className="space-y-[15px]">
@@ -65,7 +65,7 @@ export const Posters = ({ data }: PostersProps) => {
               duration: 0.5,
             }}
             key={item.id}
-            className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row md:items-center relative justify-between items-start cursor-pointer ${
+            className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row  relative justify-between gap-[10px] items-start cursor-pointer ${
               item.announcement_services.includes("border") &&
               " outline outline-[2px] outline-[#D11010]"
             } ${
@@ -89,18 +89,22 @@ export const Posters = ({ data }: PostersProps) => {
                 </div>
               </div>
               <h2 className="text-[16px] font-[500]">{item.title}</h2>
-              <p className="font-[300]">{item.description}</p>
+              <p className="font-[300] line-clamp-3">{item.description}</p>
             </div>
-            <Image
-              className="md:w-[225px] md:h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover w-full "
-              src={
-                item.images[0]?.path ? BASE_IMAGE_URL + item.images[0].path : ""
-              }
-              // src="/images/mockRightBanner.png"
-              width={225}
-              height={160}
-              alt="poster"
-            />
+
+            <div className="md:min-w-[225px] md:min-h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover w-full bg-gray-200 ">
+              <Image
+                className="md:w-[225px] md:h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px]  object-contain h-full w-full "
+                src={
+                  item.images[0]?.path
+                    ? BASE_IMAGE_URL + item.images[0].path
+                    : ""
+                }
+                width={225}
+                height={160}
+                alt="poster"
+              />
+            </div>
           </motion.div>
         ))}
       </AnimatePresence>

@@ -6,10 +6,10 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#0C7CE2",
-        accent : '#FF7E36'
+        accent: "#FF7E36",
       },
     },
   },
-  plugins: [],
+  plugins: [require("@tailwindcss/line-clamp")],
 };
 export default config;
