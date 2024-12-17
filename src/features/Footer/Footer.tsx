@@ -28,7 +28,7 @@ export const Footer = () => {
             </Link>
           ))}
           <p className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] ">
-            © Jerdesh.ru.kg - {t("footer.secure")}
+            © Jerdeshkg.ru - {t("footer.secure")}
           </p>
         </div>
       </nav>
