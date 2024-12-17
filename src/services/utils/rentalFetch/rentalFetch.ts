@@ -21,7 +21,7 @@ export const rentalFetch = async (
         headers: await buildHeaders(data),
         body: buildBody(data),
         signal: data.signal,
-        cache: config?.noCache ? "no-cache" : "default",
+        cache: config?.noCache ? "no-store" : "default",
         next: {
           revalidate: REVALIDATE,
         },

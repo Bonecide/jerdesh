@@ -12,8 +12,10 @@ export const MainPage = async () => {
       const { data } = await baseGetRequest<Announce[]>("announcement/get", {
         config: {
           isServer: true,
+          noCache: true,
         },
       });
+      console.log(data)
       return data;
     } catch (error) {
       return [];

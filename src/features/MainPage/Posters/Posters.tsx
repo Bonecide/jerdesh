@@ -4,12 +4,13 @@ import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
 import { Announce, announcementsAtom } from "@/atoms/announcements";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { PushpinOutlined } from "@ant-design/icons";
 import { useRouter } from "nextjs-toploader/app";
 import { useLocale } from "next-intl";
+import { useEffect } from "react";
 
 interface PostersProps {
   data: Announce[];
@@ -17,10 +18,15 @@ interface PostersProps {
 
 export const Posters = ({ data }: PostersProps) => {
   useHydrateAtoms([[announcementsAtom, data]]);
-  const router = useRouter();
-  const locale = useLocale()
-  const announcements = useAtomValue(announcementsAtom);
 
+  const router = useRouter();
+  const locale = useLocale();
+  const announcements = useAtomValue(announcementsAtom);
+  const setAnnouncements = useSetAtom(announcementsAtom)
+
+  useEffect(() => {
+    setAnnouncements(data)
+  },[data, setAnnouncements])
   if (!announcements) return null;
   return (
     <div className="space-y-[15px]">
