@@ -3,7 +3,11 @@ import { MapPinIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 import { AnimatePresence, motion } from "framer-motion";
-import { Announce, announcementsAtom } from "@/atoms/announcements";
+import {
+  Announce,
+  announcementsAtom,
+  announcementsFiltersAtom,
+} from "@/atoms/announcements";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useHydrateAtoms } from "jotai/utils";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
@@ -22,11 +26,14 @@ export const Posters = ({ data }: PostersProps) => {
   const router = useRouter();
   const locale = useLocale();
   const announcements = useAtomValue(announcementsAtom);
+  const filters = useAtomValue(announcementsFiltersAtom);
   const setAnnouncements = useSetAtom(announcementsAtom);
 
   useEffect(() => {
-    setAnnouncements(data);
-  }, [data, setAnnouncements]);
+    if (!filters.category_id && !filters.search && !filters.subway_id) {
+      setAnnouncements(data);
+    }
+  }, [data, setAnnouncements, filters]);
   if (!announcements) return null;
   return (
     <div className="space-y-[15px]">

@@ -20,7 +20,6 @@ export type TabSlug =
   | "settings";
 
 export type Tab = {
-  title: string;
   slug: TabSlug;
 };
 

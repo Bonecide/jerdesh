@@ -7,6 +7,7 @@ import { Button } from "antd";
 import { useSetAtom } from "jotai";
 import { Dispatch, useCallback, useState } from "react";
 import cookies from "js-cookie";
+import { useTranslations } from "next-intl";
 
 interface ExitModalProps {
   isOpen: boolean;
@@ -19,8 +20,11 @@ export const ExitModal = ({
   setIsTabOpen,
 }: ExitModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const t = useTranslations('root');
   const setIsAuth = useSetAtom(isAuthAtom);
   const setToken = useSetAtom(accesTokenAtom);
+
   const onCancel = useCallback(() => {
     setIsOpen(false);
     setIsTabOpen && setIsTabOpen(false);
@@ -43,10 +47,8 @@ export const ExitModal = ({
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
-      <h5 className="font-[500] text-[16px]">
-        Вы уверены, что хотите выйти из аккаунта?
-      </h5>
-      <p>Все несохраненные данные могут быть утеряны</p>
+      <h5 className="font-[500] text-[16px]">{t("profile.askExit")}</h5>
+      <p>{t("profile.unSaved")}</p>
       <div className="flex gap-[20px]">
         <Button
           loading={isLoading}
@@ -54,7 +56,7 @@ export const ExitModal = ({
           className="!h-[43px] !px-[50px] !bg-[#FF5E5E] !border-none"
           type="primary"
         >
-          Выйти
+          {t('profile.exit')}
         </Button>
         <Button
           loading={isLoading}
@@ -62,7 +64,7 @@ export const ExitModal = ({
           className="!h-[43px] !px-[50px] "
           type="primary"
         >
-          Отмена
+          {t('profile.cancel')}
         </Button>
       </div>
     </Modal>

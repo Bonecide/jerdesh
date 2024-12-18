@@ -8,7 +8,7 @@ import { profileAtom, tabAtom } from "@/atoms/profile";
 import { IoMdClose } from "react-icons/io";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useRouter } from "nextjs-toploader/app";
-import { useLocale } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
 
 interface ProfileTabsProps {
   setIsOpen?: Dispatch<boolean>;
@@ -21,29 +21,24 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
   const [isExit, setIsExit] = useState(false);
   const user = useAtomValue(profileAtom);
 
+  const t = useTranslations("root");
   const TABS: Tab[] = [
     {
-      title: "Мой профиль",
       slug: "profile",
     },
     {
-      title: "Мои объявления",
       slug: "adds",
     },
     {
-      title: "VIP услуги",
       slug: "vips",
     },
     {
-      title: "Анонсы",
       slug: "announcement",
     },
     {
-      title: "Пополнить счёт",
       slug: "addMoney",
     },
     {
-      title: "Настройки",
       slug: "settings",
     },
   ];
@@ -83,7 +78,9 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
             {userName}
           </h4>
           <p className="md:text-[8px] lg:text-[14px]">
-            Баланс: {user?.balance?.toLocaleString("ru-RU") || "0"} Р
+            {t("profile.balance", {
+              amount: user?.balance?.toLocaleString("ru-RU") || "0",
+            })}
           </p>
         </div>
       </div>
@@ -96,14 +93,14 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
               currentTab === item.slug ? "text-primary" : ""
             }`}
           >
-            {item.title}
+            {t(`profile.${item.slug}`)}
           </p>
         ))}
         <p
           onClick={handleExitClick}
           className="cursor-pointe lg:text-[16px] cursor-pointer md:text-[10px] text-rose-500 pl-[10px]"
         >
-          Выход
+          {t("profile.exit")}
         </p>
       </div>
       <div

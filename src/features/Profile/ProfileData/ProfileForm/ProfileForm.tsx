@@ -4,6 +4,7 @@ import { fetchProfileAtom, profileAtom } from "@/atoms/profile";
 import { updateProfileData } from "@/services/profile/updateProfileData";
 import { Button, Form, Input } from "antd";
 import { useAtomValue, useSetAtom } from "jotai";
+import { useTranslations } from "next-intl";
 import { Dispatch, useCallback } from "react";
 import toast from "react-hot-toast";
 
@@ -21,6 +22,8 @@ export interface ProfileData {
 export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
   const user = useAtomValue(profileAtom);
   const refetchUser = useSetAtom(fetchProfileAtom);
+
+  const t = useTranslations("root");
   const onFinish = useCallback(
     async (data: ProfileData) => {
       const toastId = toast.loading("Загрузка...");
@@ -44,7 +47,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.name}
           name="name"
-          label="Имя"
+          label={t('main.name')}
           className="max-[767px]:!m-0"
         >
           <Input disabled={!isChange} name="name" className="w-full h-[50px]" />
@@ -52,7 +55,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.last_name}
           name="last_name"
-          label="Фамилия"
+          label={t('main.lastName')}
           className="max-[767px]:!m-0"
         >
           <Input
@@ -64,12 +67,12 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.email}
           name="email"
-          label="Электронная почта"
+          label={t('main.email')}
           className="max-[767px]:!m-0"
           rules={[
             {
               required: true,
-              message: "Введите email",
+              message: t('errors.email'),
             },
           ]}
         >
@@ -82,7 +85,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.phone}
           name="phone"
-          label="Телефон"
+          label={t('main.phone')}
           className="max-[767px]:!m-0"
         >
           <Input
@@ -98,7 +101,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
           htmlType="submit"
           className="!h-[40px] max-[767px]:mt-5"
         >
-          Сохранить
+          {t('profile.save')}
         </Button>
       )}
     </Form>

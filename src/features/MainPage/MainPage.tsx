@@ -15,7 +15,6 @@ export const MainPage = async () => {
           noCache: true,
         },
       });
-      console.log(data)
       return data;
     } catch (error) {
       return [];
