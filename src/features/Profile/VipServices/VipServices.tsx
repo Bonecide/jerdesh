@@ -6,10 +6,12 @@ import { useAtomValue } from "jotai";
 import { motion } from "framer-motion";
 import { VIPS } from "@/utils/mock";
 import { Button } from "antd";
+import { useTranslations } from "next-intl";
 
 export const VipServices = () => {
   // const vips = useAtomValue(vipSevicesAtom);
 
+  const t = useTranslations("root.profile.vipsTab");
   return (
     <motion.div
       exit={{
@@ -35,14 +37,14 @@ export const VipServices = () => {
             className="border border-primary p-[25px] group hover:bg-primary transition-colors duration-300 rounded-[9px] w-[300px] max-w-full"
           >
             <h3 className="text-center text-primary group-hover:text-white transition-colors duration-300 text-[22px] font-[600]">
-              {item.title} - Подписка
+              {t("title", { title: item.title })}
             </h3>
             <div className="flex flex-col gap-[15px] mt-[70px]">
               <p className="group-hover:text-white transition-colors duration-300 text-[16px]">
-                {item.discount}% Скидка
+                {t("discount", { discount: String(item.discount) })}
               </p>
               <p className="group-hover:text-white transition-colors duration-300 text-[16px]">
-                {item.ads_count} Объявлений максимум
+                {t("count", { amount: item.ads_count })}
               </p>
             </div>
             <div className="mt-[50px] flex flex-col gap-[20px]">
@@ -52,7 +54,8 @@ export const VipServices = () => {
                   className="w-full !h-[50px] group-hover:!bg-white group-hover:!text-black transition-colors duration-300"
                   key={price.id}
                 >
-                  {price.day_count} дней / {price.price} рублей
+                  {t("days", { amount: String(price.day_count) })} /{" "}
+                  {t("price", { amount: String(price.price) })}
                 </Button>
               ))}
             </div>

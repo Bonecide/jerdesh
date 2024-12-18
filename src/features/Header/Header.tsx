@@ -191,19 +191,19 @@ export const Header = () => {
           <PlusOutlined />
           {t("navigation.create")}
         </Button>
-        <div className="lg:h-[57px] lg:w-[57px] md:h-[45px] cursor-pointer md:w-[45px] border border-primary  bg-white lg:rounded-[12px] md:rounded-[8px] hidden lg:flex items-center justify-center">
-          <UserCircleIcon
-            onClick={handleProfileClick}
-            className="text-primary size-[30px] "
-          />
+        <div
+          onClick={handleProfileClick}
+          className="lg:h-[57px] lg:w-[57px] md:h-[45px] cursor-pointer md:w-[45px] border border-primary  bg-white lg:rounded-[12px] md:rounded-[8px] hidden lg:flex items-center justify-center"
+        >
+          <UserCircleIcon className="text-primary size-[30px] " />
         </div>
         <div className="lg:hidden block">
           {!user?.logo || !isAuth ? (
-            <div className="lg:h-[57px] lg:w-[57px] h-[45px] cursor-pointer w-[45px] border border-primary  bg-white lg:rounded-[12px] rounded-[8px] flex items-center justify-center">
-              <UserCircleIcon
-                onClick={isAuth ? handleTabsClick : handleProfileClick}
-                className="text-primary size-[30px] "
-              />
+            <div
+              onClick={isAuth ? handleTabsClick : handleProfileClick}
+              className="lg:h-[57px] lg:w-[57px] h-[45px] cursor-pointer w-[45px] border border-primary  bg-white lg:rounded-[12px] rounded-[8px] flex items-center justify-center"
+            >
+              <UserCircleIcon className="text-primary size-[30px] " />
             </div>
           ) : (
             <div className="relative">

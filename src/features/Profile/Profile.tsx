@@ -10,6 +10,7 @@ import { useSearchParams } from "next/navigation";
 import { useAtom } from "jotai";
 import { tabAtom } from "@/atoms/profile";
 import { VipServices } from "./VipServices";
+import { Settings } from "./ProfileTabs/Settings";
 
 export type TabSlug =
   | "profile"
@@ -33,7 +34,7 @@ export const ProfilePage = () => {
     adds: <MyAdds />,
     announcement: <Anouncment />,
     addMoney: <AddMoney />,
-    settings: null,
+    settings: <Settings />,
     vips: <VipServices />,
   };
 

@@ -46,7 +46,7 @@ export default async function RootLayout({
                   <Toaster />
                   <HeaderWrapper />
 
-                  <main className="min-h-[550px]">{children}</main>
+                  <main className="min-h-[70vh]">{children}</main>
                   <Footer />
                 </body>
               </NextIntlClientProvider>

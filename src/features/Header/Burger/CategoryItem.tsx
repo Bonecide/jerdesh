@@ -37,7 +37,7 @@ export const CategoryItem = ({
       <p
         className={`${
           filters.category_id === item.id ? "text-primary" : "text-[#02203B] "
-        } text-[10px]`}
+        } text-[14px]`}
       >
         {item.title} ({item.announcements_count})
       </p>
