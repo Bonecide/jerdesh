@@ -34,7 +34,7 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
       setIsLoading(false);
       if (token) {
         setToken(token);
-        cookies.set("token", token);
+        cookies.set("token", token, { expires: 7 });
         toast.success("Вы успешно вошли в аккаунт!");
         setAuth(true);
         setIsOpen(false);
@@ -64,7 +64,7 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         </Form.Item>
         <Form.Item
           name="password"
-          label={t('main.password')}
+          label={t("main.password")}
           rules={[
             { required: true, message: t("errors.password.req") },
             { min: 8, message: t("errors.password.min") },
