@@ -3,4 +3,5 @@ export type Transactions = {
   name: string;
   total: number;
   order_number: number;
+  title : string
 };
