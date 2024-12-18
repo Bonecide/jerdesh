@@ -3,7 +3,13 @@ import { PlusOutlined, SearchOutlined, UserOutlined } from "@ant-design/icons";
 import { GlobeAltIcon, UserCircleIcon } from "@heroicons/react/24/outline";
 import { Button, Select } from "antd";
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useState } from "react";
+import {
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { AuthModal } from "@/features/AuthModal";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
 import { isAuthAtom } from "@/atoms/authAtoms";
@@ -65,6 +71,12 @@ export const Header = () => {
     }
   }, [isAuth]);
 
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      router.push("/");
+    }
+  };
+
   const onChangeSubway = useCallback(
     (value: number) => {
       setAnnouncementsFilters((prev) => ({ ...prev, subway_id: value }));
@@ -115,6 +127,8 @@ export const Header = () => {
         </Link>
         <div className="relative hidden md:block">
           <input
+            type="search"
+            onKeyDown={handleKeyDown}
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             className="lg:w-[300px] md:w-[303px]  bg-white outline-none pl-[50px] md:h-[45px] lg:h-[56px] shadow lg:!rounded-[12px] md:!rounded-[8px] border-none"
@@ -238,6 +252,8 @@ export const Header = () => {
       <div className="flex justify-between gap-[10px] w-full  md:hidden">
         <div className="relative  w-[80%]">
           <input
+            type="search"
+            onKeyDown={handleKeyDown}
             onChange={(e) => setSearchTerm(e.target.value)}
             value={searchTerm}
             className="w-full  bg-white outline-none pl-[30px] h-[40px] text-[12px] shadow lg:!rounded-[12px] md:!rounded-[8px] border-none"

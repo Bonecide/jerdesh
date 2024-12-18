@@ -147,6 +147,11 @@
         "count": "Максимум {amount} жарыя",
         "days": "{amount} күн",
         "price": "{amount} сом"
+      },
+      "settingsTab": {
+        "choose": "Тилди тандаңыз",
+        "kg": "Кыргызча",
+        "ru": "Орусча"
       }
     }
   }

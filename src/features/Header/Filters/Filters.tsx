@@ -95,7 +95,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
           onChange={(value) =>
             setFilters((prev) => ({ ...prev, subway: value }))
           }
-          value={announcementsFilters.subway_id}
+          defaultValue={announcementsFilters.subway_id}
           showSearch
           filterOption={(input: string, option?: DefaultOptionType) =>
             ((option?.label as string) ?? "")
@@ -122,7 +122,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
             setFilters((prev) => ({ ...prev, category: value }))
           }
           showSearch
-          value={announcementsFilters.category_id}
+          defaultValue={announcementsFilters.category_id}
           filterOption={(input: string, option?: DefaultOptionType) =>
             ((option?.label as string) ?? "")
               .toLowerCase()
