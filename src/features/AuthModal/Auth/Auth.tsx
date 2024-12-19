@@ -8,6 +8,7 @@ import cookies from "js-cookie";
 import toast from "react-hot-toast";
 import { useRouter } from "nextjs-toploader/app";
 import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 interface AuthProps {
   setType: Dispatch<CurrentType>;
   setIsOpen: Dispatch<boolean>;
@@ -74,7 +75,14 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         </Form.Item>
         <div className="flex items-center gap-[5px]">
           <Checkbox onChange={(e) => setIsAgree(e.target.checked)} />
-          <p className="text-[12px]">{t("auth.agree")}</p>
+          <Link
+            locale={locale}
+            href={"/confidential"}
+            className="text-[12px] text-primary"
+            target="_blank"
+          >
+            {t("auth.agree")}
+          </Link>
         </div>
         <Form.Item>
           <Button

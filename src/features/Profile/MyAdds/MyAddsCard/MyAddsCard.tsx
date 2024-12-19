@@ -20,6 +20,7 @@ import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useRouter } from "nextjs-toploader/app";
 import { ActionModal } from "./ActionModal";
 import { useLocale, useTranslations } from "next-intl";
+import { AreYouSureModal } from "./AreYouSureModal/AreYouSureModal";
 
 type CardType = "common" | "border" | "fill";
 export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
@@ -29,11 +30,11 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
   const [currentType, setCurrentType] = useState<CardType>("common");
   const [actionType, setActionType] = useState<Announcement_Service>();
   const [isOpenAction, setIsOpenAction] = useState(false);
-
+  const [isDelete, setIsDelete] = useState(false);
   const onClickEdit = useCallback(() => {
     router.push(`/${locale}/edit/${item.id}`);
   }, [router, item, locale]);
-
+  console.log(item)
   const onClickAction = useCallback(
     (type: Announcement_Service) => () => {
       setActionType(type);
@@ -42,6 +43,9 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
     []
   );
 
+  const onClickDelete = useCallback(() => {
+    setIsDelete(true);
+  }, []);
   return (
     <>
       <ActionModal
@@ -50,6 +54,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
         type={actionType!}
         id={item.id}
       />
+      <AreYouSureModal id={item.id} setIsOpen={setIsDelete} isOpen={isDelete} />
       <motion.div
         exit={{
           opacity: 0,
@@ -105,7 +110,10 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
               >
                 <PencilIcon className="text-white size-[18px]" />
               </div>
-              <div className="size-[30px] rounded-full bg-[#F6001E] flex items-center justify-center cursor-pointer">
+              <div
+                onClick={onClickDelete}
+                className="size-[30px] rounded-full bg-[#F6001E] flex items-center justify-center cursor-pointer"
+              >
                 <TrashIcon className="text-white size-[18px]" />
               </div>
             </div>

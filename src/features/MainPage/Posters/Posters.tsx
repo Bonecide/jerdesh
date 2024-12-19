@@ -15,7 +15,8 @@ import { PushpinOutlined } from "@ant-design/icons";
 import { useRouter } from "nextjs-toploader/app";
 import { useLocale } from "next-intl";
 import { useEffect } from "react";
-
+import animation from "@/../public/empty.json";
+import Lottie from "lottie-react";
 interface PostersProps {
   data: Announce[];
 }
@@ -35,6 +36,17 @@ export const Posters = ({ data }: PostersProps) => {
     }
   }, [data, setAnnouncements, filters]);
   if (!announcements) return null;
+
+  if (!announcements.length)
+    return (
+      <div className="w-full h-full flex items-center justify-center">
+        <Lottie
+          className="w-[600px]  max-w-full"
+          animationData={animation}
+          loop={true}
+        />
+      </div>
+    );
   return (
     <div className="space-y-[15px]">
       <AnimatePresence>
