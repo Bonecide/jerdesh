@@ -6,6 +6,7 @@ import {
 } from "@/atoms/announcements";
 import { headerCategories } from "@/atoms/category";
 import { subwaysAtom } from "@/atoms/subways";
+import { usePathname, useRouter } from "@/i18n/routing";
 import { handlePreventScroll } from "@/services/utils/helpers/preventMove";
 import { Button, Select } from "antd";
 import { DefaultOptionType } from "antd/es/select";
@@ -28,6 +29,8 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
     announcementsFiltersAtom
   );
 
+  const router = useRouter();
+  const pathname = usePathname();
   const refetchAnnounce = useSetAtom(setAnnouncementsAtom);
   const [filters, setFilters] = useState<Filters>({
     category: null,
@@ -43,13 +46,19 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
       subway_id: filters.subway,
     }));
     refetchAnnounce();
+    if (pathname !== "/") {
+      router.push("/");
+    }
+
     setIsOpen(false);
   }, [
+    setAnnouncementsFilters,
+    refetchAnnounce,
+    pathname,
+    setIsOpen,
     filters.category,
     filters.subway,
-    setAnnouncementsFilters,
-    setIsOpen,
-    refetchAnnounce,
+    router,
   ]);
 
   const onClear = useCallback(() => {

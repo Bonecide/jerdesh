@@ -31,7 +31,7 @@ import { BASE_IMAGE_URL } from "@/utils/const/env";
 import useDebounce from "@/hooks/useDebounce";
 import { handlePreventScroll } from "@/services/utils/helpers/preventMove";
 import { useLocale, useTranslations } from "next-intl";
-import { Link } from "@/i18n/routing";
+import { Link, usePathname } from "@/i18n/routing";
 
 export const Header = () => {
   const router = useRouter();
@@ -42,6 +42,7 @@ export const Header = () => {
 
   const isAuth = useAtomValue(isAuthAtom);
 
+  const pathname = usePathname();
   const refetchAnnounce = useSetAtom(setAnnouncementsAtom);
   const refetchProfile = useSetAtom(fetchProfileAtom);
   const locale = useLocale();
@@ -81,17 +82,25 @@ export const Header = () => {
     (value: number) => {
       setAnnouncementsFilters((prev) => ({ ...prev, subway_id: value }));
       refetchAnnounce();
+
+      if(pathname !== '/') {
+        router.push('/')
+      }
     },
-    [setAnnouncementsFilters, refetchAnnounce]
+    [setAnnouncementsFilters, refetchAnnounce, pathname, router]
   );
 
   const onChangeCategory = useCallback(
     (value: number) => {
       setAnnouncementsFilters((prev) => ({ ...prev, category_id: value }));
       refetchAnnounce();
+      if(pathname !== '/') {
+        router.push('/')
+      }
     },
-    [setAnnouncementsFilters, refetchAnnounce]
+    [setAnnouncementsFilters, refetchAnnounce, pathname, router]
   );
+
 
   const onClickAdd = useCallback(() => {
     if (isAuth) {
