@@ -2,13 +2,12 @@
 
 import { MyAddsCard } from "./MyAddsCard";
 
-import { AnimatePresence, motion } from "framer-motion";
-import { useAtomValue } from "jotai";
+import { motion } from "framer-motion";
 import { profileAnnouncementsAtom } from "@/atoms/profile";
-import { announcementsServicesAtom } from "@/atoms/announcements/announcementsServices.atoms";
+import { useRefetchableAtom } from "@/hooks/useRefetchableAtom";
 
 export const MyAdds = () => {
-  const myAnons = useAtomValue(profileAnnouncementsAtom);
+  const myAnons = useRefetchableAtom(profileAnnouncementsAtom);
 
   return (
     <motion.div

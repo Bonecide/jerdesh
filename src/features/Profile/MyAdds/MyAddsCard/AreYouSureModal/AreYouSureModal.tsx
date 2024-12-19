@@ -35,13 +35,13 @@ export const AreYouSureModal = ({
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
-      <h4>Вы уверены, что хотите удалить объявление?</h4>
+      <h4 className="text-center">Вы уверены, что хотите удалить объявление?</h4>
 
-      <div className="flex gap-[20px]">
+      <div className="flex gap-[20px] items-center flex-wrap">
         <Button
           onClick={onConfirm}
           loading={isLoading}
-          className="!h-[43px] !px-[50px] !bg-[#FF5E5E] !border-none"
+          className="!h-[43px] !px-[50px] !bg-[#FF5E5E] !border-none w-full md:w-auto"
           type="primary"
         >
           Подтвердить
@@ -49,7 +49,7 @@ export const AreYouSureModal = ({
         <Button
           loading={isLoading}
           onClick={onCancel}
-          className="!h-[43px] !px-[50px] "
+          className="!h-[43px] !px-[50px] w-full md:w-auto "
           type="primary"
         >
           Отменить

@@ -21,7 +21,7 @@ export const ExitModal = ({
 }: ExitModalProps) => {
   const [isLoading, setIsLoading] = useState(false);
 
-  const t = useTranslations('root');
+  const t = useTranslations("root");
   const setIsAuth = useSetAtom(isAuthAtom);
   const setToken = useSetAtom(accesTokenAtom);
 
@@ -43,28 +43,30 @@ export const ExitModal = ({
 
   return (
     <Modal
-      className="w-[500px] py-[53px] flex flex-col items-center gap-[20px]"
+      className="w-[500px] py-[53px] flex flex-col items-center gap-[20px]" 
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
-      <h5 className="font-[500] text-[16px]">{t("profile.askExit")}</h5>
-      <p>{t("profile.unSaved")}</p>
-      <div className="flex gap-[20px]">
+      <h5 className="font-[500] text-[16px] text-center">
+        {t("profile.askExit")}
+      </h5>
+      <p className="text-center">{t("profile.unSaved")}</p>
+      <div className="flex gap-[20px] flex-wrap">
         <Button
           loading={isLoading}
           onClick={onExit}
-          className="!h-[43px] !px-[50px] !bg-[#FF5E5E] !border-none"
+          className="!h-[43px] !px-[50px] !bg-[#FF5E5E] !border-none w-full md:w-auto"
           type="primary"
         >
-          {t('profile.exit')}
+          {t("profile.exit")}
         </Button>
         <Button
           loading={isLoading}
           onClick={onCancel}
-          className="!h-[43px] !px-[50px] "
+          className="!h-[43px] !px-[50px] w-full md:w-auto "
           type="primary"
         >
-          {t('profile.cancel')}
+          {t("profile.cancel")}
         </Button>
       </div>
     </Modal>
