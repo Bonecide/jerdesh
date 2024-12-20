@@ -30,7 +30,11 @@ export const ProfileData = () => {
   }, [fetchProfile, setProfile]);
 
   const userName = useMemo(() => {
-    if (!profile?.name) return "";
+    if (!profile?.name && !profile?.last_name) return "";
+
+    if (!profile.name || !profile.last_name) {
+      return profile.name || profile.last_name;
+    }
     return profile?.last_name + " " + profile?.name;
   }, [profile]);
 

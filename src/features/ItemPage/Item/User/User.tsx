@@ -8,7 +8,11 @@ export const User = ({ item }: { item: AnnounceDetails }) => {
 
   const t = useTranslations('root')
   const userName = useMemo(() => {
-    if (!item.user_id?.name) return "";
+    if (!item.user_id?.name && !item.user_id?.last_name) return "";
+
+    if (!item.user_id.name || !item.user_id.last_name) {
+      return item.user_id.name || item.user_id.last_name;
+    }
     return item.user_id?.last_name + " " + item.user_id?.name;
   }, [item.user_id]);
   return (

@@ -57,7 +57,11 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
   }, []);
 
   const userName = useMemo(() => {
-    if (!user?.name) return "";
+    if (!user?.name && !user?.last_name) return "";
+
+    if (!user.name || !user.last_name) {
+      return user.name || user.last_name;
+    }
     return user?.last_name + " " + user?.name;
   }, [user]);
   return (
