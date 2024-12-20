@@ -14,6 +14,7 @@
     },
     "navigation": {
       "chooseStation": "Метрону тандоо",
+      "chooseCity": "Шаарды тандаңыз",
       "chooseCategory": "Категорияны тандоо",
       "filters": "Фильтрлер",
       "create": "Жарыялоо",
@@ -87,7 +88,8 @@
       "edit": "Өзгөртүү",
       "create": "Түзүү",
       "name": "Аты",
-      "lastName": "Фамилиясы"
+      "lastName": "Фамилиясы",
+       "city": "Шаар"
     },
     "announceForm": {
       "uploadImage": "<br /> сүрөттөрдү жүктөө үчүн басыңыз же бул жерге таштаңыз"

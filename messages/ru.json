@@ -14,6 +14,8 @@
     },
     "navigation": {
       "chooseStation": "Выбрать метро",
+      "chooseCity": "Выбрать город",
+
       "chooseCategory": "Выбрать категорию",
       "filters": "Фильтры",
       "create": "Опубликовать",

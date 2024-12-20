@@ -32,10 +32,13 @@ import useDebounce from "@/hooks/useDebounce";
 import { handlePreventScroll } from "@/services/utils/helpers/preventMove";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/routing";
+import { citiesAtom } from "@/atoms/cities";
 
 export const Header = () => {
   const router = useRouter();
-  const subways = useAtomValue(subwaysAtom);
+  // const subways = useAtomValue(subwaysAtom);
+
+  const cities = useAtomValue(citiesAtom);
   const categories = useAtomValue(headerCategories);
   const t = useTranslations("root");
   const user = useAtomValue(profileAtom);
@@ -78,13 +81,24 @@ export const Header = () => {
     }
   };
 
-  const onChangeSubway = useCallback(
+  // const onChangeSubway = useCallback(
+  //   (value: number) => {
+  //     setAnnouncementsFilters((prev) => ({ ...prev, subway_id: value }));
+  //     refetchAnnounce();
+
+  //     if (pathname !== "/") {
+  //       router.push("/");
+  //     }
+  //   },
+  //   [setAnnouncementsFilters, refetchAnnounce, pathname, router]
+  // );
+  const onChangeCity = useCallback(
     (value: number) => {
-      setAnnouncementsFilters((prev) => ({ ...prev, subway_id: value }));
+      setAnnouncementsFilters((prev) => ({ ...prev, city_id: value }));
       refetchAnnounce();
 
-      if(pathname !== '/') {
-        router.push('/')
+      if (pathname !== "/") {
+        router.push("/");
       }
     },
     [setAnnouncementsFilters, refetchAnnounce, pathname, router]
@@ -94,13 +108,12 @@ export const Header = () => {
     (value: number) => {
       setAnnouncementsFilters((prev) => ({ ...prev, category_id: value }));
       refetchAnnounce();
-      if(pathname !== '/') {
-        router.push('/')
+      if (pathname !== "/") {
+        router.push("/");
       }
     },
     [setAnnouncementsFilters, refetchAnnounce, pathname, router]
   );
-
 
   const onClickAdd = useCallback(() => {
     if (isAuth) {
@@ -154,7 +167,7 @@ export const Header = () => {
             <Image src="/filters.svg" width={15} height={15} alt="filters" />
           </div>
         </div>
-        <Select
+        {/* <Select
           dropdownRender={(menu) => (
             <div
               className="max-h-[300px] overflow-auto"
@@ -176,6 +189,33 @@ export const Header = () => {
           className="!h-[57px] w-[18%] !hidden lg:!block  "
           placeholder={t("navigation.chooseStation")}
           options={subways.map((item) => ({
+            value: item.id,
+            label: item.title,
+          }))}
+        /> */}
+
+        <Select
+          dropdownRender={(menu) => (
+            <div
+              className="max-h-[300px] overflow-auto"
+              onTouchMove={handlePreventScroll}
+            >
+              {menu}
+            </div>
+          )}
+          allowClear
+          notFoundContent={"Пусто"}
+          onChange={onChangeCity}
+          value={announcementsFilters.city_id}
+          showSearch
+          filterOption={(input: string, option?: DefaultOptionType) =>
+            ((option?.label as string) ?? "")
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          className="!h-[57px] w-[18%] !hidden lg:!block  "
+          placeholder={t("navigation.chooseCity")}
+          options={cities.map((item) => ({
             value: item.id,
             label: item.title,
           }))}

@@ -61,11 +61,13 @@ export type AnnouncementsFilters = {
   sub_category_id: null | number;
   subway_id: null | number;
   search: string;
+  city_id: null | number;
 };
 export const announcementsFiltersAtom = atom<AnnouncementsFilters>({
   category_id: null,
   sub_category_id: null,
   subway_id: null,
+  city_id: null,
   search: "",
 });
 

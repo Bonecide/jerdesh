@@ -5,6 +5,7 @@ import {
   setAnnouncementsAtom,
 } from "@/atoms/announcements";
 import { headerCategories } from "@/atoms/category";
+import { citiesAtom } from "@/atoms/cities";
 import { subwaysAtom } from "@/atoms/subways";
 import { usePathname, useRouter } from "@/i18n/routing";
 import { handlePreventScroll } from "@/services/utils/helpers/preventMove";
@@ -22,6 +23,7 @@ interface FiltersProps {
 interface Filters {
   category: number | null;
   subway: number | null;
+  city: number | null;
 }
 export const Filters = ({ setIsOpen }: FiltersProps) => {
   const t = useTranslations("root");
@@ -35,8 +37,10 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
   const [filters, setFilters] = useState<Filters>({
     category: null,
     subway: null,
+    city: null,
   });
-  const subways = useAtomValue(subwaysAtom);
+  // const subways = useAtomValue(subwaysAtom);
+  const cities = useAtomValue(citiesAtom);
   const categories = useAtomValue(headerCategories);
 
   const onConfirm = useCallback(() => {
@@ -44,6 +48,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
       ...prev,
       category_id: filters.category,
       subway_id: filters.subway,
+      city_id: filters.city,
     }));
     refetchAnnounce();
     if (pathname !== "/") {
@@ -58,6 +63,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
     setIsOpen,
     filters.category,
     filters.subway,
+    filters.city,
     router,
   ]);
 
@@ -66,6 +72,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
       category_id: null,
       sub_category_id: null,
       subway_id: null,
+      city_id: null,
       search: "",
     }));
     setIsOpen(false);
@@ -92,7 +99,7 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
     >
       <p className="text-[11px]">{t("navigation.filters")}</p>
       <div className="mt-[10px] space-y-[7px]">
-        <Select
+        {/* <Select
           dropdownRender={(menu) => (
             <div
               className="max-h-[300px] overflow-auto"
@@ -116,6 +123,31 @@ export const Filters = ({ setIsOpen }: FiltersProps) => {
             label: item.title,
           }))}
           placeholder={t("navigation.chooseStation")}
+          className="!h-[33px] w-full !rounded-[5px] "
+        /> */}
+
+        <Select
+          dropdownRender={(menu) => (
+            <div
+              className="max-h-[300px] overflow-auto"
+              onTouchMove={handlePreventScroll}
+            >
+              {menu}
+            </div>
+          )}
+          onChange={(value) => setFilters((prev) => ({ ...prev, city: value }))}
+          defaultValue={announcementsFilters.city_id}
+          showSearch
+          filterOption={(input: string, option?: DefaultOptionType) =>
+            ((option?.label as string) ?? "")
+              .toLowerCase()
+              .includes(input.toLowerCase())
+          }
+          options={cities.map((item) => ({
+            value: item.id,
+            label: item.title,
+          }))}
+          placeholder={t("navigation.chooseCity")}
           className="!h-[33px] w-full !rounded-[5px] "
         />
         <Select
