@@ -20,6 +20,7 @@ export const metadata: Metadata = {
   description: "Jerdesh",
   icons: {
     icon: "/fav.png",
+    apple: "/fav.png",
   },
 };
 export default async function RootLayout({

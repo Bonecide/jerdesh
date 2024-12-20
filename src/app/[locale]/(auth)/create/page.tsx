@@ -1,3 +1,4 @@
+import { City } from "@/atoms/cities";
 import { Subway } from "@/atoms/subways";
 import { CreateAddForm } from "@/features/CreateAddForm";
 import { baseGetRequest } from "@/services/utils/rentalFetch/baseGetRequest";
@@ -11,7 +12,10 @@ export async function generateMetadata({
 }: {
   params: { locale: string };
 }) {
-  const t = await getTranslations({ locale, namespace: "root.metadata.create" });
+  const t = await getTranslations({
+    locale,
+    namespace: "root.metadata.create",
+  });
 
   return {
     title: t("title"),
@@ -19,15 +23,23 @@ export async function generateMetadata({
 }
 const Create = async () => {
   const t = await getTranslations("root");
-  const subways = await baseGetRequest<Subway[]>("subways", {
+  // const subways = await baseGetRequest<Subway[]>("subways", {
+  //   config: {
+  //     isServer: true,
+  //   },
+  // });
+
+  const data = await baseGetRequest<City[]>("cities", {
     config: {
       isServer: true,
     },
   });
+  const cities = data.data;
+  
   return (
     <div className="containerBlock flex flex-col items-center">
       <h2 className="text-[24px] font-[500] mt-[30px]">{t("create.add")}</h2>
-      <CreateAddForm subways={subways.data} />
+      <CreateAddForm cities={cities} />
     </div>
   );
 };

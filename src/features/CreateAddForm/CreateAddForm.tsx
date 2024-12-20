@@ -24,6 +24,7 @@ import { addNewImage } from "@/services/addNewImage";
 import { editAnnoune } from "@/services/editAnnoune";
 import { useRouter } from "nextjs-toploader/app";
 import { useLocale, useTranslations } from "next-intl";
+import { citiesAtom, City } from "@/atoms/cities";
 
 export interface CategoryOptionProps {
   label: string;
@@ -35,24 +36,27 @@ export type CreateFieldsType = {
   description: string;
   phone: string;
   slug: string;
-  station: number;
+  // station: number;
+  city: number;
   sub_category: number;
   title: string;
   images: UploadChangeParam<UploadFile<[]>>;
 };
 export const CreateAddForm = ({
   announce,
-  subways,
+  cities,
 }: {
   announce?: Announce;
-  subways: Subway[];
+  cities: City[];
 }) => {
   const t = useTranslations("root");
+
   const router = useRouter();
   const locale = useLocale();
   const [categoryOptions, setCategoryOptions] = useState<CategoryOptionProps[]>(
     []
   );
+
   const [subCategoriesOption, setSubCategoriesOption] = useState<
     CategoryOptionProps[]
   >([]);
@@ -230,10 +234,10 @@ export const CreateAddForm = ({
               className="!w-full !h-[50px]"
             />
           </Form.Item>
-          <Form.Item
+          {/* <Form.Item
             initialValue={announce?.subway?.id}
             className="w-full"
-            name="subway_id"
+            name="city_id"
             label={t("main.station")}
           >
             <Select
@@ -254,6 +258,37 @@ export const CreateAddForm = ({
               notFoundContent={"Пусто"}
               rootClassName="w-full"
               options={subways.map((item) => ({
+                value: item.id,
+                label: item.title,
+              }))}
+              className="!w-full !h-[50px]"
+            />
+          </Form.Item> */}
+
+          <Form.Item
+            initialValue={announce?.city?.id}
+            className="w-full"
+            name="city_id"
+            label={t("main.city")}
+          >
+            <Select
+              dropdownRender={(menu) => (
+                <div
+                  className="max-h-[300px] overflow-auto"
+                  onTouchMove={handlePreventScroll}
+                >
+                  {menu}
+                </div>
+              )}
+              showSearch
+              filterOption={(input: string, option?: DefaultOptionType) =>
+                ((option?.label as string) ?? "")
+                  .toLowerCase()
+                  .includes(input.toLowerCase())
+              }
+              notFoundContent={"Пусто"}
+              rootClassName="w-full"
+              options={cities.map((item) => ({
                 value: item.id,
                 label: item.title,
               }))}

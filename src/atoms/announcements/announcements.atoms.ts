@@ -21,6 +21,7 @@ export type Announce = {
   created_at: string;
   updated_at: string;
   status: string;
+  city: { id: number; title: string };
   announcement_services: Announcement_Service[];
 };
 
@@ -44,6 +45,8 @@ export type AnnounceDetails = {
   updated_at: string;
   status: string;
   announcement_services: Announcement_Service[];
+
+  city: { id: number; title: string };
 };
 
 export type AnnounceWithImages = Announce & {

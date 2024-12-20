@@ -1,4 +1,5 @@
 import { Announce } from "@/atoms/announcements";
+import { City } from "@/atoms/cities";
 import { Subway } from "@/atoms/subways";
 import { CreateAddForm } from "@/features/CreateAddForm";
 import { baseGetRequest } from "@/services/utils/rentalFetch/baseGetRequest";
@@ -24,24 +25,29 @@ export async function generateMetadata({
   };
 }
 const EditAnnounce = async ({ params }: IEditAnnounce) => {
-
-  const t = await getTranslations('root')
+  const t = await getTranslations("root");
   let { data } = await baseGetRequest<Announce>(`announcement/${params.id}`, {
     config: {
       isServer: true,
     },
   });
-  const subways = await baseGetRequest<Subway[]>("subways", {
+  // const subways = await baseGetRequest<Subway[]>("subways", {
+  //   config: {
+  //     isServer: true,
+  //   },
+  // });
+
+  const citiesData = await baseGetRequest<City[]>("cities", {
     config: {
       isServer: true,
     },
   });
-
+  const cities = citiesData.data;
 
   return (
     <div className="containerBlock flex flex-col items-center">
-      <h2 className="text-[24px] font-[500] mt-[30px]">{t('edit.edit')}</h2>
-      <CreateAddForm subways={subways.data} announce={data} />
+      <h2 className="text-[24px] font-[500] mt-[30px]">{t("edit.edit")}</h2>
+      <CreateAddForm cities={cities} announce={data} />
     </div>
   );
 };

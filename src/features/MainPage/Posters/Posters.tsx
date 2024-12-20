@@ -111,7 +111,7 @@ export const Posters = ({ data }: PostersProps) => {
               <p className="font-[300] line-clamp-3">{item.description}</p>
             </div>
 
-            <div className="md:min-w-[225px] md:min-h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover w-full bg-gray-200 ">
+            <div className="md:min-w-[225px] md:min-h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover bg-gray-200 ">
               <Image
                 className="md:w-[225px] md:h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px]  object-contain h-full w-full "
                 src={
