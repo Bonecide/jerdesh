@@ -85,7 +85,7 @@ export const Posters = ({ data }: PostersProps) => {
               duration: 0.5,
             }}
             key={item.id}
-            className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row  relative justify-between gap-[10px] items-start cursor-pointer ${
+            className={`md:px-[30px] md:py-[27px] py-[25px] px-[20px] flex flex-col md:flex-row  relative justify-between gap-[10px] items-start cursor-pointer ${
               item.announcement_services
                 .map((item) => item.status.title)
                 .includes("border") &&
@@ -101,10 +101,12 @@ export const Posters = ({ data }: PostersProps) => {
             {item.announcement_services
               .map((item) => item.status.title)
               .includes("fix") && (
-              <PushpinOutlined className=" text-[20px] absolute top-[10px] right-[10px]" />
+              <div className="  absolute top-[5px] right-[5px] w-[30px] h-[30px] bg-white flex items-center justify-center rounded-full" >
+                <PushpinOutlined className=" text-[20px] " />
+              </div>
             )}
             <div className="flex flex-col gap-[15px]">
-              <div className="flex gap-[20px] items-center">
+              <div className="flex gap-[20px] flex-wrap items-center">
                 <div className="flex items-center gap-[5px]">
                   <Squares2X2Icon className="size-[20px] text-[#BFBFBF]" />
                   <p className="text-[12px]">{item.category.title}</p>

@@ -55,10 +55,10 @@ const AdvertisementPage = () => {
           <li>
             Свяжитесь с нами через форму обратной связи или напишите на{" "}
             <a
-              href="mailto:email@example.com"
+              href="mailto:info@jerdeshkg.ru"
               className="text-blue-600 underline"
             >
-              email@example.com
+              info@jerdeshkg.ru
             </a>
             .
           </li>

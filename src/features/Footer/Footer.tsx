@@ -27,9 +27,6 @@ export const Footer = () => {
               {t(`footer.${item.name}`)}
             </Link>
           ))}
-          <p className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] ">
-            © Jerdeshkg.ru - {t("footer.secure")}
-          </p>
         </div>
       </nav>
       <div className="justify-between flex flex-wrap gap-[20px] items-center mt-[20px]">
@@ -37,12 +34,27 @@ export const Footer = () => {
           <Image key={item} width={120} height={40} src={item} alt={item} />
         ))}
       </div>
-      <p className="text-center mt-[10px]">
-        Разработка платформы{" "}
-        <a href="https://syntlex.kg" className="text-primary ">
-          Syntlex
-        </a>
-      </p>
+      <div className="mt-[10px]">
+        <p>
+          email :{" "}
+          <span>
+            <a href="mailto:info@jerdeshkg.ru" className="text-primary">
+              info@jerdeshkg.ru
+            </a>
+          </span>
+        </p>
+      </div>
+      <div className="flex justify-center gap-[20px] mt-[10px] flex-wrap">
+        <p className="text-center ">
+          Разработка платформы{" "}
+          <a href="https://syntlex.kg" className="text-primary ">
+            Syntlex
+          </a>
+        </p>
+        <p className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] ">
+          © Jerdeshkg.ru - {t("footer.secure")} {new Date().getFullYear()}
+        </p>
+      </div>
     </footer>
   );
 };
