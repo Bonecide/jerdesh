@@ -1,5 +1,5 @@
 "use client";
-import { AnnounceDetails } from "@/atoms/announcements";
+import { Announce } from "@/atoms/announcements";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { MapPinIcon, Squares2X2Icon } from "@heroicons/react/24/outline";
 import { useLocale } from "next-intl";
@@ -7,9 +7,9 @@ import Image from "next/image";
 import { useRouter } from "nextjs-toploader/app";
 import React from "react";
 
-export const RecomendationCard = ({ item }: { item: AnnounceDetails }) => {
+export const RecomendationCard = ({ item }: { item: Announce }) => {
   const router = useRouter();
-  const locale = useLocale()
+  const locale = useLocale();
   return (
     <div
       onClick={() => router.push(`/${locale}/items/${item.id}`)}
