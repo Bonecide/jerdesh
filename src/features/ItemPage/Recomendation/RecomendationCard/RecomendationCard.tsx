@@ -32,7 +32,7 @@ export const RecomendationCard = ({ item }: { item: Announce }) => {
           alt={item.title}
           width={239}
           height={169}
-          className="w-full h-full object-cover rounded-[15px]"
+          className="w-full h-full object-contain rounded-[15px]"
         />
       </div>
     </div>

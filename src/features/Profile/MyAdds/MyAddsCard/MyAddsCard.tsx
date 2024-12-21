@@ -142,13 +142,17 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
             </h2>
             <p className="font-[300]">{item.description}</p>
           </div>
-          <Image
-            className="md:w-[225px] md:h-[160px] object-cover rounded-[21px]  w-full"
-            src={BASE_IMAGE_URL + item.images[0]?.path}
-            width={225}
-            height={160}
-            alt="poster"
-          />
+          <div className="md:min-w-[225px] w-full md:w-auto md:min-h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover bg-gray-200 ">
+            <Image
+              className="md:w-[225px] md:h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px]  object-contain h-full w-full "
+              src={
+                item.images[0]?.path ? BASE_IMAGE_URL + item.images[0].path : ""
+              }
+              width={225}
+              height={160}
+              alt="poster"
+            />
+          </div>
         </div>
         <div className="flex justify-between flex-wrap gap-y-[20px] mt-[20px]">
           <Button

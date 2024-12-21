@@ -12,7 +12,7 @@ import { useTranslations } from "next-intl";
 
 export const Recomendation = () => {
   const banners = useAtomValue(bannersAtom);
-  const rec = useAtomValue(recomendationAtom).slice(0, 3);
+  const rec = useAtomValue(recomendationAtom);
 
   const t = useTranslations("root");
 
@@ -34,7 +34,7 @@ export const Recomendation = () => {
           />
         ) : null}
         <h2 className="font-[500] text-[20px] mt-[30px]">{t('item.recomendations')}</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-[27px] mt-[30px]">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-[27px] mt-[30px]">
           {rec.map((item) => (
             <RecomendationCard key={item.id} item={item} />
           ))}
