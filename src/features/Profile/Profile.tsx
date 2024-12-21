@@ -16,7 +16,7 @@ export type TabSlug =
   | "profile"
   | "adds"
   | "vips"
-  | "announcement"
+  // | "announcement"
   | "addMoney"
   | "settings";
 
@@ -32,7 +32,7 @@ export const ProfilePage = () => {
   const Tabs: Record<TabSlug, ReactNode> = {
     profile: <ProfileData />,
     adds: <MyAdds />,
-    announcement: <Anouncment />,
+    // announcement: <Anouncment />,
     addMoney: <AddMoney />,
     settings: <Settings />,
     vips: <VipServices />,

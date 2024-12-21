@@ -2,6 +2,13 @@ import { baseGetRequest } from "@/services/utils/rentalFetch/baseGetRequest";
 import { atom } from "jotai";
 
 export type Announcement_Service = "raise" | "fix" | "color" | "border";
+
+type AnnouncementsServiseObject = {
+  id: number;
+  price: number;
+  status: { id: number; title: Announcement_Service };
+  title: string;
+};
 export type Announce = {
   id: number;
   title: string;
@@ -22,7 +29,7 @@ export type Announce = {
   updated_at: string;
   status: string;
   city: { id: number; title: string };
-  announcement_services: Announcement_Service[];
+  announcement_services: AnnouncementsServiseObject[];
 };
 
 export type AnnounceDetails = {
@@ -81,6 +88,7 @@ export const setAnnouncementsAtom = atom(null, async (get, set) => {
     });
 
     const data = response.data;
+
     set(announcementsAtom, data);
   } catch (error) {
     return [];

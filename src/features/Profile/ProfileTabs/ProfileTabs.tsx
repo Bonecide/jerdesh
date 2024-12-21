@@ -32,9 +32,9 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
     {
       slug: "vips",
     },
-    {
-      slug: "announcement",
-    },
+    // {
+    //   slug: "announcement",
+    // },
     {
       slug: "addMoney",
     },

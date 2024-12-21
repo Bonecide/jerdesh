@@ -34,7 +34,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
   const onClickEdit = useCallback(() => {
     router.push(`/${locale}/edit/${item.id}`);
   }, [router, item, locale]);
-  console.log(item)
+  console.log(item);
   const onClickAction = useCallback(
     (type: Announcement_Service) => () => {
       setActionType(type);
@@ -72,11 +72,15 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
           },
         }}
         className={` p-[20px] duration-300 transition-all outline-none shadowPoster w-full rounded-[21px] ${
-          (item.announcement_services.includes("border") ||
+          (item.announcement_services
+            .map((item) => item.status.title)
+            .includes("border") ||
             currentType === "border") &&
           "outline-[2px] outline outline-[#D11010]"
         } ${
-          item.announcement_services.includes("color") || currentType === "fill"
+          item.announcement_services
+            .map((item) => item.status.title)
+            .includes("color") || currentType === "fill"
             ? "bg-[#fdd2dc]"
             : "bg-white"
         }`}
@@ -154,7 +158,9 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
           >
             {t("actions.raise")}
           </Button>
-          {!item.announcement_services.includes("border") && (
+          {!item.announcement_services
+            .map((item) => item.status.title)
+            .includes("border") && (
             <Button
               onClick={onClickAction("border")}
               onMouseLeave={() => setCurrentType("common")}
@@ -167,7 +173,9 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
               {t("actions.border")}
             </Button>
           )}
-          {!item.announcement_services.includes("color") && (
+          {!item.announcement_services
+            .map((item) => item.status.title)
+            .includes("color") && (
             <Button
               onClick={onClickAction("color")}
               onMouseLeave={() => setCurrentType("common")}
@@ -185,7 +193,9 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
               {t("actions.color")}
             </Button>
           )}
-          {!item.announcement_services.includes("fix") && (
+          {!item.announcement_services
+            .map((item) => item.status.title)
+            .includes("fix") && (
             <Button
               onClick={onClickAction("fix")}
               icon={<PushpinOutlined className="text-white text-[20px]" />}

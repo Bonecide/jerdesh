@@ -35,6 +35,7 @@ export const Posters = ({ data }: PostersProps) => {
       setAnnouncements(data);
     }
   }, [data, setAnnouncements, filters]);
+
   if (!announcements) return null;
 
   if (!announcements.length)
@@ -85,15 +86,21 @@ export const Posters = ({ data }: PostersProps) => {
             }}
             key={item.id}
             className={`md:px-[27px] md:py-[20px] p-[12px] flex flex-col md:flex-row  relative justify-between gap-[10px] items-start cursor-pointer ${
-              item.announcement_services.includes("border") &&
+              item.announcement_services
+                .map((item) => item.status.title)
+                .includes("border") &&
               " outline outline-[2px] outline-[#D11010]"
             } ${
-              item.announcement_services.includes("color")
+              item.announcement_services
+                .map((item) => item.status.title)
+                .includes("color")
                 ? "bg-[#FFD0DB]"
                 : "bg-white"
             } shadowPoster w-full md:rounded-[21px] rounded-[13px]`}
           >
-            {item.announcement_services.includes("fix") && (
+            {item.announcement_services
+              .map((item) => item.status.title)
+              .includes("fix") && (
               <PushpinOutlined className=" text-[20px] absolute top-[10px] right-[10px]" />
             )}
             <div className="flex flex-col gap-[15px]">

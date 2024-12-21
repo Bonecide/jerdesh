@@ -1,10 +1,15 @@
 "use client";
 import { Announcement_Service } from "@/atoms/announcements";
 import { announcementsServicesAtom } from "@/atoms/announcements/announcementsServices.atoms";
+import {
+  fetchProfileAtom,
+  profileAnnouncementsAtom,
+  profileAtom,
+} from "@/atoms/profile";
 import { Modal } from "@/components/Modal";
 import { activeService } from "@/services/activeService";
 import { Button } from "antd";
-import { useAtomValue } from "jotai";
+import { useAtomValue, useSetAtom } from "jotai";
 import { useTranslations } from "next-intl";
 import { Dispatch, useCallback, useMemo, useState } from "react";
 
@@ -18,6 +23,9 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
   const t = useTranslations("root.profile.announce");
   const [isLoading, setIsLoading] = useState(false);
   const services = useAtomValue(announcementsServicesAtom);
+
+  const refetchProfile = useSetAtom(fetchProfileAtom);
+  const refetchAnnounce = useSetAtom(profileAnnouncementsAtom);
   const texts: Record<Announcement_Service, string> = useMemo(() => {
     return {
       border: t("confirmTexts.border"),
@@ -41,8 +49,10 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
 
     if (status) {
       setIsOpen(false);
+      refetchProfile();
+      refetchAnnounce();
     }
-  }, [currentService, id, setIsOpen]);
+  }, [currentService, id, refetchAnnounce, refetchProfile, setIsOpen]);
 
   return (
     <Modal
