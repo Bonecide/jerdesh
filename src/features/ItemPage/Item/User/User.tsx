@@ -1,12 +1,11 @@
-import { AnnounceDetails } from "@/atoms/announcements";
+import { Announce, AnnounceDetails } from "@/atoms/announcements";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import { useMemo } from "react";
 
-export const User = ({ item }: { item: AnnounceDetails }) => {
-
-  const t = useTranslations('root')
+export const User = ({ item }: { item: Announce }) => {
+  const t = useTranslations("root");
   const userName = useMemo(() => {
     if (!item.user_id?.name && !item.user_id?.last_name) return "";
 
@@ -33,7 +32,7 @@ export const User = ({ item }: { item: AnnounceDetails }) => {
           {userName}
         </p>
         <p className="lg:text-[17px] md:text-[15px]">
-          {t('item.date')} {new Date(item.created_at).toLocaleString()}
+          {t("item.date")} {new Date(item.created_at).toLocaleString()}
         </p>
       </div>
     </div>

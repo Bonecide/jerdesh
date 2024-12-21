@@ -18,7 +18,7 @@ import { bannersAtom } from "@/atoms/banners/banners.atoms";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { getRandomInt } from "@/utils/helpers";
 
-export const Item = ({ item }: { item: AnnounceDetails }) => {
+export const Item = ({ item }: { item: Announce }) => {
   const setActiveAnnounce = useSetAtom(activeAnnounceAtom);
   const banners = useAtomValue(bannersAtom);
   useEffect(() => {

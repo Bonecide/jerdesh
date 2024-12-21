@@ -1,12 +1,12 @@
 "use client";
-import { AnnounceDetails } from "@/atoms/announcements";
+import { Announce } from "@/atoms/announcements";
 import { ShareSocial } from "@/components/SharesSocial";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { MapPinIcon, PhoneIcon } from "@heroicons/react/24/outline";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 
-export const Contacts = ({ item }: { item: AnnounceDetails }) => {
+export const Contacts = ({ item }: { item: Announce }) => {
   const t = useTranslations("root");
   return (
     <div className="flex flex-col gap-[10px] w-full">
