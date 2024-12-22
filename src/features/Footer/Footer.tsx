@@ -44,15 +44,23 @@ export const Footer = () => {
           </span>
         </p>
       </div>
-      <div className="flex justify-center gap-[20px] mt-[10px] flex-wrap">
+      <div className="flex justify-between w-full gap-[20px] mt-[10px] flex-wrap">
         <p className="text-center ">
           Разработка платформы{" "}
-          <a href="https://syntlex.kg" className="text-primary ">
+          <a
+            href="https://syntlex.kg"
+            target="_blank"
+            className="text-primary "
+          >
             Syntlex
           </a>
         </p>
         <p className="text-[#2B2B2B] md:text-[12px] lg:text-[14px] ">
-          © Jerdeshkg.ru - {t("footer.secure")} {new Date().getFullYear()}
+          © {new Date().getFullYear()}{" "}
+          <Link href="/" className="text-primary">
+            Jerdeshkg.ru
+          </Link>{" "}
+          - {t("footer.secure")}
         </p>
       </div>
     </footer>
