@@ -1,3 +1,14 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Реклама | Jerdesh",
+  description: "Jerdesh",
+  icons: {
+    icon: "/fav.png",
+    apple: "/fav.png",
+  },
+};
+
 const AdvertisementPage = () => {
   return (
     <main className="containerBlock mx-auto px-4 py-8">

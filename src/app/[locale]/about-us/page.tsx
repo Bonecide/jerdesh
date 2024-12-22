@@ -1,5 +1,15 @@
+import { Metadata } from "next";
 import React from "react";
 
+
+export const metadata: Metadata = {
+  title: "О нас | Jerdesh",
+  description: "Jerdesh",
+  icons: {
+    icon: "/fav.png",
+    apple: "/fav.png",
+  },
+};
 const AboutUsPage = () => {
   return (
     <div className=" text-gray-800  containerBlock">

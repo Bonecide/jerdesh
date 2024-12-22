@@ -1,3 +1,13 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Политика конфиденциальности | Jerdesh",
+  description: "Jerdesh",
+  icons: {
+    icon: "/fav.png",
+    apple: "/fav.png",
+  },
+};
 const Confidential = () => {
   return (
     <div className=" text-gray-800 containerBlock">
