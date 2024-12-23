@@ -5,8 +5,8 @@ type Props = {
   children: ReactNode;
 };
 export const metadata: Metadata = {
-  title: "Jerdesh",
-  description: "Jerdesh",
+  title: "Jerdeshkg.ru",
+  description: "Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",

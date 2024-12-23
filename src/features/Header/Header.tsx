@@ -144,7 +144,7 @@ export const Header = () => {
             className="lg:h-[50px] h-[40px] aspect-square "
             width={212}
             height={50}
-            alt="Jerdesh"
+            alt="Jerdeshkg.ru"
           />
         </Link>
         <div className="relative hidden md:block">

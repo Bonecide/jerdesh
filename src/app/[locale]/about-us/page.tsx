@@ -3,8 +3,8 @@ import React from "react";
 
 
 export const metadata: Metadata = {
-  title: "О нас | Jerdesh",
-  description: "Jerdesh",
+  title: "О нас | Jerdeshkg.ru",
+  description: "Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",

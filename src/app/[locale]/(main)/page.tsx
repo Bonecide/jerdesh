@@ -2,8 +2,8 @@ import { MainPage } from "@/features/MainPage";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Главная | Jerdesh",
-  description: "Jerdesh",
+  title: "Главная | Jerdeshkg.ru",
+  description: "Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",

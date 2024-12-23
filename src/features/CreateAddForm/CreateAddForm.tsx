@@ -10,8 +10,7 @@ import { ImFilePicture } from "react-icons/im";
 import { motion } from "framer-motion";
 import useCategory from "@/hooks/useCategory";
 import { createAdd } from "@/services/createAdd";
-import { useAtomValue } from "jotai";
-import { Subway, subwaysAtom } from "@/atoms/subways";
+
 import { DefaultOptionType } from "antd/es/select";
 import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";

@@ -16,8 +16,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { HeaderWrapper } from "@/features/Header/HeaderWrapper";
 
 export const metadata: Metadata = {
-  title: "Jerdesh",
-  description: "Jerdesh",
+  title: "Jerdeshkg.ru",
+  description: "Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",

@@ -1,8 +1,8 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Реклама | Jerdesh",
-  description: "Jerdesh",
+  title: "Реклама | Jerdeshkg.ru",
+  description: "Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",

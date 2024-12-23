@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: ItemDetailsProps) {
   });
 
   return {
-    title: `${data.title} | Jerdesh`,
+    title: `${data.title} | Jerdeshkg.ru`,
     description: data.description,
   };
 }

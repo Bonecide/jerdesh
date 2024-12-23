@@ -12,7 +12,7 @@ export const Footer = () => {
         <Image
           width={140}
           height={47}
-          src={"/miniLogo.svg"}
+          src={"/logo.svg"}
           alt="jerdesh"
           className="md:mr-[70px]"
         />

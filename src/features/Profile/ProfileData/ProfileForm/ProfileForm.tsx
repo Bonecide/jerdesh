@@ -7,7 +7,8 @@ import { useAtomValue, useSetAtom } from "jotai";
 import { useTranslations } from "next-intl";
 import { Dispatch, useCallback } from "react";
 import toast from "react-hot-toast";
-
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 interface ProfileForm {
   isChange: boolean;
   setIsChange: Dispatch<boolean>;
@@ -47,7 +48,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.name}
           name="name"
-          label={t('main.name')}
+          label={t("main.name")}
           className="max-[767px]:!m-0"
         >
           <Input disabled={!isChange} name="name" className="w-full h-[50px]" />
@@ -55,7 +56,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.last_name}
           name="last_name"
-          label={t('main.lastName')}
+          label={t("main.lastName")}
           className="max-[767px]:!m-0"
         >
           <Input
@@ -67,12 +68,12 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.email}
           name="email"
-          label={t('main.email')}
+          label={t("main.email")}
           className="max-[767px]:!m-0"
           rules={[
             {
               required: true,
-              message: t('errors.email'),
+              message: t("errors.email"),
             },
           ]}
         >
@@ -85,13 +86,19 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Form.Item
           initialValue={user?.phone}
           name="phone"
-          label={t('main.phone')}
+          label={t("main.phone")}
           className="max-[767px]:!m-0"
         >
-          <Input
+          <PhoneInput
             disabled={!isChange}
-            name="phone"
-            className="w-full h-[50px]"
+            onlyCountries={["kg", "ru"]}
+            inputClass="!w-full !h-[50px] rounded-[8px] disabled:!bg-black/5 disabled:!text-black/25"
+            inputProps={{
+              name: "phone",
+
+              disabled: !isChange,
+            }}
+            country="kg"
           />
         </Form.Item>
       </div>
@@ -99,9 +106,9 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         <Button
           type="primary"
           htmlType="submit"
-          className="!h-[40px] max-[767px]:mt-5"
+          className="!h-[40px] max-[767px]:mt-5 "
         >
-          {t('profile.save')}
+          {t("profile.save")}
         </Button>
       )}
     </Form>
