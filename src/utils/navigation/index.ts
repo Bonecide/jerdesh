@@ -19,6 +19,11 @@ export const navigation = [
     name: "confidential",
     link: "/confidential",
   },
+  {
+    id : 5,
+    name : 'publicOffer',
+    link : '/publicOffer'
+  }
 ];
 
 export const PAYMENTS = [
