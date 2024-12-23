@@ -4,7 +4,7 @@ import React from "react";
 
 export const metadata: Metadata = {
   title: "О нас | Jerdeshkg.ru",
-  description: "Jerdeshkg.ru",
+  description: "Жердеш - Жарыялар сайты! Доска объявлений! - Доска объявлений жердеш.kg, жердеш, jerdesh. акысыз жарыялар сайты, Квартира, койко место, авто, такси. | Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",

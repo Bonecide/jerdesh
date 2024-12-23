@@ -16,8 +16,8 @@ import { NextIntlClientProvider } from "next-intl";
 import { HeaderWrapper } from "@/features/Header/HeaderWrapper";
 
 export const metadata: Metadata = {
-  title: "Jerdeshkg.ru",
-  description: "Jerdeshkg.ru",
+  title: "Жердеш - Жарыялар сайты! Доска объявлений! - Доска объявлений жердеш.kg, жердеш, jerdesh. акысыз жарыялар сайты, Квартира, койко место, авто, такси. | Jerdeshkg.ru",
+  description: "Жердеш - Жарыялар сайты! Доска объявлений! - Доска объявлений жердеш.kg, жердеш, jerdesh. акысыз жарыялар сайты, Квартира, койко место, авто, такси. | Jerdeshkg.ru",
   icons: {
     icon: "/fav.png",
     apple: "/fav.png",
