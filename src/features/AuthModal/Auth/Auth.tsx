@@ -19,7 +19,6 @@ interface FormValues {
   password: string;
 }
 export const Auth = ({ setType, setIsOpen }: AuthProps) => {
-  const [isAgree, setIsAgree] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const t = useTranslations("root");
@@ -73,21 +72,10 @@ export const Auth = ({ setType, setIsOpen }: AuthProps) => {
         >
           <Input.Password type="password" className="w-full h-[50px]" />
         </Form.Item>
-        <div className="flex items-center gap-[5px]">
-          <Checkbox onChange={(e) => setIsAgree(e.target.checked)} />
-          <Link
-            locale={locale}
-            href={"/confidential"}
-            className="text-[12px] text-primary"
-            target="_blank"
-          >
-            {t("auth.agree")}
-          </Link>
-        </div>
+
         <Form.Item>
           <Button
             loading={isLoading}
-            disabled={!isAgree}
             htmlType="submit"
             type="primary"
             className="w-full !h-[50px] text-[16px] disabled:bg-gray-400"

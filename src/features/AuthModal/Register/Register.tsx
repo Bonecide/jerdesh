@@ -4,7 +4,8 @@ import { CurrentType } from "../AuthModal";
 import toast from "react-hot-toast";
 
 import { register } from "@/services/register";
-import { useTranslations } from "next-intl";
+import { useLocale, useTranslations } from "next-intl";
+import { Link } from "@/i18n/routing";
 
 interface RegisterProps {
   setType: Dispatch<CurrentType>;
@@ -17,6 +18,7 @@ interface FormValues {
 export const Register = ({ setType }: RegisterProps) => {
   const [isAgree, setIsAgree] = useState(false);
 
+  const locale = useLocale();
   const [isLoading, setIsLoading] = useState(false);
   const t = useTranslations("root");
   const onSubmit = useCallback(
@@ -81,7 +83,13 @@ export const Register = ({ setType }: RegisterProps) => {
         </Form.Item>
         <div className="flex items-center gap-[5px]">
           <Checkbox onChange={(e) => setIsAgree(e.target.checked)} />
-          <p className="text-[12px]">{t("auth.agree")}</p>
+          <Link
+            locale={locale}
+            href="/confidential"
+            className="text-[12px] text-primary"
+          >
+            {t("auth.agree")}
+          </Link>
         </div>
         <Form.Item>
           <Button
