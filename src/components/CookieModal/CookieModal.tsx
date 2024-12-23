@@ -35,7 +35,7 @@ export const CookieModal = () => {
           transition={{
             duration: 0.3,
           }}
-          className="left-[15px] fixed bottom-[15px] p-[25px] rounded-[10px] bg-white w-[450px] max-w-full cookieShadow"
+          className="left-[15px] fixed bottom-[15px] p-[25px] rounded-[10px] bg-white w-[450px] max-w-full z-10 cookieShadow"
         >
           <p className="text-[14px]">
             Этот Сайт использует файлы cookies для более удобной работы

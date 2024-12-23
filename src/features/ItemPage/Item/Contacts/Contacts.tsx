@@ -20,6 +20,7 @@ export const Contacts = ({ item }: { item: Announce }) => {
         <div className="flex gap-[10px] items-center">
           <MapPinIcon className="text-primary size-6 lg:size-[28px] md:size-[17px]" />
           <p className="text-[#696969] md:text-[12px] lg:text-[14px]">
+            {item.city && item.city.title + ", "}
             {item.address}
           </p>
         </div>
@@ -38,22 +39,6 @@ export const Contacts = ({ item }: { item: Announce }) => {
             </p>
           </div>
         )} */}
-
-        {item.city && (
-          <div className="flex gap-[10px] items-center">
-            <Image
-              src={"/images/trainIcon.svg"}
-              width={28}
-              height={28}
-              alt="train"
-              className="md:size-[17px] size-6 lg:size-[28px]"
-            />
-
-            <p className="text-[#696969] md:text-[12px] lg:text-[14px]">
-              {item.city.title}
-            </p>
-          </div>
-        )}
       </div>
       <div className="flex flex-wrap items-center w-full justify-between">
         <div className="flex items-center">
