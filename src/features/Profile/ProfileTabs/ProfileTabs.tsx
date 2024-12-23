@@ -57,7 +57,7 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
   }, []);
 
   const userName = useMemo(() => {
-    if (!user?.name && !user?.last_name) return "";
+    if (!user?.name && !user?.last_name) return user?.email;
 
     if (!user.name || !user.last_name) {
       return user.name || user.last_name;
@@ -78,7 +78,7 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
         />
 
         <div className="flex flex-col justify-between">
-          <h4 className="font-[500] lg:text-[20px] md:text-[11px]">
+          <h4 className="font-[500] lg:text-[20px] md:text-[11px] truncate max-w-[200px]">
             {userName}
           </h4>
           <p className="md:text-[8px] lg:text-[14px]">

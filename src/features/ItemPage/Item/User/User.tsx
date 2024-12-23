@@ -14,6 +14,7 @@ export const User = ({ item }: { item: Announce }) => {
     }
     return item.user_id?.last_name + " " + item.user_id?.name;
   }, [item.user_id]);
+
   return (
     <div className="flex gap-[5px]">
       <Image
