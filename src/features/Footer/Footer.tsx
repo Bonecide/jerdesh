@@ -34,7 +34,7 @@ export const Footer = () => {
           <Image key={item} width={120} height={40} src={item} alt={item} />
         ))}
       </div>
-      <div className="mt-[10px]">
+      <div className="mt-[10px] flex flex-wrap justify-between gap-y-[10px]">
         <p>
           email :{" "}
           <span>
@@ -43,6 +43,8 @@ export const Footer = () => {
             </a>
           </span>
         </p>
+        <p>ИП Атабаева Зилола</p>
+        <p> ИНН 772305543859</p>
       </div>
       <div className="flex justify-between w-full gap-[20px] mt-[10px] flex-wrap">
         <p className="text-center ">

@@ -1,6 +1,8 @@
+import { profileAnnouncementsAtom } from "@/atoms/profile";
 import { Modal } from "@/components/Modal";
 import { deleteAnnounce } from "@/services/deleteAnnounce/deleteAnnounce";
 import { Button } from "antd";
+import { useSetAtom } from "jotai";
 import { Dispatch, useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -14,7 +16,7 @@ export const AreYouSureModal = ({
   setIsOpen: Dispatch<boolean>;
 }) => {
   const [isLoading, setIsLoading] = useState(false);
-
+  const refetchAnnounce = useSetAtom(profileAnnouncementsAtom);
   const onCancel = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
@@ -23,19 +25,23 @@ export const AreYouSureModal = ({
     setIsLoading(true);
     const toastId = toast.loading("Загрузка...");
     const status = await deleteAnnounce(id);
+
     setIsLoading(false);
     toast.dismiss(toastId);
     if (status) {
+      refetchAnnounce();
       setIsOpen(false);
     }
-  }, [id, setIsOpen]);
+  }, [id, refetchAnnounce, setIsOpen]);
   return (
     <Modal
       className="w-[500px] py-[53px] flex flex-col items-center gap-[20px]"
       isOpen={isOpen}
       setIsOpen={setIsOpen}
     >
-      <h4 className="text-center">Вы уверены, что хотите удалить объявление?</h4>
+      <h4 className="text-center">
+        Вы уверены, что хотите удалить объявление?
+      </h4>
 
       <div className="flex gap-[20px] items-center flex-wrap">
         <Button
