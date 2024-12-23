@@ -1,6 +1,9 @@
 "use client";
 import { Announcement_Service } from "@/atoms/announcements";
-import { announcementsServicesAtom } from "@/atoms/announcements/announcementsServices.atoms";
+import {
+  announcementsServicesAtom,
+  fetchAnnouncementsServicesAtom,
+} from "@/atoms/announcements/announcementsServices.atoms";
 import {
   fetchProfileAtom,
   profileAnnouncementsAtom,
@@ -11,7 +14,7 @@ import { activeService } from "@/services/activeService";
 import { Button } from "antd";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useTranslations } from "next-intl";
-import { Dispatch, useCallback, useMemo, useState } from "react";
+import { Dispatch, useCallback, useEffect, useMemo, useState } from "react";
 
 interface ActionModal {
   isOpen: boolean;
@@ -23,7 +26,7 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
   const t = useTranslations("root.profile.announce");
   const [isLoading, setIsLoading] = useState(false);
   const services = useAtomValue(announcementsServicesAtom);
-
+  const fetchServices = useSetAtom(fetchAnnouncementsServicesAtom);
   const refetchProfile = useSetAtom(fetchProfileAtom);
   const refetchAnnounce = useSetAtom(profileAnnouncementsAtom);
   const texts: Record<Announcement_Service, string> = useMemo(() => {
@@ -54,6 +57,9 @@ export const ActionModal = ({ isOpen, type, id, setIsOpen }: ActionModal) => {
     }
   }, [currentService, id, refetchAnnounce, refetchProfile, setIsOpen]);
 
+  useEffect(() => {
+    fetchServices();
+  }, [fetchServices]);
   return (
     <Modal
       className="md:px-[70px] md:py-[40px] px-[20px] w-[550px] max-w-[90vw]"

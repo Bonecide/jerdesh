@@ -1,17 +1,17 @@
 "use client";
 
-import { vipSevicesAtom } from "@/atoms/profile";
-import { useAtomValue } from "jotai";
+import { fetchVipSevicesAtom, vipSevicesAtom } from "@/atoms/profile";
+import { useAtomValue, useSetAtom } from "jotai";
 
 import { motion } from "framer-motion";
 import { Button } from "antd";
 import { useTranslations } from "next-intl";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { handleSubscribe } from "@/services/handleSubscribe";
 
 export const VipServices = () => {
   const vips = useAtomValue(vipSevicesAtom);
-
+  const fetchVips = useSetAtom(fetchVipSevicesAtom);
   const t = useTranslations("root.profile.vipsTab");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -24,6 +24,11 @@ export const VipServices = () => {
     },
     []
   );
+
+  useEffect(() => {
+    fetchVips();
+  }, [fetchVips]);
+
   return (
     <motion.div
       exit={{

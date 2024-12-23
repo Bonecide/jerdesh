@@ -12,11 +12,12 @@ export type AnnounceServicesData = {
   };
 };
 
-export const announcementsServicesAtom = atom(async () => {
+export const announcementsServicesAtom = atom<AnnounceServicesData[]>([]);
+export const fetchAnnouncementsServicesAtom = atom(null, async (_, set) => {
   try {
-    const { data } = await baseGetRequest<AnnounceServicesData[]>("announcement-services");
-    return data;
-  } catch (error) {
-    return [];
-  }
+    const { data } = await baseGetRequest<AnnounceServicesData[]>(
+      "announcement-services"
+    );
+    set(announcementsServicesAtom, data);
+  } catch (error) {}
 });

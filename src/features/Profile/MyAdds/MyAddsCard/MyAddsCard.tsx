@@ -34,7 +34,6 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
   const onClickEdit = useCallback(() => {
     router.push(`/${locale}/edit/${item.id}`);
   }, [router, item, locale]);
-  console.log(item);
   const onClickAction = useCallback(
     (type: Announcement_Service) => () => {
       setActionType(type);

@@ -19,11 +19,10 @@ export type VipService = {
   }[];
 };
 
-export const vipSevicesAtom = atom(async () => {
+export const vipSevicesAtom = atom<VipService[]>([]);
+export const fetchVipSevicesAtom = atom(null, async (_, set) => {
   try {
     const { data } = await baseGetRequest<VipService[]>("vip-services");
-    return data;
-  } catch (error) {
-    return [];
-  }
+    set(vipSevicesAtom, data);
+  } catch (error) {}
 });

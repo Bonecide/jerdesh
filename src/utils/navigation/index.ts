@@ -20,10 +20,15 @@ export const navigation = [
     link: "/confidential",
   },
   {
-    id : 5,
-    name : 'publicOffer',
-    link : '/publicOffer'
-  }
+    id: 5,
+    name: "publicOffer",
+    link: "/publicOffer",
+  },
+  {
+    id: 6,
+    name: "services",
+    link: "/services",
+  },
 ];
 
 export const PAYMENTS = [
