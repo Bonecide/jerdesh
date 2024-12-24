@@ -22,15 +22,15 @@ export const CookieModal = () => {
         <motion.div
           initial={{
             opacity: 0,
-            z: -100,
+            y: -100,
           }}
           exit={{
-            z: -100,
+            y: -100,
             opacity: 0,
           }}
           animate={{
             opacity: 1,
-            z: 0,
+            y: 0,
           }}
           transition={{
             duration: 0.3,
