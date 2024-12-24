@@ -7,7 +7,8 @@ import { useMemo } from "react";
 export const User = ({ item }: { item: Announce }) => {
   const t = useTranslations("root");
   const userName = useMemo(() => {
-    if (!item.user_id?.name && !item.user_id?.last_name) return "";
+    if (!item.user_id?.name && !item.user_id?.last_name)
+      return item.user_id.email;
 
     if (!item.user_id.name || !item.user_id.last_name) {
       return item.user_id.name || item.user_id.last_name;

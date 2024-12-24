@@ -16,7 +16,13 @@ export type Announce = {
   address: string;
   phone: string;
   description: string;
-  user_id: { id: number; name: string; last_name: string; logo?: string };
+  user_id: {
+    id: number;
+    name: string;
+    last_name: string;
+    logo?: string;
+    email: string;
+  };
   category: { id: number; title: string };
   subcategory: { id: number; title: string };
   subway: { id: number; title: string };
