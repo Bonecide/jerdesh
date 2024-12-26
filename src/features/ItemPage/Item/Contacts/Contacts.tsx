@@ -46,7 +46,7 @@ export const Contacts = ({ item }: { item: Announce }) => {
           <ShareSocial
             link={window?.location.href}
             title={item.title}
-            image={BASE_IMAGE_URL! + item.images[0]}
+            image={BASE_IMAGE_URL + item.images[0].path}
           />
         </div>
         <p>

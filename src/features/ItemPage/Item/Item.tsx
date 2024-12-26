@@ -9,8 +9,6 @@ import { Recomendation } from "../Recomendation";
 import {
   activeAnnounceAtom,
   Announce,
-  AnnounceDetails,
-  AnnounceWithImages,
 } from "@/atoms/announcements";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
