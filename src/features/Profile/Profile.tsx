@@ -1,5 +1,5 @@
 "use client";
-import { ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useMemo, useRef, useState } from "react";
 import { ProfileTabs } from "./ProfileTabs";
 import { MyAdds } from "./MyAdds";
 import { AnimatePresence } from "framer-motion";
@@ -11,6 +11,7 @@ import { useAtom } from "jotai";
 import { tabAtom } from "@/atoms/profile";
 import { VipServices } from "./VipServices";
 import { Settings } from "./ProfileTabs/Settings";
+import toast from "react-hot-toast";
 
 export type TabSlug =
   | "profile"
@@ -29,6 +30,13 @@ export const ProfilePage = () => {
 
   const searchParams = useSearchParams();
 
+  const statusText = useMemo(() => {
+    return {
+      success: "Платёж успешно исполнен!",
+      failed:
+        "Платёж не исполнен, проверьте свой способ оплаты либо попробуйте ещё раз!",
+    };
+  }, []);
   const Tabs: Record<TabSlug, ReactNode> = {
     profile: <ProfileData />,
     adds: <MyAdds />,
@@ -41,7 +49,23 @@ export const ProfilePage = () => {
   useEffect(() => {
     setCurrentTab(searchParams.get("tab") as TabSlug);
   }, [searchParams, setCurrentTab]);
+  const hasShownToast = useRef(false); 
 
+  useEffect(() => {
+    const status = searchParams.get("status");
+
+    if (!hasShownToast.current && status) {
+      hasShownToast.current = true;
+      if (status === "success") {
+        toast.success("Платёж успешно исполнен!");
+      }
+      if (status === "failed") {
+        toast.error(
+          "Платёж не исполнен, проверьте свой способ оплаты либо попробуйте ещё раз!"
+        );
+      }
+    }
+  }, [searchParams]);
   return (
     <div className="flex gap-[80px]">
       <div className="flex-1">

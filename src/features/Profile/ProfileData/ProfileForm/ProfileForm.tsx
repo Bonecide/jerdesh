@@ -27,7 +27,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
   const t = useTranslations("root");
   const onFinish = useCallback(
     async (data: ProfileData) => {
-      const toastId = toast.loading("Загрузка...");
+      const toastId = toast.loading(t("main.loading"));
       const status = await updateProfileData(data, user!.id);
       toast.dismiss(toastId);
 
@@ -36,7 +36,7 @@ export const ProfileForm = ({ isChange, setIsChange }: ProfileForm) => {
         await refetchUser();
       }
     },
-    [refetchUser, setIsChange, user]
+    [refetchUser, setIsChange, user, t]
   );
   return (
     <Form

@@ -3,6 +3,7 @@ import { Modal } from "@/components/Modal";
 import { deleteAnnounce } from "@/services/deleteAnnounce/deleteAnnounce";
 import { Button } from "antd";
 import { useSetAtom } from "jotai";
+import { useTranslations } from "next-intl";
 import { Dispatch, useCallback, useState } from "react";
 import toast from "react-hot-toast";
 
@@ -17,13 +18,14 @@ export const AreYouSureModal = ({
 }) => {
   const [isLoading, setIsLoading] = useState(false);
   const refetchAnnounce = useSetAtom(profileAnnouncementsAtom);
+  const t = useTranslations('root')
   const onCancel = useCallback(() => {
     setIsOpen(false);
   }, [setIsOpen]);
 
   const onConfirm = useCallback(async () => {
     setIsLoading(true);
-    const toastId = toast.loading("Загрузка...");
+    const toastId = toast.loading(t('main.loading'));
     const status = await deleteAnnounce(id);
 
     setIsLoading(false);
@@ -32,7 +34,7 @@ export const AreYouSureModal = ({
       refetchAnnounce();
       setIsOpen(false);
     }
-  }, [id, refetchAnnounce, setIsOpen]);
+  }, [id, refetchAnnounce, setIsOpen,t]);
   return (
     <Modal
       className="w-[500px] py-[53px] flex flex-col items-center gap-[20px]"

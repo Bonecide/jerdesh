@@ -15,15 +15,15 @@ export const Payment = () => {
 
   const onConfirm = useCallback(async () => {
     if (currentPayment !== undefined) {
-      const toastId = toast.loading("Загрузка...");
+      const toastId = toast.loading(t('main.loading'));
       const payUrl = await replenishBalance(currentPayment);
       toast.dismiss(toastId);
 
-      if(payUrl) {
-        window.location.href = payUrl
+      if (payUrl) {
+        window.location.href = payUrl;
       }
     }
-  }, [currentPayment]);
+  }, [currentPayment,t]);
 
   return (
     <div className="w-full flex flex-col items-center">
