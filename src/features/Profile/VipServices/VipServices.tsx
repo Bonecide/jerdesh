@@ -1,6 +1,10 @@
 "use client";
 
-import { fetchVipSevicesAtom, vipSevicesAtom } from "@/atoms/profile";
+import {
+  fetchProfileAtom,
+  fetchVipSevicesAtom,
+  vipSevicesAtom,
+} from "@/atoms/profile";
 import { useAtomValue, useSetAtom } from "jotai";
 
 import { motion } from "framer-motion";
@@ -12,6 +16,8 @@ import { handleSubscribe } from "@/services/handleSubscribe";
 export const VipServices = () => {
   const vips = useAtomValue(vipSevicesAtom);
   const fetchVips = useSetAtom(fetchVipSevicesAtom);
+  const fetchProfile = useSetAtom(fetchProfileAtom);
+
   const t = useTranslations("root.profile.vipsTab");
 
   const [isLoading, setIsLoading] = useState(false);
@@ -20,9 +26,10 @@ export const VipServices = () => {
     (pricing_id: number) => async () => {
       setIsLoading(true);
       await handleSubscribe(pricing_id);
+      await fetchProfile();
       setIsLoading(false);
     },
-    []
+    [fetchProfile]
   );
 
   useEffect(() => {
