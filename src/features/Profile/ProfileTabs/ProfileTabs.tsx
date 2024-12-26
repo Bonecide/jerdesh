@@ -62,7 +62,7 @@ export const ProfileTabs = ({ setIsOpen }: ProfileTabsProps) => {
     if (!user.name || !user.last_name) {
       return user.name || user.last_name;
     }
-    return user?.last_name + " " + user?.name;
+    return user?.name + " " + user?.last_name;
   }, [user]);
   return (
     <div className="bg-white lg:p-[25px] p-[20px] md:p-[12px] flex flex-col lg:gap-[27px] md:gap-[10px] relative shadowTabs lg:rounded-[15px] md:rounded-[8px] md:w-[203px] h-screen md:h-auto w-screen lg:w-auto">

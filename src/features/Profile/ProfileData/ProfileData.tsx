@@ -35,7 +35,7 @@ export const ProfileData = () => {
     if (!profile.name || !profile.last_name) {
       return profile.name || profile.last_name;
     }
-    return profile?.last_name + " " + profile?.name;
+    return profile?.name + " " + profile?.last_name;
   }, [profile]);
 
   const onChangeLogo = useCallback(
