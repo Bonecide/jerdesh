@@ -30,7 +30,7 @@ export const AddMoney = () => {
         {t('profile.addMoney')}
       </p>
       <Payment />
-      {/* <TransactionHistory /> */}
+      <TransactionHistory />
     </motion.div>
   );
 };

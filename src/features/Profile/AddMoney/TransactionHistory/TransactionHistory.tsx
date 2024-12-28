@@ -1,17 +1,16 @@
 "use client";
 
-import { Transactions } from "@/atoms/profile";
+import { Transaction, transactionsAtom } from "@/atoms/transactions";
 import { Table } from "@/components/Table";
-import {
-  baseTablePaginationConfig,
-  fixedTableHeight,
-} from "@/utils/const/table";
+import { useRefetchableAtom } from "@/hooks/useRefetchableAtom";
+import { baseTablePaginationConfig } from "@/utils/const/table";
 import { ColumnsType } from "antd/es/table";
 import { useMemo, useRef } from "react";
 
 export const TransactionHistory = () => {
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const columns: ColumnsType<Transactions> = useMemo(
+  const transactions = useRefetchableAtom(transactionsAtom);
+  const columns: ColumnsType<Transaction> = useMemo(
     () => [
       {
         title: "Дата",
@@ -24,8 +23,8 @@ export const TransactionHistory = () => {
       },
       {
         title: "Название",
-        dataIndex: "name",
-        key: "name",
+        dataIndex: "service_name",
+        key: "service_name",
         width: 150,
         align: "left",
       },
@@ -35,25 +34,29 @@ export const TransactionHistory = () => {
         key: "total",
         width: 150,
         align: "left",
-      },
-      {
-        title: "Номер заказа",
-        dataIndex: "order_number",
-        key: "order_number",
-        width: 150,
-        align: "left",
+
+        render: (_, { total, operation_type }) => (
+          <p
+            className={`${
+              operation_type === "income" ? "text-green-500" : "text-rose-400"
+            }`}
+          >
+            {operation_type === "income" ? `+${total}` : `-${total}`} руб.
+          </p>
+        ),
       },
     ],
     []
   );
+
   return (
     <div ref={containerRef} className="max-w-[100%] w-full">
       <h4 className="font-bold mt-2 mb-2">История транзакций</h4>
-      <Table<Transactions>
+      <Table<Transaction>
         locale={{ emptyText: "Нет данных за этот промежуток времени" }}
         columns={columns}
-        dataSource={[]}
-        rowKey={(record) => record.title}
+        dataSource={transactions}
+        rowKey={(record) => record.id}
         bordered
         size="small"
         pagination={baseTablePaginationConfig}
