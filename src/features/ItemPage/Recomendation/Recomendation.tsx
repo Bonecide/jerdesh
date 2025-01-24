@@ -9,6 +9,7 @@ import { bannersAtom } from "@/atoms/banners/banners.atoms";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { getRandomInt } from "@/utils/helpers";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 export const Recomendation = () => {
   const banners = useAtomValue(bannersAtom);
@@ -20,20 +21,30 @@ export const Recomendation = () => {
     <div className="mt-[30px] gap-[20px] md:flex lg:block">
       <div>
         {banners && banners.detail_bottom.length ? (
-          <Image
-            src={
-              BASE_IMAGE_URL! +
+          <Link
+            href={
               banners.detail_bottom[
                 getRandomInt(0, banners.detail_bottom.length)
-              ].image
+              ].link || ""
             }
-            className="w-full hidden md:block h-[74px] md:h-auto object-cover lg:mt-[20px]"
-            width={996}
-            height={127}
-            alt="banner"
-          />
+          >
+            <Image
+              src={
+                BASE_IMAGE_URL! +
+                banners.detail_bottom[
+                  getRandomInt(0, banners.detail_bottom.length)
+                ].image
+              }
+              className="w-full hidden md:block h-[74px] md:h-auto object-cover lg:mt-[20px]"
+              width={996}
+              height={127}
+              alt="banner"
+            />
+          </Link>
         ) : null}
-        <h2 className="font-[500] text-[20px] mt-[30px]">{t('item.recomendations')}</h2>
+        <h2 className="font-[500] text-[20px] mt-[30px]">
+          {t("item.recomendations")}
+        </h2>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-[27px] mt-[30px]">
           {rec.map((item) => (
             <RecomendationCard key={item.id} item={item} />
@@ -41,17 +52,24 @@ export const Recomendation = () => {
         </div>
       </div>
       {banners && banners.detail_right.length ? (
-        <Image
-          src={
-            BASE_IMAGE_URL +
+        <Link
+          href={
             banners.detail_right[getRandomInt(0, banners.detail_right.length)]
-              .mobile_image
+              .link || ""
           }
-          className="w-full md:w-[300px] max-[767px]:mt-6 max-[767px]:mx-auto  h-auto object-contain block lg:hidden"
-          width={300}
-          height={900}
-          alt="banner"
-        />
+        >
+          <Image
+            src={
+              BASE_IMAGE_URL +
+              banners.detail_right[getRandomInt(0, banners.detail_right.length)]
+                .mobile_image
+            }
+            className="w-full md:w-[300px] max-[767px]:mt-6 max-[767px]:mx-auto  h-auto object-contain block lg:hidden"
+            width={300}
+            height={900}
+            alt="banner"
+          />
+        </Link>
       ) : null}
     </div>
   );

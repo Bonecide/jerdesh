@@ -6,15 +6,13 @@ import { Status } from "./Status";
 import { Contacts } from "./Contacts";
 import Image from "next/image";
 import { Recomendation } from "../Recomendation";
-import {
-  activeAnnounceAtom,
-  Announce,
-} from "@/atoms/announcements";
+import { activeAnnounceAtom, Announce } from "@/atoms/announcements";
 import { useAtomValue, useSetAtom } from "jotai";
 import { useEffect } from "react";
 import { bannersAtom } from "@/atoms/banners/banners.atoms";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { getRandomInt } from "@/utils/helpers";
+import Link from "next/link";
 
 export const Item = ({ item }: { item: Announce }) => {
   const setActiveAnnounce = useSetAtom(activeAnnounceAtom);
@@ -45,17 +43,24 @@ export const Item = ({ item }: { item: Announce }) => {
       </div>
 
       {banners && banners.detail_right.length ? (
-        <Image
-          src={
-            BASE_IMAGE_URL! +
+        <Link
+          href={
             banners.detail_right[getRandomInt(0, banners.detail_right.length)]
-              .image
+              .link || ""
           }
-          className="w-[300px] h-auto object-contain hidden lg:block"
-          width={300}
-          height={900}
-          alt="banner"
-        />
+        >
+          <Image
+            src={
+              BASE_IMAGE_URL! +
+              banners.detail_right[getRandomInt(0, banners.detail_right.length)]
+                .image
+            }
+            className="w-[300px] h-auto object-contain hidden lg:block"
+            width={300}
+            height={900}
+            alt="banner"
+          />
+        </Link>
       ) : null}
       {/* <Image
         src={"/images/longBanner.png"}

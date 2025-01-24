@@ -1,5 +1,4 @@
 import { getAllCategories } from "@/services/category";
-import Link from "next/link";
 import { Category } from "./Category";
 
 export const Categories = async () => {

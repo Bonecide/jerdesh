@@ -10,6 +10,7 @@ export type Banner = {
   updated_at: string;
   banner_type: BannersType;
   mobile_image: string;
+  link?: string
 };
 
 export type BannersType =

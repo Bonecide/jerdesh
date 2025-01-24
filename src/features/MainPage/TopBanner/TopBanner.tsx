@@ -8,6 +8,7 @@ import React from "react";
 import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { useAtomValue } from "jotai";
 import { bannersAtom } from "@/atoms/banners/banners.atoms";
+import Link from "next/link";
 
 export const TopBanner = () => {
   const banners = useAtomValue(bannersAtom);
@@ -23,24 +24,28 @@ export const TopBanner = () => {
 
   if (!banners) return null;
   return (
-    <div className="w-full overflow-x-hidden overflow-y-visibl banners">
+    <div className="w-full overflow-x-hidden overflow-y-visible banners">
       <Slider {...options}>
         {banners.main_head.map((item, idx) => (
           <React.Fragment key={idx}>
-            <Image
-              src={BASE_IMAGE_URL + item.image}
-              className="w-full !hidden md:!block"
-              alt="banner"
-              width={1800}
-              height={136}
-            />
-            <Image
-              src={BASE_IMAGE_URL + item.mobile_image}
-              width={850}
-              height={192}
-              className="w-full block md:!hidden object-contain"
-              alt="banner"
-            />
+            <Link href={item.link || ""} className="!hidden md:!block">
+              <Image
+                src={BASE_IMAGE_URL + item.image}
+                className="w-full "
+                alt="banner"
+                width={1800}
+                height={136}
+              />
+            </Link>
+            <Link className="block md:!hidden" href={item.link || ""}>
+              <Image
+                src={BASE_IMAGE_URL + item.mobile_image}
+                width={850}
+                height={192}
+                className="w-full  object-contain"
+                alt="banner"
+              />
+            </Link>
           </React.Fragment>
         ))}
       </Slider>

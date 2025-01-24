@@ -25,6 +25,20 @@ export const metadata: Metadata = {
     icon: "/fav.png",
     apple: "/fav.png",
   },
+  authors: [
+    {
+      name: "Syntlex.kg",
+      url: "https://syntlex.kg",
+    },
+  ],
+  openGraph: {
+    type: "website",
+    url: "https://jerdeshkg.ru",
+    title: "Жердеш - Жарыялар сайты! Доска объявлений!",
+    description:
+      "Жердеш - Жарыялар сайты! Доска объявлений! - Доска объявлений жердеш.kg, жердеш, jerdesh. акысыз жарыялар сайты, Квартира, койко место, авто, такси. | Jerdeshkg.ru",
+    siteName: "Jerdeshkg.ru",
+  },
 };
 export default async function RootLayout({
   children,
