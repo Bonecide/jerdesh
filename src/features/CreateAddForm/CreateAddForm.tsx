@@ -233,6 +233,10 @@ export const CreateAddForm = ({
                 required: true,
                 message: t("errors.title"),
               },
+              {
+                max : 150,
+                message : 'Максимум символов для заголовка 150'
+              }
             ]}
           >
             <Input
