@@ -101,7 +101,7 @@ export const Posters = ({ data }: PostersProps) => {
             {item.announcement_services
               .map((item) => item.status.title)
               .includes("fix") && (
-              <div className="  absolute top-[5px] right-[5px] w-[30px] h-[30px] bg-white flex items-center justify-center rounded-full" >
+              <div className="  absolute top-[5px] right-[5px] w-[30px] h-[30px] bg-white flex items-center justify-center rounded-full">
                 <PushpinOutlined className=" text-[20px] " />
               </div>
             )}
@@ -117,7 +117,12 @@ export const Posters = ({ data }: PostersProps) => {
                 </div>
               </div>
               <h2 className="text-[16px] font-[500]">{item.title}</h2>
-              <p className="font-[300] line-clamp-3">{item.description}</p>
+              <p
+                className="font-[300] line-clamp-3"
+                dangerouslySetInnerHTML={{
+                  __html: item.description,
+                }}
+              />
             </div>
 
             <div className="md:min-w-[225px] w-full md:w-auto md:min-h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover bg-gray-200 ">

@@ -36,7 +36,12 @@ export const Item = ({ item }: { item: Announce }) => {
         </div>
         <div className="w-full py-[30px] px-[18px] rounded-[20px] mt-[20px] descriptionShadow">
           <p className="font-[500] text-[16px]">Описание</p>
-          <p className="text-[16px] mt-[10px] font-[300]">{item.description}</p>
+          <p
+            className="text-[16px] mt-[10px] font-[300]"
+            dangerouslySetInnerHTML={{
+              __html: item.description,
+            }}
+          />
         </div>
 
         <Recomendation />

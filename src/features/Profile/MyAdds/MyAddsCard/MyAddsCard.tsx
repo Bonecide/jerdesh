@@ -139,7 +139,12 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
             <h2 className="text-[16px] font-[500] max-[767px]:mt-3 max-[767px]:text-center">
               {item.title}
             </h2>
-            <p className="font-[300]">{item.description}</p>
+            <p
+              className="font-[300]"
+              dangerouslySetInnerHTML={{
+                __html: item.description,
+              }}
+            />
           </div>
           <div className="md:min-w-[225px] w-full md:w-auto md:min-h-[160px] md:rounded-[21px] rounded-[13px] max-h-[160px] object-cover bg-gray-200 ">
             <Image

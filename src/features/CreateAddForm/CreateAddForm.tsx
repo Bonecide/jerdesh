@@ -24,6 +24,7 @@ import { editAnnoune } from "@/services/editAnnoune";
 import { useRouter } from "nextjs-toploader/app";
 import { useLocale, useTranslations } from "next-intl";
 import { citiesAtom, City } from "@/atoms/cities";
+import { TextEditor } from "@/components/TextEditor";
 
 export interface CategoryOptionProps {
   label: string;
@@ -117,6 +118,13 @@ export const CreateAddForm = ({
       setSubCategoriesOption(options || []);
     },
     [categories]
+  );
+
+  const onChangeDescription = useCallback(
+    (value: string) => {
+      form.setFieldValue("description", value);
+    },
+    [form]
   );
 
   const handleRemoveServerImages = useCallback(
@@ -374,10 +382,10 @@ export const CreateAddForm = ({
               },
             ]}
           >
-            <Input.TextArea
-              name="description"
-              autoSize={{ minRows: 21, maxRows: 24 }}
-            ></Input.TextArea>
+            <TextEditor
+              onChange={onChangeDescription}
+              value={form.getFieldValue("description")}
+            />
           </Form.Item>
         </div>
       </div>

@@ -18,14 +18,14 @@ export const RecomendationCard = ({ item }: { item: Announce }) => {
       <div className="flex max-[767px]:justify-between gap-[20px]">
         <div className="flex items-center gap-[5px]">
           <Squares2X2Icon className="size-[20px] text-[#BFBFBF]" />
-          <p className="text-[12px]">{item.category.title}</p>
+          <p className="text-[12px] line-clamp-2">{item.category.title}</p>
         </div>
         <div className="flex items-center gap-[5px]">
           <MapPinIcon className="size-[20px] text-[#BFBFBF]" />
-          <p className="text-[12px]">{item.address}</p>
+          <p className="text-[12px] line-clamp-2">{item.address}</p>
         </div>
       </div>
-      <h4 className="text-[16px] font-[500]">{item.title}</h4>
+      <h4 className="text-[16px] font-[500] line-clamp-2">{item.title}</h4>
       <div className="w-full bg-gray-200 h-[200px] rounded-[15px]">
         <Image
           src={BASE_IMAGE_URL + item.images[0].path}
