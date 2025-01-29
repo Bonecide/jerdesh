@@ -21,6 +21,7 @@ import { useRouter } from "nextjs-toploader/app";
 import { ActionModal } from "./ActionModal";
 import { useLocale, useTranslations } from "next-intl";
 import { AreYouSureModal } from "./AreYouSureModal/AreYouSureModal";
+import { clampText } from "@/services/clampText";
 
 type CardType = "common" | "border" | "fill";
 export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
@@ -142,7 +143,7 @@ export const MyAddsCard = ({ item }: { item: AnnounceWithImages }) => {
             <p
               className="font-[300]"
               dangerouslySetInnerHTML={{
-                __html: item.description,
+                __html: clampText(item.description, 150),
               }}
             />
           </div>

@@ -17,6 +17,7 @@ import { useLocale } from "next-intl";
 import { useEffect } from "react";
 import animation from "@/../public/empty.json";
 import Lottie from "lottie-react";
+import { clampText } from "@/services/clampText";
 interface PostersProps {
   data: Announce[];
 }
@@ -118,9 +119,9 @@ export const Posters = ({ data }: PostersProps) => {
               </div>
               <h2 className="text-[16px] font-[500]">{item.title}</h2>
               <p
-                className="font-[300] line-clamp-3"
+                className="font-[300] "
                 dangerouslySetInnerHTML={{
-                  __html: item.description,
+                  __html: clampText(item.description, 150),
                 }}
               />
             </div>

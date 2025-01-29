@@ -10,13 +10,14 @@ import { BASE_IMAGE_URL } from "@/utils/const/env";
 import { getRandomInt } from "@/utils/helpers";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useMemo } from "react";
 
 export const Recomendation = () => {
   const banners = useAtomValue(bannersAtom);
   const rec = useAtomValue(recomendationAtom);
 
   const t = useTranslations("root");
-
+ rec.slice(0,3)
   return (
     <div className="mt-[30px] gap-[20px] md:flex lg:block">
       <div>
@@ -45,7 +46,7 @@ export const Recomendation = () => {
         <h2 className="font-[500] text-[20px] mt-[30px]">
           {t("item.recomendations")}
         </h2>
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-[27px] mt-[30px]">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-[27px] mt-[30px]">
           {rec.map((item) => (
             <RecomendationCard key={item.id} item={item} />
           ))}
