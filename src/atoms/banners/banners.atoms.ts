@@ -10,7 +10,10 @@ export type Banner = {
   updated_at: string;
   banner_type: BannersType;
   mobile_image: string;
-  link?: string
+  link?: string;
+  status: {
+    title: BannersType;
+  };
 };
 
 export type BannersType =
@@ -28,9 +31,12 @@ export const bannersAtom = atom(async () => {
       main_right: [],
     };
     const { data } = await baseGetRequest<Banner[]>("advertising-banners");
+
+    console.log(data);
     data.forEach((item) => {
-      banners[item.banner_type].push(item);
+      banners[item.status.title].push(item);
     });
+
     return banners;
   } catch (error) {
     return null;

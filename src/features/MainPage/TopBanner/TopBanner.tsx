@@ -12,9 +12,10 @@ import Link from "next/link";
 
 export const TopBanner = () => {
   const banners = useAtomValue(bannersAtom);
+  console.log(banners);
   const options: Settings = {
     dots: false,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -28,7 +29,11 @@ export const TopBanner = () => {
       <Slider {...options}>
         {banners.main_head.map((item, idx) => (
           <React.Fragment key={idx}>
-            <Link href={item.link || ""} className="!hidden md:!block">
+            <Link
+              target="_blank"
+              href={item.link || ""}
+              className="!hidden md:!block"
+            >
               <Image
                 src={BASE_IMAGE_URL + item.image}
                 className="w-full "
@@ -37,7 +42,11 @@ export const TopBanner = () => {
                 height={136}
               />
             </Link>
-            <Link className="block md:!hidden" href={item.link || ""}>
+            <Link
+              target="_blank"
+              className="block md:!hidden"
+              href={item.link || ""}
+            >
               <Image
                 src={BASE_IMAGE_URL + item.mobile_image}
                 width={850}

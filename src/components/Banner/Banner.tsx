@@ -12,8 +12,7 @@ interface BannerProps {
 }
 
 const optionsSlider: Settings = {
-  autoplay: true,
-  autoplaySpeed: 3000,
+  autoplay: false,
   arrows: false,
 };
 

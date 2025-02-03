@@ -11,10 +11,16 @@ export default function MobileBanner() {
   if (!banners) return null;
   return (
     <div className="pt-6 max-w-[100vw] md:hidden">
-      <Banner options={{ slidesToShow: 1.1, dots: true }}>
+      <Banner
+        options={{
+          slidesToShow: banners.main_right.length > 1 ? 1.1 : 1,
+          infinite: banners.main_right.length > 1 ? true : false,
+          dots: true,
+        }}
+      >
         {banners.main_right.map((item) => (
-          <div key={item.id} className="px-2 ml-6 outline-none">
-            <Link href={item.link || ''}>
+          <div key={item.id} className="px-2  outline-none">
+            <Link target="_blank" href={item.link || ""}>
               <Image
                 src={BASE_IMAGE_URL + item.image}
                 alt="banner"

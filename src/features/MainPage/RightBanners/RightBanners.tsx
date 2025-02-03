@@ -12,7 +12,7 @@ export const RightBanners = () => {
   return (
     <div className="flex-2 hidden space-y-[15px] md:block md:w-[25%] lg:w-[15%] mt-[10px]">
       {banners.main_right.map((item) => (
-        <Link key={item.id} href={item.link || ''}>
+        <Link target="_blank" key={item.id} href={item.link || ""}>
           <Image
             className="rounded-[15px] aspect-square w-full h-auto "
             src={BASE_IMAGE_URL + item.image}

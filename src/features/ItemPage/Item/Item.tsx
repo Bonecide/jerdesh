@@ -20,6 +20,7 @@ export const Item = ({ item }: { item: Announce }) => {
   useEffect(() => {
     setActiveAnnounce(item.id);
   }, [item.id, setActiveAnnounce]);
+
   return (
     <div className="flex flex-col md:flex-row gap-[30px] items-start">
       <div className="w-full">
@@ -49,16 +50,19 @@ export const Item = ({ item }: { item: Announce }) => {
 
       {banners && banners.detail_right.length ? (
         <Link
+          target="_blank"
           href={
-            banners.detail_right[getRandomInt(0, banners.detail_right.length)]
-              .link || ""
+            banners.detail_right[
+              getRandomInt(0, banners.detail_right.length - 1)
+            ]?.link || ""
           }
         >
           <Image
             src={
               BASE_IMAGE_URL! +
-              banners.detail_right[getRandomInt(0, banners.detail_right.length)]
-                .image
+              banners.detail_right[
+                getRandomInt(0, banners.detail_right.length - 1)
+              ]?.image
             }
             className="w-[300px] h-auto object-contain hidden lg:block"
             width={300}
