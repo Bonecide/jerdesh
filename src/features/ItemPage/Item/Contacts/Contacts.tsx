@@ -18,7 +18,7 @@ export const Contacts = ({ item }: { item: Announce }) => {
           </p>
         </div>
         <div className="flex gap-[10px] items-center">
-          <MapPinIcon className="text-primary size-6 lg:size-[28px] md:size-[17px]" />
+          <MapPinIcon className="text-primary size-6 min-w-6 md:min-w-[17px] lg:min-w-[28px] lg:size-[28px] md:size-[17px]" />
           <p className="text-[#696969] md:text-[12px] lg:text-[14px]">
             {item.city && item.city.title + ", "}
             {item.address}

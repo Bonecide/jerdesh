@@ -113,13 +113,13 @@ export const Posters = ({ data }: PostersProps) => {
                   <p className="text-[12px]">{item.category.title}</p>
                 </div>
                 <div className="flex items-center gap-[5px]">
-                  <MapPinIcon className="size-[20px] text-[#BFBFBF]" />
-                  <p className="text-[12px]">{item.address}</p>
+                  <MapPinIcon className="size-[20px] min-w-[20px] text-[#BFBFBF]" />
+                  <p className="text-[12px] line-clamp-1">{item.address}</p>
                 </div>
               </div>
-              <h2 className="text-[16px] font-[500]">{item.title}</h2>
+              <h2 className="text-[16px] font-[500] line-clamp-2">{item.title}</h2>
               <p
-                className="font-[300] "
+                className="font-[300] line-clamp-3 "
                 dangerouslySetInnerHTML={{
                   __html: clampText(item.description, 150),
                 }}
