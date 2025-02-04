@@ -81,10 +81,6 @@ header .ant-select-selector {
   border: 0px !important;
 }
 
-.banners .slick-slide > div {
-  margin: 0 10px;
-}
-
 .banner-slider .slick-dots li {
   @apply !mx-[5px];
 }
@@ -112,4 +108,8 @@ header .ant-select-selector {
 }
 .cookieShadow {
   box-shadow: 0 8px 32px -8px rgba(0, 0, 0, 0.4);
+}
+
+.slick-disabled {
+  display: none !important;
 }
