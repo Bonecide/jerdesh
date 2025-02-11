@@ -10,11 +10,11 @@ export const RightBanners = () => {
   const banners = useAtomValue(bannersAtom);
   if (!banners) return null;
   return (
-    <div className="flex-2 hidden space-y-[15px] md:block md:w-[25%] lg:w-[15%] mt-[10px]">
-      {banners.main_right.map((item) => (
+    <div className="flex-2 hidden md:block md:w-[25%] lg:w-[15%] mt-[10px]">
+      {banners.main_right.map((item, idx) => (
         <Link target="_blank" key={item.id} href={item.link || ""}>
           <Image
-            className="rounded-[15px] aspect-square w-full h-auto "
+            className="rounded-[15px] mb-[15px] aspect-square w-full h-auto "
             src={BASE_IMAGE_URL + item.image}
             width={250}
             height={250}
